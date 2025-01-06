@@ -15,6 +15,7 @@
 		7699B88040F8A987B510C191 /* libPods-PouchProject-PouchProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-PouchProject-PouchProjectTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		DBF8F646AACB1C3607FE08FA /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		94D0E902209A44AA978223AE /* Lexend.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1245F025490143D1B4E89169 /* Lexend.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = PouchProject/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-PouchProject-PouchProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PouchProject-PouchProjectTests.release.xcconfig"; path = "Target Support Files/Pods-PouchProject-PouchProjectTests/Pods-PouchProject-PouchProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		1245F025490143D1B4E89169 /* Lexend.ttf */ = {isa = PBXFileReference; name = "Lexend.ttf"; path = "../src/assets/fonts/Lexend.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				F95C80D039004BFA99076F34 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -150,6 +153,15 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		F95C80D039004BFA99076F34 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				1245F025490143D1B4E89169 /* Lexend.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -247,6 +259,7 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				DBF8F646AACB1C3607FE08FA /* PrivacyInfo.xcprivacy in Resources */,
+				94D0E902209A44AA978223AE /* Lexend.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
