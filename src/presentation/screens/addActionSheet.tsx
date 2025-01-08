@@ -19,7 +19,7 @@ const AddActionSheet = ({open, toggleOverlay, setOpen}: Props) => {
     return;
   };
 
-  return (
+  return open ? (
     <Overlay
       isVisible={open}
       onBackdropPress={toggleOverlay}
@@ -29,7 +29,7 @@ const AddActionSheet = ({open, toggleOverlay, setOpen}: Props) => {
         <Button title="Add goal" onPress={handleNavigation} />
       </View>
     </Overlay>
-  );
+  ) : null;
 };
 
 export default AddActionSheet;
