@@ -14,7 +14,9 @@ export const GoalCard = () => {
         <H2>Travel & Lifestyle</H2>
       </View>
       <View className="mt-2">
-        <CustomText className="text-3xl">GHS 1000/GHS 3000</CustomText>
+        <CustomText className="text-3xl font-semibold">
+          GHS 1000 / GHS 3000
+        </CustomText>
       </View>
     </Pressable>
   );
@@ -23,19 +25,21 @@ export const GoalCard = () => {
 export const GoalDetailCard = () => {
   return (
     <Pressable className="bg-white p-5 rounded-lg flex-column justify-center items-center">
-      <View className="flex-row w-max  items-center justify-center p-5 border border-slate-300 rounded">
+      <View className="flex-row w-max  items-center justify-center p-3 border border-slate-200 rounded-md">
         <View className="w-14 h-14 rounded-full bg-blue-200 me-2">&nbsp;</View>
         <View>
           <CustomText className="text-xs">
             40% done. You’re almost there!
           </CustomText>
-          <CustomText className="text-xs p-1 mt-1 w-20 border rounded-full ">
+          <CustomText className="text-xs p-1 mt-2 w-20 border rounded-full bg-yellow-50 text-orange-800 border-yellow-500 ">
             In Progress
           </CustomText>
         </View>
       </View>
       <View className="mt-3 py-2">
-        <CustomText className="text-3xl">GHS 1000/GHS 3000</CustomText>
+        <CustomText className="text-3xl font-semibold">
+          GHS 1000 / GHS 3000
+        </CustomText>
       </View>
     </Pressable>
   );
@@ -44,7 +48,7 @@ export const GoalDetailCard = () => {
 export const ActivityCard = () => {
   return (
     <Pressable className="bg-white p-3 rounded-lg flex-row justify-between">
-      <View className='flex-row'>
+      <View className="flex-row">
         <View className="w-14 h-14 rounded-full bg-blue-200 me-2">&nbsp;</View>
         <View>
           <P>Travel & Lifestyle</P>
@@ -54,7 +58,7 @@ export const ActivityCard = () => {
         </View>
       </View>
       <View>
-        <P>GHS 3000</P>
+        <P className="text-red-600 font-semibold">GHS 3000</P>
       </View>
     </Pressable>
   );

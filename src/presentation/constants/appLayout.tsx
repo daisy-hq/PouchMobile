@@ -62,8 +62,15 @@ const TabItems = [
   },
 ];
 const HeaderItems = {
-  dashboard: {name: 'Sandra', icon: <BellDot />},
-  goaltracker: {name: 'Goal Tracker', icon: <Plus />},
+  dashboard: {
+    name: 'Sandra',
+    icon: (
+      <BellDot
+       size={20}
+      />
+    ),
+  },
+  goaltracker: {name: 'Goal Tracker', icon: <Plus  size={20}/>},
   addScreen: {name: 'Some thing'},
   default: {name: 'Default', icon: <Plus />},
 };
@@ -83,12 +90,16 @@ const ScreenHeader = ({type, title}: any) => {
               </View>
             </View>
 
-            <View>{HeaderItems.dashboard.icon}</View>
+            <View className="bg-white p-2 rounded-lg">
+              {HeaderItems.dashboard.icon}
+            </View>
           </View>
         ) : type === 'goaltracker' ? (
           <View className="w-full h-12  flex  flex-row items-center justify-between">
             <H1 className="text-xl">{HeaderItems.goaltracker.name}</H1>
-            <View>{HeaderItems.goaltracker.icon}</View>
+            <View className="bg-white p-2 rounded-lg">
+              {HeaderItems.goaltracker.icon}
+            </View>
           </View>
         ) : type === 'addScreen' ? (
           <View className="w-full h-12  flex  flex-row items-center justify-around">
@@ -96,7 +107,9 @@ const ScreenHeader = ({type, title}: any) => {
               <ChevronLeft />
             </View>
             <View className="flex-1 items-center mr-8">
-              <H1 className="text-xl">{title ? title : HeaderItems.addScreen.name}</H1>
+              <H1 className="text-xl">
+                {title ? title : HeaderItems.addScreen.name}
+              </H1>
             </View>
           </View>
         ) : (
@@ -110,7 +123,7 @@ const ScreenHeader = ({type, title}: any) => {
               </H1>
             </View>
             <View>
-              <EllipsisVertical />
+              <EllipsisVertical size={20}/>
             </View>
           </View>
         )}

@@ -1,6 +1,6 @@
 import {View, useWindowDimensions, StyleSheet, ScrollView} from 'react-native';
 import React, {useState} from 'react';
-import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
+import {SceneMap, TabBar, TabBarItem, TabView} from 'react-native-tab-view';
 import {GoalCard} from './cards';
 import {P} from '../constants/text';
 
