@@ -51,3 +51,15 @@ export const P = ({children, className, props}: any) => {
     </Text>
   );
 };
+export const CustomText = ({children, className, props}: any) => {
+  return (
+    <Text
+      style={{
+        fontFamily: 'Lexend',
+      }}
+      className={` ${className}`}
+      {...props}>
+      {children}
+    </Text>
+  );
+};

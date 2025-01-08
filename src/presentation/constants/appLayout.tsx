@@ -15,9 +15,25 @@ import {SafeAreaView, Text, View} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AddGoalScreen from '../screens/addGoalScreen';
 import {H1, H3, P} from './text';
+import GoalDetailsScreen from '../screens/goalDetailsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
+
+const stackNavigation = [
+  {
+    name: 'Goal Detail',
+    page: GoalDetailsScreen,
+    title: 'Travel & LifeStyle',
+    type: '',
+  },
+  {
+    name: 'addGoal',
+    page: AddGoalScreen,
+    title: 'Add New Screen',
+    type: 'addScreen',
+  },
+];
 
 const TabItems = [
   {name: 'dashboard', page: HomeScreen, icon: <House />, title: 'Dashboard'},
@@ -52,9 +68,9 @@ const HeaderItems = {
   default: {name: 'Default', icon: <Plus />},
 };
 
-const ScreenHeader = ({type}: any) => {
+const ScreenHeader = ({type, title}: any) => {
   return (
-    <View className="bg-white p-4">
+    <View className="p-4">
       <SafeAreaView>
         {type === 'dashboard' ? (
           <View className="w-full h-12 flex flex-row items-center justify-between">
@@ -79,8 +95,8 @@ const ScreenHeader = ({type}: any) => {
             <View>
               <ChevronLeft />
             </View>
-            <View className="flex-1 items-center bg-red-200 mr-8">
-              <H1 className="text-xl">{HeaderItems.default.name}</H1>
+            <View className="flex-1 items-center mr-8">
+              <H1 className="text-xl">{title ? title : HeaderItems.addScreen.name}</H1>
             </View>
           </View>
         ) : (
@@ -89,7 +105,9 @@ const ScreenHeader = ({type}: any) => {
               <ChevronLeft />
             </View>
             <View>
-              <H1 className="text-xl">{HeaderItems.default.name}</H1>
+              <H1 className="text-xl">
+                {title ? title : HeaderItems.default.name}
+              </H1>
             </View>
             <View>
               <EllipsisVertical />
@@ -136,15 +154,24 @@ const RootTab = () => {
             }}
           />
         ))}
-        <Tab.Screen
-          name="addGoal"
-          component={AddGoalScreen}
-          options={{
-            tabBarItemStyle: {display: 'none'},
-            tabBarShowLabel: false,
-            header: () => <ScreenHeader type="addGoal" />,
-          }}
-        />
+        {stackNavigation.map((item, index) => (
+          <Tab.Screen
+            key={index}
+            name={item.name}
+            component={item.page}
+            options={{
+              title: '',
+              tabBarItemStyle: {display: 'none'},
+              tabBarShowLabel: false,
+              header: () => (
+                <ScreenHeader
+                  type={item.type}
+                  title={item.title !== '' ? item.title : null}
+                />
+              ),
+            }}
+          />
+        ))}
       </Tab.Navigator>
       <AddActionSheet
         open={open}
