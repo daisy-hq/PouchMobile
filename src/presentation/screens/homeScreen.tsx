@@ -1,25 +1,34 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { useNavigation } from '@react-navigation/native'
-import { StyleSheet } from 'react-native'
+import {Text} from 'react-native';
+import React from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {BaseLayout} from '../constants/layouts';
+import {H1, H2, H3, P} from '../constants/text';
 
 const HomeScreen = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   return (
-    <View className='bg-red-200'>
-      <Text onPress={()=>navigation.navigate('New')}>the main home Screen</Text>
-    </View>
-  )
-}
+    <BaseLayout>
+      <Text onPress={() => navigation.navigate('New' as never)}>
+        <H1>Heading one</H1>
+        {'\n'}
+        <H2>Heading two</H2>
+        {'\n'}
+        <H3>Heading two</H3>
+        {'\n'}
+        <P className="text-2xl">Heading two</P>
+        {'\n'}
+        <P className="text-2xl text-red-300 bg-green-400">Heading two</P>
+        {'\n'}
+        <Text className="text-2xl">This should be big</Text>
+        {'\n'}
+        <P className="text-lg">Heading two</P>
+        {'\n'}
+        <P>Heading two</P>
+        {'\n'}
+      </Text>
+    </BaseLayout>
+  );
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor:"#ff0"
-  },
-})
-
-export default HomeScreen
+export default HomeScreen;
