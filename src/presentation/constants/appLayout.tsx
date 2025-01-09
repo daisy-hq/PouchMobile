@@ -10,14 +10,16 @@ import {
   ChevronLeft,
   EllipsisVertical,
 } from 'lucide-react-native';
-import AddActionSheet from '../screens/addActionSheet';
-import {SafeAreaView, View} from 'react-native';
+import {AddActionSheet} from '../screens/overlaySheets';
+import {SafeAreaView, Touchable, TouchableOpacity, View} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AddGoalScreen from '../screens/addGoalScreen';
 import {H1, H3, P} from './text';
 import GoalDetailsScreen from '../screens/goalDetailsScreen';
 import LoginScreen from '../screens/auth/login';
 import RegisterScreen from '../screens/auth/register';
+import { Button } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -32,7 +34,7 @@ const stackNavigation = [
   {
     name: 'addGoal',
     page: AddGoalScreen,
-    title: 'Add New Screen',
+    title: 'Add New Goal',
     type: 'addScreen',
   },
 ];
@@ -68,12 +70,13 @@ const HeaderItems = {
     name: 'Sandra',
     icon: <BellDot size={20} />,
   },
-  goaltracker: {name: 'Goal Tracker', icon: <Plus size={20} />},
+  goaltracker: {name: 'Goal Tracker', icon: <Plus size={20} />,},
   addScreen: {name: 'Some thing'},
   default: {name: 'Default', icon: <Plus />},
 };
 
 const ScreenHeader = ({type, title}: any) => {
+  const navigation = useNavigation()
   return (
     <View className="p-4">
       <SafeAreaView>
@@ -95,15 +98,15 @@ const ScreenHeader = ({type, title}: any) => {
         ) : type === 'goaltracker' ? (
           <View className="w-full h-12  flex  flex-row items-center justify-between">
             <H1 className="text-xl">{HeaderItems.goaltracker.name}</H1>
-            <View className="bg-white p-2 rounded-lg">
+            <TouchableOpacity className="bg-white p-2 rounded-lg" onPress={()=>navigation.navigate("addGoal" as never)}>
               {HeaderItems.goaltracker.icon}
-            </View>
+            </TouchableOpacity>
           </View>
         ) : type === 'addScreen' ? (
           <View className="w-full h-12  flex  flex-row items-center justify-around">
-            <View>
+            <TouchableOpacity onPress={()=>navigation.goBack()}>
               <ChevronLeft />
-            </View>
+            </TouchableOpacity>
             <View className="flex-1 items-center mr-8">
               <H1 className="text-xl">
                 {title ? title : HeaderItems.addScreen.name}
@@ -112,9 +115,9 @@ const ScreenHeader = ({type, title}: any) => {
           </View>
         ) : (
           <View className="w-full h-12  flex  flex-row items-center justify-between">
-            <View>
+            <TouchableOpacity onPress={()=>navigation.goBack()}>
               <ChevronLeft />
-            </View>
+            </TouchableOpacity>
             <View>
               <H1 className="text-xl">
                 {title ? title : HeaderItems.default.name}
@@ -209,7 +212,7 @@ const AuthStack = () => (
 );
 
 const AppLayout = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   return isAuthenticated ? <RootTab /> : <AuthStack />;
 };

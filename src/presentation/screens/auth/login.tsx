@@ -4,7 +4,7 @@ import {AuthLayout} from '../../constants/layouts';
 import {H2, H3, P} from '../../constants/text';
 import {Apple, Eye, Lock, Mail, UserPlus2} from 'lucide-react-native';
 import {CheckBox} from 'react-native-elements';
-import LabelInputField from './labelInputField';
+import {LabelInputField} from '../../components/labelInputField';
 import {PrimaryButton} from '../../components/button';
 import AuthHeader from './authHeader';
 import {useNavigation} from '@react-navigation/native';
