@@ -8,7 +8,7 @@ export class GoalsTrackerScreen extends Component {
   render() {
     return (
       <BaseLayout>
-        <Options/>
+        <Options />
       </BaseLayout>
     );
   }

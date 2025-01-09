@@ -1,3 +1,4 @@
+import React from 'react';
 import {Text} from 'react-native';
 
 export const H1 = ({children, className, props}: any) => {

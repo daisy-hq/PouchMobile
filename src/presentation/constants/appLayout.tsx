@@ -11,11 +11,12 @@ import {
   EllipsisVertical,
 } from 'lucide-react-native';
 import AddActionSheet from '../screens/addActionSheet';
-import {SafeAreaView, Text, View} from 'react-native';
+import {SafeAreaView, View} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AddGoalScreen from '../screens/addGoalScreen';
 import {H1, H3, P} from './text';
 import GoalDetailsScreen from '../screens/goalDetailsScreen';
+import LoginScreen from '../screens/auth/login';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -198,5 +199,8 @@ const RootTab = () => {
 const AppLayout = () => {
   return <RootTab />;
 };
+// const AppLayout = () => {
+//   return <LoginScreen />;
+// };
 
 export default AppLayout;

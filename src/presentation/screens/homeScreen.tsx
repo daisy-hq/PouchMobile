@@ -1,15 +1,15 @@
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {BaseLayout} from '../constants/layouts';
-import {H1, H2, H3, P} from '../constants/text';
+// import {H1, H2, H3, P} from '../constants/text';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
 
   return (
     <BaseLayout>
-      <Text onPress={() => navigation.navigate('New' as never)}>
+      {/* <Text onPress={() => navigation.navigate('New' as never)}>
         <H1>Heading one</H1>
         {'\n'}
         <H2>Heading two</H2>
@@ -26,7 +26,9 @@ const HomeScreen = () => {
         {'\n'}
         <P>Heading two</P>
         {'\n'}
-      </Text>
+      </Text> */}
+
+      <Text>asdfa</Text>
     </BaseLayout>
   );
 };

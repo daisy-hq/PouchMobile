@@ -1,6 +1,6 @@
 import {View, useWindowDimensions, StyleSheet, ScrollView} from 'react-native';
 import React, {useState} from 'react';
-import {SceneMap, TabBar, TabBarItem, TabView} from 'react-native-tab-view';
+import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import {GoalCard} from './cards';
 import {P} from '../constants/text';
 
@@ -62,24 +62,24 @@ const styles = StyleSheet.create({
   tabHeader: {
     backgroundColor: 'rgba(0, 0, 0, 0.05)',
     borderColor: 'rgba(0, 0, 0, 0.05)',
-    borderWidth: 2,
+    borderWidth: 4,
     borderRadius: 25,
     borderCurve: 'circular',
-    marginBottom: 5,
   },
   indicator: {
     backgroundColor: '#ffffff',
-    height: '80%',
-    width: '50%',
-    top: '10%',
+    height: '100%',
+    width: 180,
     borderRadius: 25,
   },
   label: {
+    fontFamily: 'Lexend',
     fontSize: 14,
     fontWeight: 'bold',
   },
   tab: {
-    height: 50,
+    height: 40,
+    top: '-10%',
   },
 });
 
