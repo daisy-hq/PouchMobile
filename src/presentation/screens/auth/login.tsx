@@ -1,9 +1,17 @@
 import React, {useState} from 'react';
-import {View, TextInput} from 'react-native';
+import {View, TextInput, Image, StyleSheet} from 'react-native';
 import {AuthLayout} from '../../constants/layouts';
 import {H2, H3, P} from '../../constants/text';
-import {Apple, Eye, Lock, Mail, UserPlus2} from 'lucide-react-native';
-import {CheckBox} from 'react-native-elements';
+import {
+  Apple,
+  Eye,
+  Facebook,
+  Lock,
+  Mail,
+  Twitter,
+  UserPlus2,
+} from 'lucide-react-native';
+import {CheckBox, SocialIcon} from 'react-native-elements';
 import LabelInputField from './labelInputField';
 import {PrimaryButton} from '../../components/button';
 import AuthHeader from './authHeader';
@@ -28,13 +36,27 @@ const LoginScreen = () => {
         {/* auth icons */}
         <View className="flex flex-row gap-2">
           <View className="flex-1 rounded-lg flex items-center border border-gray-200 py-2">
-            <Apple />
+            <Image
+              style={[
+                {
+                  width: 20,
+                  height: 24,
+                },
+              ]}
+              source={require('../../../assets/images/auth/apple.png')}
+            />
           </View>
           <View className="flex-1 rounded-lg flex items-center border border-gray-200 py-2">
-            <Apple />
+            <Image
+              style={styles.socialLogo}
+              source={require('../../../assets/images/auth/google.png')}
+            />
           </View>
           <View className="flex-1 rounded-lg flex items-center border border-gray-200 py-2">
-            <Apple />
+            <Image
+              style={styles.socialLogo}
+              source={require('../../../assets/images/auth/x.png')}
+            />
           </View>
         </View>
 
@@ -106,3 +128,10 @@ const LoginScreen = () => {
 };
 
 export default LoginScreen;
+
+const styles = StyleSheet.create({
+  socialLogo: {
+    height: 24,
+    width: 20,
+  },
+});
