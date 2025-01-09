@@ -209,7 +209,7 @@ const AuthStack = () => (
 );
 
 const AppLayout = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   return isAuthenticated ? <RootTab /> : <AuthStack />;
 };
