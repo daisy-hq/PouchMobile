@@ -2,24 +2,28 @@ import React, {useState} from 'react';
 import {View, TextInput} from 'react-native';
 import {AuthLayout} from '../../constants/layouts';
 import {H2, H3, P} from '../../constants/text';
-import {Apple, Eye, Lock, Mail} from 'lucide-react-native';
+import {Apple, Eye, Lock, Mail, UserPlus2} from 'lucide-react-native';
 import {CheckBox} from 'react-native-elements';
+import LabelInputField from './labelInputField';
+import {PrimaryButton} from '../../components/button';
+import AuthHeader from './authHeader';
+import {useNavigation} from '@react-navigation/native';
 
 const LoginScreen = () => {
+  const navigation = useNavigation();
+
   const [checked, setChecked] = useState(true);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const toggleCheckbox = () => setChecked(!checked);
 
   return (
     <AuthLayout>
-      <View className="flex gap-2 items-center">
-        {/* logo */}
-        <View className="w-20 mx-auto h-20 rounded-full bg-gray-200">
-          <P>&nbsp;</P>
-        </View>
-        <H2 className="text-[24px]">Login to your account</H2>
-        <H3 className="text-gray-500 text-[16px]">
-          Enter your details to login
-        </H3>
+      <View className="flex gap-4 items-center">
+        <AuthHeader
+          title="Login to your account"
+          subtitle="Enter your details to login"
+        />
 
         {/* auth icons */}
         <View className="flex flex-row gap-2">
@@ -34,6 +38,7 @@ const LoginScreen = () => {
           </View>
         </View>
 
+        {/* or */}
         <View className="flex flex-row items-center my-4">
           <View className="flex-1 h-px bg-gray-300" />
           <P className="mx-4 text-gray-500">OR</P>
@@ -42,49 +47,40 @@ const LoginScreen = () => {
 
         {/* input fields */}
         <View className="flex gap-4">
-          <View className="w-full">
-            <P className="mb-2">
-              Email Address <P className="text-blue-600">*</P>
-            </P>
-            <View className="flex flex-row items-center gap-2 w-full border border-gray-300 rounded-lg p-2 bg-white">
-              <Mail color={'#9CA3AF'} size={20} />
-              <TextInput
-                className="flex-1 text-gray-700"
-                placeholder="example@gmail.com"
-                placeholderTextColor="#9CA3AF"
-              />
-            </View>
-          </View>
-          <View className="w-full">
-            <P className="mb-2">
-              Password <P className="text-blue-600">*</P>
-            </P>
-            <View className="flex flex-row items-center gap-2 w-full border border-gray-300 rounded-lg p-2 bg-white">
-              <Lock color={'#9CA3AF'} size={20} />
-              <TextInput
-                className="flex-1 text-gray-700"
-                placeholder="*********"
-                placeholderTextColor="#9CA3AF"
-              />
-              <Eye color={'#9CA3AF'} size={20} />
-            </View>
-          </View>
+          <LabelInputField
+            label="Email Address"
+            placeholder="example@gmail.com"
+            icon={<Mail color={'#9CA3AF'} size={20} />}
+            required
+            value={email}
+            onChangeText={setEmail}
+          />
+
+          <LabelInputField
+            label="Password"
+            placeholder="**********"
+            icon={<Lock color={'#9CA3AF'} size={20} />}
+            required
+            value={password}
+            onChangeText={setPassword}
+            trailingIcon={<Eye color={'#9CA3AF'} size={20} />}
+          />
         </View>
 
-        <View className="bg-blue-200 flex flex-row justify-between w-full">
+        <View className="flex flex-row justify-between w-full">
           {/* left side */}
           <View className="flex flex-row items-center gap-2">
-            <CheckBox
+            {/* <CheckBox
               checked={checked}
               onPress={toggleCheckbox}
-              // Use ThemeProvider to make change for all checkbox
               iconType="material-community"
               checkedIcon="checkbox-marked"
               uncheckedIcon="checkbox-blank-outline"
               checkedColor="red"
               title={'Keep me logged in'}
-            />
-            {/* <Text>Keep me logged in</Text> */}
+            /> */}
+            <P>[]</P>
+            <P>Keep me logged in</P>
           </View>
           {/* right side */}
           <View>
@@ -92,7 +88,19 @@ const LoginScreen = () => {
           </View>
         </View>
 
-        <P>LoginScreen</P>
+        <PrimaryButton
+          onPress={() => navigation.navigate('dashboard' as never)}>
+          Login
+        </PrimaryButton>
+
+        <P>
+          Don&apos;t have an account?{' '}
+          <P
+            className="text-blue-600"
+            onPress={() => navigation.navigate('Register' as never)}>
+            Sign Up
+          </P>
+        </P>
       </View>
     </AuthLayout>
   );

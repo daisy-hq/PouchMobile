@@ -17,6 +17,7 @@ import AddGoalScreen from '../screens/addGoalScreen';
 import {H1, H3, P} from './text';
 import GoalDetailsScreen from '../screens/goalDetailsScreen';
 import LoginScreen from '../screens/auth/login';
+import RegisterScreen from '../screens/auth/register';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -65,13 +66,9 @@ const TabItems = [
 const HeaderItems = {
   dashboard: {
     name: 'Sandra',
-    icon: (
-      <BellDot
-       size={20}
-      />
-    ),
+    icon: <BellDot size={20} />,
   },
-  goaltracker: {name: 'Goal Tracker', icon: <Plus  size={20}/>},
+  goaltracker: {name: 'Goal Tracker', icon: <Plus size={20} />},
   addScreen: {name: 'Some thing'},
   default: {name: 'Default', icon: <Plus />},
 };
@@ -124,7 +121,7 @@ const ScreenHeader = ({type, title}: any) => {
               </H1>
             </View>
             <View>
-              <EllipsisVertical size={20}/>
+              <EllipsisVertical size={20} />
             </View>
           </View>
         )}
@@ -196,11 +193,25 @@ const RootTab = () => {
   );
 };
 
+const AuthStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen
+      name="Login"
+      component={LoginScreen}
+      options={{headerShown: false}}
+    />
+    <Stack.Screen
+      name="Register"
+      component={RegisterScreen}
+      options={{headerShown: false}}
+    />
+  </Stack.Navigator>
+);
+
 const AppLayout = () => {
-  return <RootTab />;
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  return isAuthenticated ? <RootTab /> : <AuthStack />;
 };
-// const AppLayout = () => {
-//   return <LoginScreen />;
-// };
 
 export default AppLayout;
