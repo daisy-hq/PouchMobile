@@ -89,18 +89,17 @@ const LoginScreen = () => {
         </View>
 
         <PrimaryButton
+          // the Login button isn't working because we're conditionally rendering the RootStack
           onPress={() => navigation.navigate('dashboard' as never)}>
           Login
         </PrimaryButton>
 
-        <P>
-          Don&apos;t have an account?{' '}
-          <P
-            className="text-blue-600"
-            onPress={() => navigation.navigate('Register' as never)}>
-            Sign Up
-          </P>
-        </P>
+        <PrimaryButton
+          onPress={() => navigation.navigate('Register' as never)}
+          className="bg-transparent py-0">
+          <P className="text-black">Don&apos;t have an account?</P>
+          <P className="text-blue-600"> Sign Up</P>
+        </PrimaryButton>
       </View>
     </AuthLayout>
   );

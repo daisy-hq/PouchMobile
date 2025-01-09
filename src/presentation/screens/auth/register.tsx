@@ -66,14 +66,12 @@ const RegisterScreen = () => {
 
         <PrimaryButton>Sign Up</PrimaryButton>
 
-        <P>
-          Already have an account?{' '}
-          <P
-            className="text-blue-600"
-            onPress={() => navigation.navigate('Login' as never)}>
-            Login
-          </P>
-        </P>
+        <PrimaryButton
+          onPress={() => navigation.navigate('Login' as never)}
+          className="bg-transparent py-0">
+          <P className="text-black">Already have an account?</P>{' '}
+          <P className="text-blue-600">Login</P>
+        </PrimaryButton>
       </View>
     </AuthLayout>
   );
