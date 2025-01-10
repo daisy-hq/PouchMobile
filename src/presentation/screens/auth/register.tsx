@@ -58,9 +58,10 @@ const RegisterScreen = () => {
             placeholder="**********"
             icon={<Lock color={'#9CA3AF'} size={20} />}
             required
+            secureTextEntry
             value={password}
             onChangeText={setPassword}
-            trailingIcon={<Eye color={'#9CA3AF'} size={20} />}
+            isPasswordField={true}
           />
         </View>
 

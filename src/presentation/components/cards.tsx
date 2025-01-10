@@ -10,7 +10,7 @@ export const GoalCard = () => {
       className="bg-white p-5 rounded-lg"
       onPress={() => navigation.navigate('Goal Detail' as never)}>
       <View className="flex-row  items-center ">
-        <View className="w-14 h-14 rounded-full bg-blue-200 me-2">&nbsp;</View>
+        <View className="w-14 h-14 rounded-full bg-blue-200 me-2"></View>
         <H2>Travel & Lifestyle</H2>
       </View>
       <View className="mt-2">
@@ -26,7 +26,7 @@ export const GoalDetailCard = () => {
   return (
     <Pressable className="bg-white p-5 rounded-lg flex-column justify-center items-center">
       <View className="flex-row w-max  items-center justify-center p-3 border border-slate-200 rounded-md">
-        <View className="w-14 h-14 rounded-full bg-blue-200 me-2">&nbsp;</View>
+        <View className="w-14 h-14 rounded-full bg-blue-200 me-2"></View>
         <View>
           <CustomText className="text-xs">
             40% done. You’re almost there!
@@ -45,11 +45,11 @@ export const GoalDetailCard = () => {
   );
 };
 
-export const ActivityCard = () => {
+export const ActivityCard = ({id}:{id?:number}) => {
   return (
-    <Pressable className="bg-white p-3 rounded-lg flex-row justify-between">
+    <Pressable className="bg-white p-3 my-2 rounded-lg flex-row justify-between">
       <View className="flex-row">
-        <View className="w-14 h-14 rounded-full bg-blue-200 me-2">&nbsp;</View>
+        <View className="w-14 h-14 rounded-full bg-blue-200 me-2"></View>
         <View>
           <P>Travel & Lifestyle</P>
           <CustomText className="text-xs text-slate-400 mt-2 ">
@@ -59,6 +59,7 @@ export const ActivityCard = () => {
       </View>
       <View>
         <P className="text-red-600 font-semibold">GHS 3000</P>
+        <P className="text-red-600 font-semibold">{id}</P>
       </View>
     </Pressable>
   );

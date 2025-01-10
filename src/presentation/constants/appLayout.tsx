@@ -10,21 +10,21 @@ import {
   ChevronLeft,
   EllipsisVertical,
 } from 'lucide-react-native';
-import {AddActionSheet} from '../screens/overlaySheets';
-import {SafeAreaView, Touchable, TouchableOpacity, View} from 'react-native';
+import {AddActionSheet} from '../screens/actionSheets';
+import {SafeAreaView, TouchableOpacity, View} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AddGoalScreen from '../screens/addGoalScreen';
 import {H1, H3, P} from './text';
 import GoalDetailsScreen from '../screens/goalDetailsScreen';
 import LoginScreen from '../screens/auth/login';
 import RegisterScreen from '../screens/auth/register';
-import { Button } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import { Image} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-const stackNavigation = [
+const goalTrackerNavigation = [
   {
     name: 'Goal Detail',
     page: GoalDetailsScreen,
@@ -32,7 +32,7 @@ const stackNavigation = [
     type: '',
   },
   {
-    name: 'addGoal',
+    name: 'AddGoal',
     page: AddGoalScreen,
     title: 'Add New Goal',
     type: 'addScreen',
@@ -40,9 +40,9 @@ const stackNavigation = [
 ];
 
 const TabItems = [
-  {name: 'dashboard', page: HomeScreen, icon: <House />, title: 'Dashboard'},
+  {name: 'Dashboard', page: HomeScreen, icon: <House />, title: 'Dashboard'},
   {
-    name: 'addScreen',
+    name: 'AddScreen',
     page: () => null,
     icon: (
       <Plus
@@ -59,32 +59,41 @@ const TabItems = [
     actionSheet: true,
   },
   {
-    name: 'goaltracker',
+    name: 'Goaltracker',
     page: GoalsTrackerScreen,
     icon: <Goal />,
     title: 'Goals',
   },
 ];
+
 const HeaderItems = {
   dashboard: {
     name: 'Sandra',
     icon: <BellDot size={20} />,
   },
-  goaltracker: {name: 'Goal Tracker', icon: <Plus size={20} />,},
+  goaltracker: {name: 'Goal Tracker', icon: <Plus size={20} />},
   addScreen: {name: 'Some thing'},
   default: {name: 'Default', icon: <Plus />},
 };
 
-const ScreenHeader = ({type, title}: any) => {
-  const navigation = useNavigation()
+export const ScreenHeader = ({type, title}: any) => {
+  const navigation = useNavigation();
   return (
     <View className="p-4">
       <SafeAreaView>
-        {type === 'dashboard' ? (
+        {type === 'Dashboard' ? (
           <View className="w-full h-12 flex flex-row items-center justify-between">
             <View className="flex-row items-center gap-2">
               {/* Image */}
-              <View className="w-14 h-14 rounded-full bg-blue-200">&nbsp;</View>
+                <Image
+                  source={require('../../assets/images/avatar.png')}
+                  style={{
+                    height: 40,
+                    width: 40,
+                    objectFit:'cover',
+                    borderRadius:'50%',
+                  }}
+                />
               <View>
                 <P className="text-xs">Welcome back</P>
                 <H3 className="text-xl">{HeaderItems.dashboard.name}</H3>
@@ -95,16 +104,18 @@ const ScreenHeader = ({type, title}: any) => {
               {HeaderItems.dashboard.icon}
             </View>
           </View>
-        ) : type === 'goaltracker' ? (
+        ) : type === 'Goaltracker' ? (
           <View className="w-full h-12  flex  flex-row items-center justify-between">
             <H1 className="text-xl">{HeaderItems.goaltracker.name}</H1>
-            <TouchableOpacity className="bg-white p-2 rounded-lg" onPress={()=>navigation.navigate("addGoal" as never)}>
+            <TouchableOpacity
+              className="bg-white p-2 rounded-lg"
+              onPress={() => navigation.navigate('AddGoal' as never)}>
               {HeaderItems.goaltracker.icon}
             </TouchableOpacity>
           </View>
-        ) : type === 'addScreen' ? (
+        ) : type === 'AddScreen' ? (
           <View className="w-full h-12  flex  flex-row items-center justify-around">
-            <TouchableOpacity onPress={()=>navigation.goBack()}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <ChevronLeft />
             </TouchableOpacity>
             <View className="flex-1 items-center mr-8">
@@ -115,7 +126,7 @@ const ScreenHeader = ({type, title}: any) => {
           </View>
         ) : (
           <View className="w-full h-12  flex  flex-row items-center justify-between">
-            <TouchableOpacity onPress={()=>navigation.goBack()}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <ChevronLeft />
             </TouchableOpacity>
             <View>
@@ -168,7 +179,8 @@ const RootTab = () => {
             }}
           />
         ))}
-        {stackNavigation.map((item, index) => (
+        {/* TODO: look into the React Navigation library in-depth */}
+        {goalTrackerNavigation.map((item, index) => (
           <Tab.Screen
             key={index}
             name={item.name}
@@ -211,6 +223,7 @@ const AuthStack = () => (
   </Stack.Navigator>
 );
 
+// TODO: Review navigation and refactor authentication routing
 const AppLayout = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 

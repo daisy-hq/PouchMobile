@@ -21,7 +21,6 @@ const AuthHeader = ({title, subtitle}: Props) => {
       </View>
 
       <H2 className={'text-[24px]'}>{title}</H2>
-
       <H3 className={'text-gray-500 text-[16px]'}>{subtitle}</H3>
     </View>
   );

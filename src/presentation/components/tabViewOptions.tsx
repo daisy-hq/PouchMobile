@@ -1,40 +1,13 @@
-import {View, useWindowDimensions, StyleSheet, ScrollView} from 'react-native';
+import {useWindowDimensions, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
-import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
-import {GoalCard} from './cards';
-import {P} from '../constants/text';
+import {TabBar, TabView} from 'react-native-tab-view';
 
-const Layout = () => (
-  <View>
-    <View className="flex py-2 items-center ">
-      <P className="my-3 ">Achieve your plans through smart saving</P>
-    </View>
-    <GoalCard />
-  </View>
-);
+type TabViewOptionsProps = {
+  renderScene: any;
+  routes: Array<{key: string; title: string}>;
+};
 
-const InProgress = () => (
-  <ScrollView>
-    <Layout />
-  </ScrollView>
-);
-
-const Completed = () => (
-  <ScrollView>
-    <Layout />
-  </ScrollView>
-);
-
-const renderScene = SceneMap({
-  first: InProgress,
-  second: Completed,
-});
-const routes = [
-  {key: 'first', title: 'In-Progress'},
-  {key: 'second', title: 'Completed'},
-];
-
-const Options = () => {
+const TabViewOptions = ({renderScene, routes}: TabViewOptionsProps) => {
   const [index, setIndex] = useState(0);
   const layout = useWindowDimensions();
 
@@ -83,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Options;
+export default TabViewOptions;

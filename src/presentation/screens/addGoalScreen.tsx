@@ -1,37 +1,40 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {BaseLayout} from '../constants/layouts';
-import {H1, P} from '../constants/text';
 import {View} from 'react-native';
-import {LabelDatePicker, LabelInputField, LabelTextArea} from '../components/labelInputField';
-import {Lock} from 'lucide-react-native';
+import {
+  LabelDatePicker,
+  LabelInputField,
+  LabelTextArea,
+} from '../components/labelInputField';
 import {PrimaryButton} from '../components/button';
 
 const AddGoalScreen = () => {
+  const [name, setName] = useState('');
+  const [amount, setAmount] = useState('');
+  const [note, setNote] = useState('');
+
   return (
     <BaseLayout>
       <View>
         <LabelInputField
           label="Goal name"
-          placeholder="**********"
-          icon={<Lock color={'#9CA3AF'} size={20} />}
-          value={'GHS'}
-          onChangeText={() => null}
+          placeholder="sadique"
+          value={name}
+          onChangeText={setName}
         />
         <LabelInputField
           label="Target amount"
-          placeholder="**********"
-          icon={<Lock color={'#9CA3AF'} size={20} />}
-          required
-          value={'GHS'}
-          onChangeText={() => null}
+          placeholder="50"
+          value={amount}
+          type="numeric"
+          onChangeText={setAmount}
         />
-        <LabelDatePicker/>
+        <LabelDatePicker />
         <LabelTextArea
-          label="Target amount"
-          placeholder="**********"
-          icon={<Lock color={'#9CA3AF'} size={20} />}
-          value={'GHS'}
-          onChangeText={() => null}
+          label="Note"
+          placeholder="description"
+          value={note}
+          onChangeText={setNote}
         />
         <PrimaryButton className="mt-5" onPress={() => null}>
           Save
