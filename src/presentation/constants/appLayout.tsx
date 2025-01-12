@@ -19,7 +19,8 @@ import GoalDetailsScreen from '../screens/goalDetailsScreen';
 import LoginScreen from '../screens/auth/login';
 import RegisterScreen from '../screens/auth/register';
 import {useNavigation} from '@react-navigation/native';
-import { Image} from 'react-native';
+import {Image} from 'react-native';
+import AddExpenseScreen from '../screens/addExpenseScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -35,6 +36,12 @@ const goalTrackerNavigation = [
     name: 'AddGoal',
     page: AddGoalScreen,
     title: 'Add New Goal',
+    type: 'addScreen',
+  },
+  {
+    name: 'AddExpense',
+    page: AddExpenseScreen,
+    title: 'Add New Expense',
     type: 'addScreen',
   },
 ];
@@ -76,7 +83,13 @@ const HeaderItems = {
   default: {name: 'Default', icon: <Plus />},
 };
 
-export const ScreenHeader = ({type, title}: any) => {
+export const ScreenHeader = ({
+  type,
+  title,
+}: {
+  type?: 'Dashboard' | 'Goaltracker' | 'AddScreen' | string | null; // remove string type
+  title?: string | null;
+}) => {
   const navigation = useNavigation();
   return (
     <View className="p-4">
@@ -85,15 +98,15 @@ export const ScreenHeader = ({type, title}: any) => {
           <View className="w-full h-12 flex flex-row items-center justify-between">
             <View className="flex-row items-center gap-2">
               {/* Image */}
-                <Image
-                  source={require('../../assets/images/avatar.png')}
-                  style={{
-                    height: 40,
-                    width: 40,
-                    objectFit:'cover',
-                    borderRadius:'50%',
-                  }}
-                />
+              <Image
+                source={require('../../assets/images/avatar.png')}
+                style={{
+                  height: 40,
+                  width: 40,
+                  objectFit: 'cover',
+                  borderRadius: '50%',
+                }}
+              />
               <View>
                 <P className="text-xs">Welcome back</P>
                 <H3 className="text-xl">{HeaderItems.dashboard.name}</H3>
