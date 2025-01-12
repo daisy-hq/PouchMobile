@@ -1,13 +1,45 @@
-import {Text, View} from 'react-native';
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {BaseLayout} from '../constants/layouts';
-import {H1, P} from '../constants/text';
+import {View} from 'react-native';
+import {
+  LabelDatePicker,
+  LabelInputField,
+  LabelTextArea,
+} from '../components/labelInputField';
+import {PrimaryButton} from '../components/button';
 
 const AddGoalScreen = () => {
+  const [name, setName] = useState('');
+  const [amount, setAmount] = useState('');
+  const [note, setNote] = useState('');
+
   return (
     <BaseLayout>
-      <H1>Hello Goal</H1>
-      <P>helloo, somebody cannot see you</P>
+      <View>
+        <LabelInputField
+          label="Goal name"
+          placeholder="sadique"
+          value={name}
+          onChangeText={setName}
+        />
+        <LabelInputField
+          label="Target amount"
+          placeholder="50"
+          value={amount}
+          type="numeric"
+          onChangeText={setAmount}
+        />
+        <LabelDatePicker />
+        <LabelTextArea
+          label="Note"
+          placeholder="description"
+          value={note}
+          onChangeText={setNote}
+        />
+        <PrimaryButton className="mt-5" onPress={() => null}>
+          Save
+        </PrimaryButton>
+      </View>
     </BaseLayout>
   );
 };
