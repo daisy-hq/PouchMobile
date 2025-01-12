@@ -1,7 +1,8 @@
 import {View, Pressable} from 'react-native';
 import React from 'react';
-import {CustomText, H2, P} from '../constants/text';
+import {CustomText, H1, H2, H3, P} from '../constants/text';
 import {useNavigation} from '@react-navigation/native';
+import {Lightbulb} from 'lucide-react-native';
 
 export const GoalCard = () => {
   const navigation = useNavigation();
@@ -17,6 +18,27 @@ export const GoalCard = () => {
         <CustomText className="text-3xl font-semibold">
           GHS 1000 / GHS 3000
         </CustomText>
+      </View>
+    </Pressable>
+  );
+};
+export const ExpenseCard = () => {
+  return (
+    <Pressable className="bg-white p-5 rounded-lg" onPress={() => null}>
+      <View className="flex flex-row justify-between p-4">
+        <View className=" items-center ">
+          <CustomText className="text-sm mb-2 text-gray-500">Spent</CustomText>
+          <CustomText className="text-3xl font-semibold">GHS 1000</CustomText>
+        </View>
+        <View className="border border-gray-400"></View>
+        <View className=" items-center ">
+          <CustomText className="text-sm mb-2 text-gray-500">
+            Remaining
+          </CustomText>
+          <CustomText className="text-3xl font-semibold text-red-500">
+            GHS -1000
+          </CustomText>
+        </View>
       </View>
     </Pressable>
   );
@@ -45,7 +67,7 @@ export const GoalDetailCard = () => {
   );
 };
 
-export const ActivityCard = ({id}:{id?:number}) => {
+export const ActivityCard = ({id}: {id?: number}) => {
   return (
     <Pressable className="bg-white p-3 my-2 rounded-lg flex-row justify-between">
       <View className="flex-row">
@@ -62,5 +84,13 @@ export const ActivityCard = ({id}:{id?:number}) => {
         <P className="text-red-600 font-semibold">{id}</P>
       </View>
     </Pressable>
+  );
+};
+export const Hint = () => {
+  return (
+    <View className="flex flex-row items-center justify-center gap-1 p-1 my-3 w-full border rounded-full bg-yellow-50 border-yellow-500">
+      <Lightbulb size={16} color="#DC6803" /> 
+      <CustomText className='text-xs text-orange-800'>You have exceeded your budget on payments this month</CustomText>
+    </View>
   );
 };

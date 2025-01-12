@@ -20,6 +20,7 @@ import LoginScreen from '../screens/auth/login';
 import RegisterScreen from '../screens/auth/register';
 import {useNavigation} from '@react-navigation/native';
 import { Image} from 'react-native';
+import ExpenseDetailsScreen from '../screens/expenseDetailsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -36,6 +37,12 @@ const goalTrackerNavigation = [
     page: AddGoalScreen,
     title: 'Add New Goal',
     type: 'addScreen',
+  },
+  {
+    name: 'ViewExpense',
+    page: ExpenseDetailsScreen,
+    title: 'Payments',
+    type: '',
   },
 ];
 
