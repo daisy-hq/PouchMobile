@@ -1,10 +1,10 @@
 import {View, ScrollView} from 'react-native';
 import React from 'react';
-import {BaseLayout} from '../constants/layouts';
+import {BaseLayout} from '../../constants/layouts';
 import {SceneMap} from 'react-native-tab-view';
-import {P} from '../constants/text';
-import {GoalCard} from '../components/cards';
-import TabViewOptions from '../components/tabViewOptions';
+import {P} from '../../constants/text';
+import {GoalCard} from '../../components/cards';
+import TabViewOptions from '../../components/tabViewOptions';
 
 const Layout = () => (
   <View>
@@ -38,9 +38,9 @@ const routes = [
 
 function GoalsTrackerScreen() {
   return (
-      <BaseLayout>
-        <TabViewOptions renderScene={renderScene} routes={routes} />
-      </BaseLayout>
+    <BaseLayout>
+      <TabViewOptions renderScene={renderScene} routes={routes} />
+    </BaseLayout>
   );
 }
 

@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
-import {BaseLayout} from '../constants/layouts';
+import {BaseLayout} from '../../constants/layouts';
 import {StyleSheet, Text, View} from 'react-native';
-import {LabelInputField, LabelTextArea} from '../components/labelInputField';
-import {PrimaryButton} from '../components/button';
-import {P} from '../constants/text';
+import {LabelInputField, LabelTextArea} from '../../components/labelInputField';
+import {PrimaryButton} from '../../components/button';
+import {P} from '../../constants/text';
 import SelectDropdown from 'react-native-select-dropdown';
 import {ChevronDown, ChevronUp} from 'lucide-react-native';
 
 const AddExpenseScreen = () => {
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
-  const [category, setCategory] = useState('');
   const [note, setNote] = useState('');
 
   const expenseCategories = [

@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import {BaseLayout} from '../constants/layouts';
+import {BaseLayout} from '../../constants/layouts';
 import {View} from 'react-native';
 import {
   LabelDatePicker,
   LabelInputField,
   LabelTextArea,
-} from '../components/labelInputField';
-import {PrimaryButton} from '../components/button';
+} from '../../components/labelInputField';
+import {PrimaryButton} from '../../components/button';
 
 const AddGoalScreen = () => {
   const [name, setName] = useState('');

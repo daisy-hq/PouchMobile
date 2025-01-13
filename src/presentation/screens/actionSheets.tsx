@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet, Pressable} from 'react-native';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {Overlay} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
 import {
@@ -19,8 +19,8 @@ type Props = {
 const quickActions = [
   {label: 'Add Expense', icon: ReceiptText, route: 'AddExpense'},
   {label: 'Add Goal', icon: Goal, route: 'AddGoal'},
-  {label: 'Add Income', icon: CircleDollarSign, route: 'AddExpense'},
-  {label: 'Add Budget', icon: NotebookText, route: 'AddExpense'},
+  {label: 'Add Income', icon: CircleDollarSign, route: 'AddIncome'},
+  {label: 'Add Budget', icon: NotebookText, route: 'AddBudget'},
 ];
 
 export const AddActionSheet = ({open, toggleOverlay, setOpen}: Props) => {
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
 });
 
 export const UpdateActionSheet = ({open, toggleOverlay, setOpen}: Props) => {
-  const [increment, setIncrement]=useState('')
+  const [increment, setIncrement] = useState('');
   const handleUpdate = () => {
     setOpen(false);
     return;
@@ -120,7 +120,7 @@ export const UpdateActionSheet = ({open, toggleOverlay, setOpen}: Props) => {
           label="Increment"
           placeholder="50"
           required
-          type='numeric'
+          type="numeric"
           value={increment}
           onChangeText={setIncrement}
         />
