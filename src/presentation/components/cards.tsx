@@ -24,7 +24,7 @@ export const GoalCard = () => {
 };
 export const ExpenseCard = () => {
   return (
-    <Pressable className="bg-white p-5 rounded-lg" onPress={() => null}>
+    <Pressable className="bg-white p-5 rounded-lg w-full" onPress={() => null}>
       <View className="flex flex-row justify-between p-4">
         <View className=" items-center ">
           <CustomText className="text-sm mb-2 text-gray-500">Spent</CustomText>
@@ -67,9 +67,17 @@ export const GoalDetailCard = () => {
   );
 };
 
-export const ActivityCard = ({id}: {id?: number}) => {
+export const ActivityCard = ({
+  id,
+  onPress,
+}: {
+  id?: number;
+  onPress: () => void;
+}) => {
   return (
-    <Pressable className="bg-white p-3 my-2 rounded-lg flex-row justify-between">
+    <Pressable
+      onPress={onPress}
+      className="bg-white p-3 my-2 rounded-lg flex-row justify-between">
       <View className="flex-row">
         <View className="w-14 h-14 rounded-full bg-blue-200 me-2"></View>
         <View>
@@ -86,11 +94,36 @@ export const ActivityCard = ({id}: {id?: number}) => {
     </Pressable>
   );
 };
-export const Hint = () => {
+export const Hint = ({
+  children,
+  icon,
+  width,
+}: {
+  children: any;
+  icon?: React.ReactNode;
+  width: any;
+}) => {
   return (
-    <View className="flex flex-row items-center justify-center gap-1 p-1 my-3 w-full border rounded-full bg-yellow-50 border-yellow-500">
-      <Lightbulb size={16} color="#DC6803" /> 
-      <CustomText className='text-xs text-orange-800'>You have exceeded your budget on payments this month</CustomText>
+    <View
+      className={`flex flex-row items-center justify-center gap-1 p-2 my-3 w-${width} border rounded-full bg-yellow-50 border-yellow-500`}>
+      {icon && icon}
+      <CustomText className="text-xs text-orange-800">{children}</CustomText>
+    </View>
+  );
+};
+export const Notes = ({
+  children,
+  title,
+}: {
+  children: any;
+  title: React.ReactNode;
+}) => {
+  return (
+    <View className="mt-3 w-full">
+      <P className="mb-2">{title && title}</P>
+      <View className="h-32 w-full p-3 border rounded-lg border-gray-400">
+        <P>{children}</P>
+      </View>
     </View>
   );
 };

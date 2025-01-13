@@ -1,29 +1,20 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {View, Text} from 'react-native';
 import React from 'react';
-import {Calendar} from 'lucide-react-native';
-import {P} from '../constants/text';
 import {BaseLayout} from '../constants/layouts';
-import {ActivityCard, ExpenseCard, Hint} from '../components/cards';
+import {H3} from '../constants/text';
+import {ExpenseCard, Hint, Notes} from '../components/cards';
 
 const ExpenseDetailsScreen = () => {
   return (
     <BaseLayout>
-      <View className="flex flex-row justify-center items-center mb-4">
-        <Calendar size={18} />
-        <P className=''>This month</P>
-      </View>
-      <ExpenseCard />
-      <Hint />
-      <View className="mt-5">
-        <P>History</P>
-        {[1, 2, 3].map((item, index) => (
-          <ActivityCard key={index}/>
-        ))}
+      <View className='flex items-center'>
+        <Hint width="20">High</Hint>
+        <H3 className="mb-3">Category: Food</H3>
+        <ExpenseCard />
+        <Notes title='Notes'>Bought eggs</Notes>
       </View>
     </BaseLayout>
   );
 };
 
 export default ExpenseDetailsScreen;
-
-const styles = StyleSheet.create({});

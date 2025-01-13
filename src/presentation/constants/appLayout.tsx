@@ -19,9 +19,10 @@ import GoalDetailsScreen from '../screens/goalDetailsScreen';
 import LoginScreen from '../screens/auth/login';
 import RegisterScreen from '../screens/auth/register';
 import {useNavigation} from '@react-navigation/native';
-import ExpenseDetailsScreen from '../screens/expenseDetailsScreen';
 import {Image} from 'react-native';
 import AddExpenseScreen from '../screens/addExpenseScreen';
+import ExpenseCategoryDetailsScreen from '../screens/expenseCategoryDetailsScreen';
+import ExpenseDetailsScreen from '../screens/expenseDetailsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -40,8 +41,8 @@ const goalTrackerNavigation = [
     type: 'addScreen',
   },
   {
-    name: 'ViewExpense',
-    page: ExpenseDetailsScreen,
+    name: 'ViewExpenseCategory',
+    page: ExpenseCategoryDetailsScreen,
     title: 'Payments',
     type: '',
   },
@@ -49,6 +50,12 @@ const goalTrackerNavigation = [
     name: 'AddExpense',
     page: AddExpenseScreen,
     title: 'Add New Expense',
+    type: 'addScreen',
+  },
+  {
+    name: 'ViewExpense',
+    page: ExpenseDetailsScreen,
+    title: 'Transportation',
     type: 'addScreen',
   },
 ];

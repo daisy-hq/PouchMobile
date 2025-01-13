@@ -9,7 +9,7 @@ const HomeScreen = () => {
   return (
     <BaseLayout>
       <H1>Dashboardingggg........</H1>
-      <Pressable onPress={() => navigation.navigate('ViewExpense' as never)}>
+      <Pressable onPress={() => navigation.navigate('ViewExpenseCategory' as never)}>
         <H1>Go to expense screen</H1>
       </Pressable>
     </BaseLayout>
