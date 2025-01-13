@@ -21,7 +21,7 @@ const GoalDetailsScreen = () => {
             <View className="h-[400px]">
               <ScrollView>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((card, i) => (
-                  <ActivityCard key={i} id={i} />
+                  <ActivityCard onPress={() => null} key={i} id={i} />
                 ))}
               </ScrollView>
             </View>

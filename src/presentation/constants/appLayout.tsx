@@ -31,6 +31,7 @@ import AddIncomeScreen from '../screens/income/addIncomeScreen';
 import ProfileScreen from '../screens/profile/profile';
 import ExpenseDetailsScreen from '../screens/expense/expenseDetailsScreen';
 import AddBudgetScreen from '../screens/budget/addBudgetScreen';
+import ExpenseCategoryDetailsScreen from '../screens/expense/expenseCategoryDetailsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -50,8 +51,8 @@ const goalTrackerNavigation = [
     type: 'addScreen',
   },
   {
-    name: 'ViewExpense',
-    page: ExpenseDetailsScreen,
+    name: 'ViewExpenseCategory',
+    page: ExpenseCategoryDetailsScreen,
     title: 'Payments',
     type: '',
   },
@@ -78,6 +79,12 @@ const goalTrackerNavigation = [
     page: ProfileScreen,
     title: 'Profile',
     type: 'Profile',
+  },
+  {
+    name: 'ViewExpense',
+    page: ExpenseDetailsScreen,
+    title: 'Transportation',
+    type: 'addScreen',
   },
 ];
 
