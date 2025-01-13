@@ -30,10 +30,12 @@ import AddExpenseScreen from '../screens/expense/addExpenseScreen';
 import AddIncomeScreen from '../screens/income/addIncomeScreen';
 import ProfileScreen from '../screens/profile/profile';
 import ExpenseDetailsScreen from '../screens/expense/expenseDetailsScreen';
+import AddBudgetScreen from '../screens/budget/addBudgetScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
+// TODO: export this to a separate module
 const goalTrackerNavigation = [
   {
     name: 'Goal Detail',
@@ -63,6 +65,12 @@ const goalTrackerNavigation = [
     name: 'AddIncome',
     page: AddIncomeScreen,
     title: 'Add New Income',
+    type: 'addScreen',
+  },
+  {
+    name: 'AddBudget',
+    page: AddBudgetScreen,
+    title: 'Add New Plan',
     type: 'addScreen',
   },
   {
