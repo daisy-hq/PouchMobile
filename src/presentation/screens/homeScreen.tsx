@@ -26,7 +26,7 @@ const HomeScreen = () => {
               prevIndex={prevIndex}
               animatedValue={animatedValue}
               currentIndex={currentIndex}
-              maxVisibleItems={3}
+              maxVisibleItems={2}
             />
           ))}
         </View>

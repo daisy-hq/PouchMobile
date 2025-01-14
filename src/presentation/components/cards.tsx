@@ -12,6 +12,11 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
 } from 'react-native-reanimated';
+import {
+  Directions,
+  FlingGestureHandler,
+  State,
+} from 'react-native-gesture-handler';
 
 export const GoalCard = () => {
   const navigation = useNavigation();
@@ -189,25 +194,49 @@ export const OverviewCards = ({
   });
 
   return (
-    <Animated.View
-      style={[{zIndex: dataLength - i}, animatedStyle]}
-      className={`absolute h-64 w-full border border-gray-300 rounded-3xl bg-indigo-500 p-4 justify-between`}>
-      <View className="flex flex-row items-center justify-center gap-3">
-        <CircleArrowLeft size={14} color="white" />
-        <H3 className="text-white">February, 2025</H3>
-        <CircleArrowRight size={14} color="white" />
-      </View>
-      <View className="flex justify-center items-center">
-        <CustomText className="w-4/5 text-white text-3xl text-center ">
-          GHS 1,600 <H1>left out of GHS 2,000 budgeted for bills</H1>
-        </CustomText>
-      </View>
-      <View className="flex flex-row-reverse">
-        <View className="flex items-center justify-center w-12 h-9 backdrop-blur-sm bg-white/30 rounded">
-          <ShoppingBag size={16} color="white" />
-        </View>
-      </View>
-    </Animated.View>
+    <FlingGestureHandler
+      key={'up'}
+      direction={Directions.UP}
+      onHandlerStateChange={e => {
+        if (e.nativeEvent.state === State.END) {
+          if (currentIndex.value !== 0) {
+            animatedValue.value = withTiming((currentIndex.value -= 1));
+            prevIndex.value = currentIndex.value - 1;
+          }
+        }
+      }}>
+      <FlingGestureHandler
+        key={'down'}
+        direction={Directions.DOWN}
+        onHandlerStateChange={e => {
+          if (e.nativeEvent.state === State.END) {
+            if (currentIndex.value !== dataLength - 1) {
+              animatedValue.value = withTiming((currentIndex.value += 1));
+              prevIndex.value = currentIndex.value;
+            }
+          }
+        }}>
+        <Animated.View
+          style={[{zIndex: dataLength - i}, animatedStyle]}
+          className={`absolute h-64 w-full border border-gray-300 rounded-3xl bg-indigo-500 p-4 justify-between`}>
+          <View className="flex flex-row items-center justify-center gap-3">
+            <CircleArrowLeft size={14} color="white" />
+            <H3 className="text-white">February, 2025</H3>
+            <CircleArrowRight size={14} color="white" />
+          </View>
+          <View className="flex justify-center items-center">
+            <CustomText className="w-4/5 text-white text-3xl text-center ">
+              GHS 1,600 <H1>left out of GHS 2,000 budgeted for bills</H1>
+            </CustomText>
+          </View>
+          <View className="flex flex-row-reverse">
+            <View className="flex items-center justify-center w-12 h-9 backdrop-blur-sm bg-white/30 rounded">
+              <ShoppingBag size={16} color="white" />
+            </View>
+          </View>
+        </Animated.View>
+      </FlingGestureHandler>
+    </FlingGestureHandler>
   );
 };
 export const ExpenseCategoryOverview = ({
