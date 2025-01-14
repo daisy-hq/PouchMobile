@@ -14,6 +14,7 @@ const HomeScreen = () => {
   const prevIndex = useSharedValue(0);
 
   const colors = ['bg-rose-600', 'bg-yellow-500', 'bg-emerald-600', 'bg-slate-600'];
+  const overviewColors = ['bg-indigo-600', 'bg-rose-500', 'bg-emerald-600', 'bg-slate-600'];
   return (
     <BaseLayout>
       <View className="justify-between">
@@ -27,6 +28,7 @@ const HomeScreen = () => {
               animatedValue={animatedValue}
               currentIndex={currentIndex}
               maxVisibleItems={2}
+              color={overviewColors[i]}
             />
           ))}
         </View>

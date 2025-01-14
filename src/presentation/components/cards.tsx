@@ -148,6 +148,7 @@ export const OverviewCards = ({
   currentIndex,
   animatedValue,
   maxVisibleItems,
+  color
 }: {
   dataLength: number;
   i: number;
@@ -155,6 +156,7 @@ export const OverviewCards = ({
   currentIndex: any;
   animatedValue: any;
   maxVisibleItems: any;
+  color: any;
 }) => {
   const animatedStyle = useAnimatedStyle(() => {
     const translateY = interpolate(
@@ -218,7 +220,7 @@ export const OverviewCards = ({
         }}>
         <Animated.View
           style={[{zIndex: dataLength - i}, animatedStyle]}
-          className={`absolute h-64 w-full border border-gray-300 rounded-3xl bg-indigo-500 p-4 justify-between`}>
+          className={`absolute h-64 w-full border border-gray-300 rounded-3xl ${color} p-4 justify-between`}>
           <View className="flex flex-row items-center justify-center gap-3">
             <CircleArrowLeft size={14} color="white" />
             <H3 className="text-white">February, 2025</H3>
