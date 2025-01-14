@@ -2,7 +2,15 @@ import {View, Pressable} from 'react-native';
 import React from 'react';
 import {CustomText, H1, H2, H3, P} from '../constants/text';
 import {useNavigation} from '@react-navigation/native';
-import {Lightbulb} from 'lucide-react-native';
+import {
+  CircleArrowLeft,
+  CircleArrowRight,
+  Lightbulb,
+  ShoppingBag,
+} from 'lucide-react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import {Text} from 'react-native-svg';
+import {StyleSheet} from 'nativewind';
 
 export const GoalCard = () => {
   const navigation = useNavigation();
@@ -121,9 +129,57 @@ export const Notes = ({
   return (
     <View className="mt-3 w-full">
       <P className="mb-2">{title && title}</P>
-      <View className="h-32 w-full p-3 border rounded-lg border-gray-400">
+      <View className="h-32 w-full p-3 border rounded-lg border-gray-300">
         <P>{children}</P>
       </View>
     </View>
+  );
+};
+export const OverviewCards = () => {
+  return (
+    <View className="h-64 w-full border border-gray-300 rounded-3xl bg-indigo-500 p-4 justify-between">
+      <View className="flex flex-row items-center justify-center gap-3">
+        <CircleArrowLeft size={14} color="white" />
+        <H3 className="text-white">February, 2025</H3>
+        <CircleArrowRight size={14} color="white" />
+      </View>
+      <View className="flex justify-center items-center">
+        <CustomText className="w-4/5 text-white text-3xl text-center ">
+          GHS 1,600 <H1>left out of GHS 2,000 budgeted for bills</H1>
+        </CustomText>
+      </View>
+      <View className="flex flex-row-reverse">
+        <View className="flex items-center justify-center w-12 h-9 backdrop-blur-sm bg-white/30 rounded">
+          <ShoppingBag size={16} color="white" />
+        </View>
+      </View>
+    </View>
+  );
+};
+export const ExpenseCategoryOverview = ({
+  onPress,
+  color,
+}: {
+  onPress: () => void;
+  color: any;
+}) => {
+  return (
+    <Pressable
+      onPress={onPress}
+      className="h-32 mt-2 w-52 rounded-lg bg-gray-200 p-4 justify-between">
+      <View className="flex flex-row justify-between gap-3">
+        <View>
+          <H3>GHS 500.00</H3>
+          <CustomText className="text-xs">Food</CustomText>
+        </View>
+        <View>
+          <H3>34%</H3>
+        </View>
+      </View>
+      <View
+        className={`flex items-center justify-center w-9 h-9 ${color} bg-white/30 rounded-full`}>
+        <ShoppingBag size={16} color="white" />
+      </View>
+    </Pressable>
   );
 };

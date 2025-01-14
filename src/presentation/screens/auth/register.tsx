@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import {AuthLayout} from '../../constants/layouts';
-import {H2, H3, P} from '../../constants/text';
-import {Apple, Eye, Lock, Mail, Phone, User} from 'lucide-react-native';
+import {P} from '../../constants/text';
+import {Lock, Mail, Phone, User} from 'lucide-react-native';
 import {LabelInputField} from '../../components/labelInputField';
 import {PrimaryButton} from '../../components/button';
 import AuthHeader from './authHeader';

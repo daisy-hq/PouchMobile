@@ -1,7 +1,7 @@
 import {View, Image, StyleSheet} from 'react-native';
 import React from 'react';
 import {BaseLayout} from '../../constants/layouts';
-import {H1, P} from '../../constants/text';
+import {H3, P} from '../../constants/text';
 import {Bell, CircleHelp, DollarSign, Edit, LogOut} from 'lucide-react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 
@@ -19,20 +19,20 @@ const ProfileScreen = () => {
               <Edit />
             </View>
           </View>
-          <H1>Sandra</H1>
+          <H3>Sandra</H3>
           <P className="text-gray-400">sandra@gmail.com</P>
         </View>
 
         <View className="mt-8 flex gap-6">
-          <View className="flex flex-row gap-2">
-            <DollarSign />
-            <H1>Current settings</H1>
+          <View className="flex items-center flex-row gap-2">
+            <DollarSign size={18}/>
+            <H3>Current settings</H3>
           </View>
 
-          <View className="flex flex-row justify-between">
-            <View className="flex flex-row gap-2">
-              <Bell />
-              <H1>Push notifications</H1>
+          <View className="flex flex-row items-center justify-between">
+            <View className="flex flex-row items-center gap-2">
+              <Bell size={18}/>
+              <H3>Push notifications</H3>
             </View>
 
             <ToggleSwitch
@@ -44,14 +44,14 @@ const ProfileScreen = () => {
             />
           </View>
 
-          <View className="flex flex-row gap-2">
-            <CircleHelp />
-            <H1>Support</H1>
+          <View className="flex items-center flex-row gap-2">
+            <CircleHelp size={18}/>
+            <H3>Support</H3>
           </View>
 
-          <View className="flex flex-row gap-2">
-            <LogOut />
-            <H1>Logout</H1>
+          <View className="flex items-center flex-row gap-2">
+            <LogOut size={18}/>
+            <H3>Logout</H3>
           </View>
         </View>
       </View>
