@@ -17,6 +17,7 @@ import {
   FlingGestureHandler,
   State,
 } from 'react-native-gesture-handler';
+import {PieChart} from 'react-native-gifted-charts';
 
 export const GoalCard = () => {
   const navigation = useNavigation();
@@ -148,7 +149,9 @@ export const OverviewCards = ({
   currentIndex,
   animatedValue,
   maxVisibleItems,
-  color
+  color,
+  data,
+  type,
 }: {
   dataLength: number;
   i: number;
@@ -157,6 +160,8 @@ export const OverviewCards = ({
   animatedValue: any;
   maxVisibleItems: any;
   color: any;
+  data?: any;
+  type?: any;
 }) => {
   const animatedStyle = useAnimatedStyle(() => {
     const translateY = interpolate(
@@ -221,16 +226,32 @@ export const OverviewCards = ({
         <Animated.View
           style={[{zIndex: dataLength - i}, animatedStyle]}
           className={`absolute h-64 w-full border border-gray-300 rounded-3xl ${color} p-4 justify-between`}>
-          <View className="flex flex-row items-center justify-center gap-3">
-            <CircleArrowLeft size={14} color="white" />
-            <H3 className="text-white">February, 2025</H3>
-            <CircleArrowRight size={14} color="white" />
-          </View>
-          <View className="flex justify-center items-center">
-            <CustomText className="w-4/5 text-white text-3xl text-center ">
-              GHS 1,600 <H1>left out of GHS 2,000 budgeted for bills</H1>
-            </CustomText>
-          </View>
+          {type === 'chart' ? (
+            <View className='flex items-center justify-center'>
+              <PieChart
+                data={data}
+                donut
+                showText
+                textColor="black"
+                radius={80}
+                textSize={20}
+                textBackgroundRadius={26}
+              />
+            </View>
+          ) : (
+            <>
+              <View className="flex flex-row items-center justify-center gap-3">
+                <CircleArrowLeft size={14} color="white" />
+                <H3 className="text-white">February, 2025</H3>
+                <CircleArrowRight size={14} color="white" />
+              </View>
+              <View className="flex justify-center items-center">
+                <CustomText className="w-4/5 text-white text-3xl text-center ">
+                  GHS 1,600 <H1>left out of GHS 2,000 budgeted for bills</H1>
+                </CustomText>
+              </View>
+            </>
+          )}
           <View className="flex flex-row-reverse">
             <View className="flex items-center justify-center w-12 h-9 backdrop-blur-sm bg-white/30 rounded">
               <ShoppingBag size={16} color="white" />
@@ -262,7 +283,7 @@ export const ExpenseCategoryOverview = ({
         </View>
       </View>
       <View
-        className={`flex items-center justify-center w-9 h-9 ${color} bg-white/30 rounded-full`}>
+        className={`flex items-center justify-center w-9 h-9 ${color} rounded-full`}>
         <ShoppingBag size={16} color="white" />
       </View>
     </Pressable>

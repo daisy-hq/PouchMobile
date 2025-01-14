@@ -13,15 +13,26 @@ const HomeScreen = () => {
   const currentIndex = useSharedValue(0);
   const prevIndex = useSharedValue(0);
 
-  const colors = ['bg-rose-600', 'bg-yellow-500', 'bg-emerald-600', 'bg-slate-600'];
+  const colors = ['bg-blue-600', 'bg-yellow-500', 'bg-emerald-600', 'bg-red-600'];
   const overviewColors = ['bg-indigo-600', 'bg-rose-500', 'bg-emerald-600', 'bg-slate-600'];
+  const pieChartData=[ {value:50}, {value:80}, {value:90}, {value:70} ]
+
+  const renderOverviewCards =[
+    {type:"chart"},
+    {type:"details"},
+    {type:"details"},
+    {type:"details"},
+    {type:"details"},
+    {type:"details"},
+
+  ]
   return (
     <BaseLayout>
       <View className="justify-between">
         <View className=" ">
-          {[1, 2, 3].map((item, i) => (
+          {renderOverviewCards.map((item, i) => (
             <OverviewCards
-              dataLength={3}
+              dataLength={renderOverviewCards.length}
               i={i}
               key={i}
               prevIndex={prevIndex}
@@ -29,6 +40,8 @@ const HomeScreen = () => {
               currentIndex={currentIndex}
               maxVisibleItems={2}
               color={overviewColors[i]}
+              data={pieChartData}
+              type={item.type}
             />
           ))}
         </View>
@@ -49,7 +62,7 @@ const HomeScreen = () => {
                 }
                 color={colors[item.index]}
               />
-            )}></FlatList>
+            )}/>
         </View>
       </View>
     </BaseLayout>

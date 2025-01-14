@@ -15,8 +15,8 @@ const ProfileScreen = () => {
               source={require('../../../assets/images/avatar.png')}
               style={styles.userIcon}
             />
-            <View className="absolute bg-white bottom-0 right-0">
-              <Edit />
+            <View className="absolute bg-white bottom-0 right-0 p-1 rounded">
+              <Edit size={16}/>
             </View>
           </View>
           <H3>Sandra</H3>
