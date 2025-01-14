@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import HomeScreen from '../screens/homeScreen';
-import GoalsTrackerScreen from '../screens/goalsTrackerScreen';
+import GoalsTrackerScreen from '../screens/goal/goalsTrackerScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   Goal,
@@ -11,21 +11,32 @@ import {
   EllipsisVertical,
 } from 'lucide-react-native';
 import {AddActionSheet} from '../screens/actionSheets';
-import {SafeAreaView, TouchableOpacity, View} from 'react-native';
+import {
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import AddGoalScreen from '../screens/addGoalScreen';
+import AddGoalScreen from '../screens/goal/addGoalScreen';
 import {H1, H3, P} from './text';
-import GoalDetailsScreen from '../screens/goalDetailsScreen';
+import GoalDetailsScreen from '../screens/goal/goalDetailsScreen';
 import LoginScreen from '../screens/auth/login';
 import RegisterScreen from '../screens/auth/register';
 import {useNavigation} from '@react-navigation/native';
-import ExpenseDetailsScreen from '../screens/expenseDetailsScreen';
 import {Image} from 'react-native';
-import AddExpenseScreen from '../screens/addExpenseScreen';
+import AddExpenseScreen from '../screens/expense/addExpenseScreen';
+import AddIncomeScreen from '../screens/income/addIncomeScreen';
+import ProfileScreen from '../screens/profile/profile';
+import ExpenseDetailsScreen from '../screens/expense/expenseDetailsScreen';
+import AddBudgetScreen from '../screens/budget/addBudgetScreen';
+import ExpenseCategoryDetailsScreen from '../screens/expense/expenseCategoryDetailsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
+// TODO: export this to a separate module
 const goalTrackerNavigation = [
   {
     name: 'Goal Detail',
@@ -40,8 +51,8 @@ const goalTrackerNavigation = [
     type: 'addScreen',
   },
   {
-    name: 'ViewExpense',
-    page: ExpenseDetailsScreen,
+    name: 'ViewExpenseCategory',
+    page: ExpenseCategoryDetailsScreen,
     title: 'Payments',
     type: '',
   },
@@ -49,6 +60,30 @@ const goalTrackerNavigation = [
     name: 'AddExpense',
     page: AddExpenseScreen,
     title: 'Add New Expense',
+    type: 'addScreen',
+  },
+  {
+    name: 'AddIncome',
+    page: AddIncomeScreen,
+    title: 'Add New Income',
+    type: 'addScreen',
+  },
+  {
+    name: 'AddBudget',
+    page: AddBudgetScreen,
+    title: 'Add New Plan',
+    type: 'addScreen',
+  },
+  {
+    name: 'Profile',
+    page: ProfileScreen,
+    title: 'Profile',
+    type: 'Profile',
+  },
+  {
+    name: 'ViewExpense',
+    page: ExpenseDetailsScreen,
+    title: 'Transportation',
     type: 'addScreen',
   },
 ];
@@ -103,22 +138,19 @@ export const ScreenHeader = ({
       <SafeAreaView>
         {type === 'Dashboard' ? (
           <View className="w-full h-12 flex flex-row items-center justify-between">
-            <View className="flex-row items-center gap-2">
+            <Pressable
+              onPress={() => navigation.navigate('Profile' as never)}
+              className="flex-row items-center gap-2">
               {/* Image */}
               <Image
                 source={require('../../assets/images/avatar.png')}
-                style={{
-                  height: 40,
-                  width: 40,
-                  objectFit: 'cover',
-                  borderRadius: '50%',
-                }}
+                style={styles.userIcon}
               />
               <View>
                 <P className="text-xs">Welcome back</P>
                 <H3 className="text-xl">{HeaderItems.dashboard.name}</H3>
               </View>
-            </View>
+            </Pressable>
 
             <View className="bg-white p-2 rounded-lg">
               {HeaderItems.dashboard.icon}
@@ -251,3 +283,12 @@ const AppLayout = () => {
 };
 
 export default AppLayout;
+
+const styles = StyleSheet.create({
+  userIcon: {
+    height: 40,
+    width: 40,
+    objectFit: 'cover',
+    borderRadius: '50%',
+  },
+});
