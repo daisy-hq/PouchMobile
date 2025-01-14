@@ -8,6 +8,7 @@ module.exports = {
     './src/resources/assets/fonts/Lexend.ttf',
     './src/assets/fonts/LexendBold.ttf',
   ],
+  plugins: ['react-native-reanimated/plugin'],
   theme: {
     extend: {
       fontFamily: {

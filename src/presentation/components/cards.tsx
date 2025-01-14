@@ -5,12 +5,13 @@ import {useNavigation} from '@react-navigation/native';
 import {
   CircleArrowLeft,
   CircleArrowRight,
-  Lightbulb,
   ShoppingBag,
 } from 'lucide-react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import {Text} from 'react-native-svg';
-import {StyleSheet} from 'nativewind';
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
 
 export const GoalCard = () => {
   const navigation = useNavigation();
@@ -135,9 +136,62 @@ export const Notes = ({
     </View>
   );
 };
-export const OverviewCards = () => {
+export const OverviewCards = ({
+  dataLength,
+  i,
+  prevIndex,
+  currentIndex,
+  animatedValue,
+  maxVisibleItems,
+}: {
+  dataLength: number;
+  i: number;
+  prevIndex: any;
+  currentIndex: any;
+  animatedValue: any;
+  maxVisibleItems: any;
+}) => {
+  const animatedStyle = useAnimatedStyle(() => {
+    const translateY = interpolate(
+      animatedValue.value,
+      [i + 1, i, i - 1],
+      [-30, 1, 30],
+    );
+    const translateY2 = interpolate(
+      animatedValue.value,
+      [i - 1, i, i + 1],
+      [-200, 1, 200],
+    );
+    const scale = interpolate(
+      animatedValue.value,
+      [i - 1, i, i + 1],
+      [0.9, 1, 1.1],
+    );
+    const opacity = interpolate(
+      animatedValue.value,
+      [i - 1, i, i + 1],
+      [1, 1, 0],
+    );
+    return {
+      transform: [
+        {
+          translateY: i === prevIndex.value ? translateY2 : translateY,
+        },
+        {scale},
+      ],
+      opacity:
+        i < currentIndex.value + maxVisibleItems - 1
+          ? opacity
+          : i === currentIndex.value + maxVisibleItems - 1
+          ? withTiming(1)
+          : withTiming(0),
+    };
+  });
+
   return (
-    <View className="h-64 w-full border border-gray-300 rounded-3xl bg-indigo-500 p-4 justify-between">
+    <Animated.View
+      style={[{zIndex: dataLength - i}, animatedStyle]}
+      className={`absolute h-64 w-full border border-gray-300 rounded-3xl bg-indigo-500 p-4 justify-between`}>
       <View className="flex flex-row items-center justify-center gap-3">
         <CircleArrowLeft size={14} color="white" />
         <H3 className="text-white">February, 2025</H3>
@@ -153,7 +207,7 @@ export const OverviewCards = () => {
           <ShoppingBag size={16} color="white" />
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 export const ExpenseCategoryOverview = ({
