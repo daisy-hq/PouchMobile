@@ -32,7 +32,6 @@ import ProfileScreen from '../screens/profile/profile';
 import ExpenseDetailsScreen from '../screens/expense/expenseDetailsScreen';
 import AddBudgetScreen from '../screens/budget/addBudgetScreen';
 import ExpenseCategoryDetailsScreen from '../screens/expense/expenseCategoryDetailsScreen';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();

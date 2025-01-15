@@ -3,6 +3,7 @@ import React from 'react';
 import {CustomText, H1, H2, H3, P} from '../constants/text';
 import {useNavigation} from '@react-navigation/native';
 import {
+  CarFront,
   CircleArrowLeft,
   CircleArrowRight,
   ShoppingBag,
@@ -26,7 +27,9 @@ export const GoalCard = () => {
       className="bg-white p-5 rounded-lg"
       onPress={() => navigation.navigate('Goal Detail' as never)}>
       <View className="flex-row  items-center ">
-        <View className="w-14 h-14 rounded-full bg-blue-200 me-2"></View>
+        <View className="w-14 h-14 p-2 rounded-full bg-blue-200 me-2 justify-center items-center border border-8 border-blue-100 ">
+          <CarFront color={'#1570EF'} />
+        </View>
         <H2>Travel & Lifestyle</H2>
       </View>
       <View className="mt-2">
@@ -60,10 +63,25 @@ export const ExpenseCard = () => {
 };
 
 export const GoalDetailCard = () => {
+  const progress = 40;
+  const progressDegree = (progress / 100) * 360;
   return (
     <Pressable className="bg-white p-5 rounded-lg flex-column justify-center items-center">
       <View className="flex-row w-max  items-center justify-center p-3 border border-slate-200 rounded-md">
-        <View className="w-14 h-14 rounded-full bg-blue-200 me-2"></View>
+        <View className="relative w-14 h-14 me-2 rounded-full bg-white border border-4 border-gray-300 justify-center items-center">
+          <View
+            className="absolute w-14 h-14 rounded-full border-4 justify-center items-center"
+            style={{
+              borderColor: 'transparent',
+              borderTopColor: '#f43f5e',
+              borderRightColor:
+                progressDegree > 180 ? '#f43f5e' : 'transparent',
+            }}
+          />
+          <CustomText className="text-[4px]">Keep going!</CustomText>
+          <CustomText className="text-xs">40%</CustomText>
+        </View>
+
         <View>
           <CustomText className="text-xs">
             40% done. You’re almost there!
@@ -82,19 +100,15 @@ export const GoalDetailCard = () => {
   );
 };
 
-export const ActivityCard = ({
-  id,
-  onPress,
-}: {
-  id?: number;
-  onPress: () => void;
-}) => {
+export const ActivityCard = ({onPress}: {onPress: () => void}) => {
   return (
     <Pressable
       onPress={onPress}
       className="bg-white p-3 my-2 rounded-lg flex-row justify-between">
       <View className="flex-row">
-        <View className="w-14 h-14 rounded-full bg-blue-200 me-2"></View>
+        <View className="w-14 h-14 p-2 rounded-full bg-blue-500 me-2 justify-center items-center ">
+          <CarFront color={'white'} />
+        </View>
         <View>
           <P>Travel & Lifestyle</P>
           <CustomText className="text-xs text-slate-400 mt-2 ">
@@ -104,7 +118,6 @@ export const ActivityCard = ({
       </View>
       <View>
         <P className="text-red-600 font-semibold">GHS 3000</P>
-        <P className="text-red-600 font-semibold">{id}</P>
       </View>
     </Pressable>
   );
@@ -227,7 +240,7 @@ export const OverviewCards = ({
           style={[{zIndex: dataLength - i}, animatedStyle]}
           className={`absolute h-64 w-full border border-gray-300 rounded-3xl ${color} p-4 justify-between`}>
           {type === 'chart' ? (
-            <View className='flex items-center justify-center'>
+            <View className="flex items-center justify-center">
               <PieChart
                 data={data}
                 donut

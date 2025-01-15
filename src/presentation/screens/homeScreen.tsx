@@ -20,11 +20,8 @@ const HomeScreen = () => {
   const renderOverviewCards =[
     {type:"chart"},
     {type:"details"},
-    {type:"details"},
-    {type:"details"},
-    {type:"details"},
-    {type:"details"},
-
+    {type:"chart"},
+    {type:"details"}
   ]
   return (
     <BaseLayout>
