@@ -3,6 +3,7 @@ import React from 'react';
 import {CustomText, H1, H2, H3, P} from '../constants/text';
 import {useNavigation} from '@react-navigation/native';
 import {
+  Bell,
   CarFront,
   CircleArrowLeft,
   CircleArrowRight,
@@ -300,5 +301,27 @@ export const ExpenseCategoryOverview = ({
         <ShoppingBag size={16} color="white" />
       </View>
     </Pressable>
+  );
+};
+
+export const NotificationsCard = () => {
+  return (
+    <View className="w-full bg-gray-200 p-4 flex-row my-1">
+      <View className="w-14 h-14 rounded-full bg-orange-100 items-center justify-center">
+        <Bell size={18} />
+      </View>
+      <View className="ms-2 w-5/6">
+        <H3>Budget Alert</H3>
+        <P className="text-gray-500 text-pretty">
+          You’ve spent 80% of your Groceries Budget. Is this really how you to
+          continue spending?
+        </P>
+        <View className=' flex-row justify-end'>
+          <CustomText className="text-xs text-gray-500 mt-1">
+            Jan 15, 2025 at 10:00am
+          </CustomText>
+        </View>
+      </View>
+    </View>
   );
 };

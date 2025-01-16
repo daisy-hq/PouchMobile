@@ -32,6 +32,7 @@ import ProfileScreen from '../screens/profile/profile';
 import ExpenseDetailsScreen from '../screens/expense/expenseDetailsScreen';
 import AddBudgetScreen from '../screens/budget/addBudgetScreen';
 import ExpenseCategoryDetailsScreen from '../screens/expense/expenseCategoryDetailsScreen';
+import Notifications from '../screens/notifications';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -77,14 +78,20 @@ const goalTrackerNavigation = [
   {
     name: 'Profile',
     page: ProfileScreen,
-    title: 'Profile',
-    type: 'Profile',
+    title: '',
+    type: 'none',
   },
   {
     name: 'ViewExpense',
     page: ExpenseDetailsScreen,
     title: 'Transportation',
     type: 'addScreen',
+  },
+  {
+    name: 'ViewNotifications',
+    page: Notifications,
+    title: 'Notifications',
+    type: 'notifications',
   },
 ];
 
@@ -138,23 +145,24 @@ export const ScreenHeader = ({
       <SafeAreaView>
         {type === 'Dashboard' ? (
           <View className="w-full h-12 flex flex-row items-center justify-between">
-            <Pressable
-              onPress={() => navigation.navigate('Profile' as never)}
-              className="flex-row items-center gap-2">
+            <View className="flex-row items-center gap-2">
               {/* Image */}
-              <Image
-                source={require('../../assets/images/avatar.png')}
-                style={styles.userIcon}
-              />
+              <Pressable
+                onPress={() => navigation.navigate('Profile' as never)}>
+                <Image
+                  source={require('../../assets/images/avatar.png')}
+                  style={styles.userIcon}
+                />
+              </Pressable>
               <View>
                 <P className="text-xs">Welcome back</P>
                 <H3 className="text-xl">{HeaderItems.dashboard.name}</H3>
               </View>
-            </Pressable>
-
-            <View className="bg-white p-2 rounded-lg">
-              {HeaderItems.dashboard.icon}
             </View>
+
+            <Pressable onPress={() => navigation.navigate('ViewNotifications' as never)} className="bg-white p-2 rounded-lg ">
+              {HeaderItems.dashboard.icon}
+            </Pressable>
           </View>
         ) : type === 'Goaltracker' ? (
           <View className="w-full h-12  flex  flex-row items-center justify-between">
@@ -176,6 +184,8 @@ export const ScreenHeader = ({
               </H1>
             </View>
           </View>
+        ) : type === 'none' ? (
+          <></>
         ) : (
           <View className="w-full h-12  flex  flex-row items-center justify-between">
             <TouchableOpacity onPress={() => navigation.goBack()}>
