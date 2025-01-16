@@ -9,6 +9,7 @@ import {
   BellDot,
   ChevronLeft,
   EllipsisVertical,
+  Bell,
 } from 'lucide-react-native';
 import {AddActionSheet} from '../screens/actionSheets';
 import {
@@ -20,7 +21,7 @@ import {
 } from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AddGoalScreen from '../screens/goal/addGoalScreen';
-import {H1, H3, P} from './text';
+import {CustomText, H1, H3, P} from './text';
 import GoalDetailsScreen from '../screens/goal/goalDetailsScreen';
 import LoginScreen from '../screens/auth/login';
 import RegisterScreen from '../screens/auth/register';
@@ -49,7 +50,7 @@ const goalTrackerNavigation = [
     name: 'AddGoal',
     page: AddGoalScreen,
     title: 'Add New Goal',
-    type: 'addScreen',
+    type: 'AddScreen',
   },
   {
     name: 'ViewExpenseCategory',
@@ -61,13 +62,13 @@ const goalTrackerNavigation = [
     name: 'AddExpense',
     page: AddExpenseScreen,
     title: 'Add New Expense',
-    type: 'addScreen',
+    type: 'AddScreen',
   },
   {
     name: 'AddIncome',
     page: AddIncomeScreen,
     title: 'Add New Income',
-    type: 'addScreen',
+    type: 'AddScreen',
   },
   {
     name: 'AddBudget',
@@ -85,13 +86,13 @@ const goalTrackerNavigation = [
     name: 'ViewExpense',
     page: ExpenseDetailsScreen,
     title: 'Transportation',
-    type: 'addScreen',
+    type: '',
   },
   {
     name: 'ViewNotifications',
     page: Notifications,
     title: 'Notifications',
-    type: 'notifications',
+    type: 'AddScreen',
   },
 ];
 
@@ -125,7 +126,7 @@ const TabItems = [
 const HeaderItems = {
   dashboard: {
     name: 'Sandra',
-    icon: <BellDot size={20} />,
+    icon: <Bell size={20} />,
   },
   goaltracker: {name: 'Goal Tracker', icon: <Plus size={20} />},
   addScreen: {name: 'Some thing'},
@@ -160,8 +161,15 @@ export const ScreenHeader = ({
               </View>
             </View>
 
-            <Pressable onPress={() => navigation.navigate('ViewNotifications' as never)} className="bg-white p-2 rounded-lg ">
-              {HeaderItems.dashboard.icon}
+            <Pressable
+              onPress={() => navigation.navigate('ViewNotifications' as never)}
+              className="relative">
+              <View className="bg-white p-2 rounded-lg ">
+                {HeaderItems.dashboard.icon}
+              </View>
+              <View className="w-4 h-4 rounded-full bg-red-500 items-center justify-center absolute top-0 right-0">
+                <CustomText className="text-xs text-white">2</CustomText>
+              </View>
             </Pressable>
           </View>
         ) : type === 'Goaltracker' ? (
