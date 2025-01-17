@@ -1,6 +1,6 @@
 import React from 'react';
 import {BaseLayout} from '../constants/layouts';
-import {H3} from '../constants/text';
+import {H3, P} from '../constants/text';
 import {useNavigation} from '@react-navigation/native';
 import {ExpenseCategoryOverview, OverviewCards} from '../components/cards';
 import {FlatList, View} from 'react-native';
@@ -13,20 +13,30 @@ const HomeScreen = () => {
   const currentIndex = useSharedValue(0);
   const prevIndex = useSharedValue(0);
 
-  const colors = ['bg-blue-600', 'bg-yellow-500', 'bg-emerald-600', 'bg-red-600'];
-  const overviewColors = ['bg-indigo-600', 'bg-rose-500', 'bg-emerald-600', 'bg-slate-600'];
-  const pieChartData=[ {value:50}, {value:80}, {value:90}, {value:70} ]
+  const colors = [
+    'bg-blue-600',
+    'bg-yellow-500',
+    'bg-emerald-600',
+    'bg-red-600',
+  ];
+  const overviewColors = [
+    ['#101828','#475467'],
+    ['#42307D', '#7F56D9'],
+    ['#42307D', '#7F56D9'],
+    ['#42307D', '#7F56D9']
+  ];
+  const pieChartData = [{value: 50}, {value: 80}, {value: 90}, {value: 70}];
 
-  const renderOverviewCards =[
-    {type:"chart"},
-    {type:"details"},
-    {type:"chart"},
-    {type:"details"}
-  ]
+  const renderOverviewCards = [
+    {type: 'chart'},
+    {type: 'details'},
+    {type: 'chart'},
+    {type: 'details'},
+  ];
   return (
     <BaseLayout>
-      <View className="justify-between">
-        <View className=" ">
+      <View className="h-full relative flex w-full">
+        <View className="relative h-72">
           {renderOverviewCards.map((item, i) => (
             <OverviewCards
               dataLength={renderOverviewCards.length}
@@ -42,7 +52,7 @@ const HomeScreen = () => {
             />
           ))}
         </View>
-        <View className="relative mt-80 top-30">
+        <View className="mt-2">
           <H3>Expense categories</H3>
           <FlatList
             data={[1, 2, 3, 4]}
@@ -59,7 +69,8 @@ const HomeScreen = () => {
                 }
                 color={colors[item.index]}
               />
-            )}/>
+            )}
+          />
         </View>
       </View>
     </BaseLayout>

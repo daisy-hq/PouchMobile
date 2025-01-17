@@ -50,8 +50,8 @@ const ProfileScreen = () => {
           </View>
 
           <View className="flex items-center flex-row gap-2">
-            <LogOut size={18}/>
-            <H3>Logout</H3>
+            <LogOut size={18} color={"#D92D20"}/>
+            <H3 className="text-red-500">Logout</H3>
           </View>
         </View>
       </View>

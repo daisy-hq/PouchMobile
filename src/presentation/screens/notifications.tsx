@@ -16,12 +16,12 @@ const Notifications = () => {
             <View className="flex-row items-center">
               <ToggleSwitch
                 isOn={false}
-                onColor="green"
+                onColor="blue"
                 offColor="#F2F4F7"
                 size="small"
                 onToggle={isOn => console.log('changed to : ', isOn)}
               />
-              <CustomText className="text-xs">Unread only</CustomText>
+              <CustomText className="text-xs ms-1">Unread only</CustomText>
             </View>
             <View>
               <CustomText className="text-xs text-gray-600">

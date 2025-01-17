@@ -163,12 +163,12 @@ export const ScreenHeader = ({
 
             <Pressable
               onPress={() => navigation.navigate('ViewNotifications' as never)}
-              className="relative">
-              <View className="bg-white p-2 rounded-lg ">
+              className="relative ">
+              <View className="bg-white p-3 rounded-lg ">
                 {HeaderItems.dashboard.icon}
               </View>
-              <View className="w-4 h-4 rounded-full bg-red-500 items-center justify-center absolute top-0 right-0">
-                <CustomText className="text-xs text-white">2</CustomText>
+              <View className="w-4 h-4 rounded-md bg-red-500 items-center justify-center absolute top-1 right-2">
+                <CustomText className="text-xs text-white ">2</CustomText>
               </View>
             </Pressable>
           </View>

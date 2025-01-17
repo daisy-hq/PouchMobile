@@ -1,4 +1,4 @@
-import {View, Pressable} from 'react-native';
+import {View, Pressable, StyleSheet} from 'react-native';
 import React from 'react';
 import {CustomText, H1, H2, H3, P} from '../constants/text';
 import {useNavigation} from '@react-navigation/native';
@@ -20,6 +20,7 @@ import {
   State,
 } from 'react-native-gesture-handler';
 import {PieChart} from 'react-native-gifted-charts';
+import {LinearGradient} from 'react-native-linear-gradient';
 
 export const GoalCard = () => {
   const navigation = useNavigation();
@@ -176,7 +177,7 @@ export const OverviewCards = ({
   color: any;
   data?: any;
   type?: any;
-}) => {
+}) => {  
   const animatedStyle = useAnimatedStyle(() => {
     const translateY = interpolate(
       animatedValue.value,
@@ -239,38 +240,50 @@ export const OverviewCards = ({
         }}>
         <Animated.View
           style={[{zIndex: dataLength - i}, animatedStyle]}
-          className={`absolute h-64 w-full border border-gray-300 rounded-3xl ${color} p-4 justify-between`}>
-          {type === 'chart' ? (
-            <View className="flex items-center justify-center">
-              <PieChart
-                data={data}
-                donut
-                showText
-                textColor="black"
-                radius={80}
-                textSize={20}
-                textBackgroundRadius={26}
-              />
-            </View>
-          ) : (
-            <>
-              <View className="flex flex-row items-center justify-center gap-3">
-                <CircleArrowLeft size={14} color="white" />
-                <H3 className="text-white">February, 2025</H3>
-                <CircleArrowRight size={14} color="white" />
+          className={`absolute h-64 w-full border border-gray-300 rounded-3xl overflow-hidden justify-between`}>
+          <LinearGradient
+            colors={color}
+            start={{ x: -0.7, y: 0 }}
+            style={{
+              height: '100%',
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              position:'relative',
+            }}
+          >
+            {type === 'chart' ? (
+              <View className="flex items-center justify-center p-4">
+                <PieChart
+                  data={data}
+                  donut
+                  showText
+                  textColor="black"
+                  radius={80}
+                  textSize={20}
+                  textBackgroundRadius={26}
+                />
               </View>
-              <View className="flex justify-center items-center">
-                <CustomText className="w-4/5 text-white text-3xl text-center ">
-                  GHS 1,600 <H1>left out of GHS 2,000 budgeted for bills</H1>
-                </CustomText>
-              </View>
-            </>
-          )}
-          <View className="flex flex-row-reverse">
+            ) : (
+              <>
+                <View className="flex flex-row items-center justify-center gap-3 p-4">
+                  <CircleArrowLeft size={14} color="white" />
+                  <H3 className="text-white">February, 2025</H3>
+                  <CircleArrowRight size={14} color="white" />
+                </View>
+                <View className="flex grow -mt-12 justify-center items-center">
+                  <CustomText className="text-white text-3xl text-center ">
+                    GHS 1,600 <H1>left out of GHS 2,000 budgeted for bills</H1>
+                  </CustomText>
+                </View>
+              </>
+            )}
+            <View className="absolute bottom-4 right-4">
             <View className="flex items-center justify-center w-12 h-9 backdrop-blur-sm bg-white/30 rounded">
               <ShoppingBag size={16} color="white" />
             </View>
           </View>
+          </LinearGradient>
         </Animated.View>
       </FlingGestureHandler>
     </FlingGestureHandler>
@@ -316,7 +329,7 @@ export const NotificationsCard = () => {
           You’ve spent 80% of your Groceries Budget. Is this really how you to
           continue spending?
         </P>
-        <View className=' flex-row justify-end'>
+        <View className=" flex-row justify-end">
           <CustomText className="text-xs text-gray-500 mt-1">
             Jan 15, 2025 at 10:00am
           </CustomText>
