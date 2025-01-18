@@ -1,5 +1,4 @@
 import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Bell, ChevronLeft, EllipsisVertical, Plus} from 'lucide-react-native';
 import {
   Pressable,

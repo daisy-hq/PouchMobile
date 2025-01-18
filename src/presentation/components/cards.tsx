@@ -177,7 +177,7 @@ export const OverviewCards = ({
   color: any;
   data?: any;
   type?: any;
-}) => {  
+}) => {
   const animatedStyle = useAnimatedStyle(() => {
     const translateY = interpolate(
       animatedValue.value,
@@ -243,15 +243,14 @@ export const OverviewCards = ({
           className={`absolute h-64 w-full border border-gray-300 rounded-3xl overflow-hidden justify-between`}>
           <LinearGradient
             colors={color}
-            start={{ x: -0.7, y: 0 }}
+            start={{x: -0.7, y: 0}}
             style={{
               height: '100%',
               width: '100%',
               display: 'flex',
               alignItems: 'center',
-              position:'relative',
-            }}
-          >
+              position: 'relative',
+            }}>
             {type === 'chart' ? (
               <View className="flex items-center justify-center p-4">
                 <PieChart
@@ -279,10 +278,10 @@ export const OverviewCards = ({
               </>
             )}
             <View className="absolute bottom-4 right-4">
-            <View className="flex items-center justify-center w-12 h-9 backdrop-blur-sm bg-white/30 rounded">
-              <ShoppingBag size={16} color="white" />
+              <View className="flex items-center justify-center w-12 h-9 backdrop-blur-sm bg-white/30 rounded">
+                <ShoppingBag size={16} color="white" />
+              </View>
             </View>
-          </View>
           </LinearGradient>
         </Animated.View>
       </FlingGestureHandler>
@@ -317,9 +316,12 @@ export const ExpenseCategoryOverview = ({
   );
 };
 
-export const NotificationsCard = () => {
+export const NotificationsCard = ({markedAsRead}: {markedAsRead: boolean}) => {
   return (
-    <View className="w-full bg-gray-200 p-4 flex-row my-1">
+    <View
+      className={`w-full flex-row my-1 p-4 ${
+        markedAsRead ? '' : 'bg-gray-200'
+      }`}>
       <View className="w-14 h-14 rounded-full bg-orange-100 items-center justify-center">
         <Bell size={18} />
       </View>

@@ -2,11 +2,19 @@ import React, {useState} from 'react';
 import AuthStackNavigation from './navigation/authStackNavigation';
 import RootTabNavigation from './navigation/rootTabNavigation';
 
-// TODO: Review navigation and refactor authentication routing
 const AppLayout = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  return isAuthenticated ? <RootTabNavigation /> : <AuthStackNavigation />;
+  // Function to handle login success
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true);
+  };
+
+  return isAuthenticated ? (
+    <RootTabNavigation />
+  ) : (
+    <AuthStackNavigation onLoginSuccess={handleLoginSuccess} />
+  );
 };
 
 export default AppLayout;

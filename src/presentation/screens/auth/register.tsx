@@ -65,7 +65,9 @@ const RegisterScreen = () => {
           />
         </View>
 
-        <PrimaryButton>Sign Up</PrimaryButton>
+        <PrimaryButton onPress={() => navigation.navigate('Login' as never)}>
+          Sign Up
+        </PrimaryButton>
 
         <PrimaryButton
           onPress={() => navigation.navigate('Login' as never)}

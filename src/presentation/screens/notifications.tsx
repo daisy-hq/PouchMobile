@@ -1,4 +1,4 @@
-import {View, Text, SafeAreaView, Image, ScrollView} from 'react-native';
+import {View, SafeAreaView, Image, ScrollView, Pressable} from 'react-native';
 import React, {useState} from 'react';
 import {CustomText, P} from '../constants/text';
 import {BaseLayout} from '../constants/layouts';
@@ -8,6 +8,9 @@ import {NotificationsCard} from '../components/cards';
 
 const Notifications = () => {
   const [isNotified, setIsNotified] = useState(true);
+  const [showUnreadOnly, setShowUnreadOnly] = useState(false);
+  const [markedAsRead, setMarkedAsRead] = useState(false);
+
   return (
     <BaseLayout>
       {isNotified ? (
@@ -15,23 +18,27 @@ const Notifications = () => {
           <View className="flex-row items-center justify-between">
             <View className="flex-row items-center">
               <ToggleSwitch
-                isOn={false}
+                isOn={showUnreadOnly}
                 onColor="blue"
                 offColor="#F2F4F7"
                 size="small"
-                onToggle={isOn => console.log('changed to : ', isOn)}
+                onToggle={isOn => {
+                  setShowUnreadOnly(isOn);
+                  console.log('Push notifications toggled:', isOn);
+                }}
               />
+
               <CustomText className="text-xs ms-1">Unread only</CustomText>
             </View>
-            <View>
+            <Pressable onPress={() => setMarkedAsRead(!markedAsRead)}>
               <CustomText className="text-xs text-gray-600">
                 Mark all as read
               </CustomText>
-            </View>
+            </Pressable>
           </View>
           <ScrollView className="mt-3 ">
             {[1, 2, 3].map((i, index) => (
-              <NotificationsCard key={index}/>
+              <NotificationsCard key={index} markedAsRead={markedAsRead} />
             ))}
           </ScrollView>
         </View>
