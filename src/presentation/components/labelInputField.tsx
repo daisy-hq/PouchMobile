@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {P} from '../constants/text';
 import DateTimePicker from 'react-native-ui-datepicker';
-import {Eye, EyeClosed, EyeOff} from 'lucide-react-native';
+import {Eye, EyeOff} from 'lucide-react-native';
 
 type LabelInputFieldProps = {
   label: string;

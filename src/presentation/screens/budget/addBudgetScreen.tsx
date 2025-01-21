@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {BaseLayout} from '../../constants/layouts';
 import {StyleSheet, Text, View} from 'react-native';
-import {LabelInputField, LabelTextArea} from '../../components/labelInputField';
+import {LabelInputField} from '../../components/labelInputField';
 import {PrimaryButton} from '../../components/button';
 import {P} from '../../constants/text';
 import SelectDropdown from 'react-native-select-dropdown';

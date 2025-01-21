@@ -1,11 +1,13 @@
-import {View, Image, StyleSheet} from 'react-native';
-import React from 'react';
-import {BaseLayout} from '../../constants/layouts';
-import {H1, P} from '../../constants/text';
+import React, {useState} from 'react';
+import {View, Image, StyleSheet, Pressable} from 'react-native';
 import {Bell, CircleHelp, DollarSign, Edit, LogOut} from 'lucide-react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
+import {BaseLayout} from '@src/presentation/constants/layouts';
+import {H3, P} from '@src/presentation/constants/text';
 
 const ProfileScreen = () => {
+  const [isPushNotificationsOn, setIsPushNotificationsOn] = useState(false);
+
   return (
     <BaseLayout>
       <View className="">
@@ -15,44 +17,38 @@ const ProfileScreen = () => {
               source={require('../../../assets/images/avatar.png')}
               style={styles.userIcon}
             />
-            <View className="absolute bg-white bottom-0 right-0">
-              <Edit />
+            <View className="absolute bg-white bottom-0 right-0 p-1 rounded">
+              <Edit size={16} />
             </View>
           </View>
-          <H1>Sandra</H1>
+          <H3>Sandra</H3>
           <P className="text-gray-400">sandra@gmail.com</P>
         </View>
 
         <View className="mt-8 flex gap-6">
-          <View className="flex flex-row gap-2">
-            <DollarSign />
-            <H1>Current settings</H1>
-          </View>
+          <SettingsRow icon={DollarSign} title="Current settings" />
+          <SettingsRow
+            icon={Bell}
+            title="Push notifications"
+            rightComponent={
+              <ToggleSwitch
+                isOn={isPushNotificationsOn}
+                onColor="blue"
+                offColor="#F2F4F7"
+                size="small"
+                onToggle={isOn => {
+                  setIsPushNotificationsOn(isOn);
+                  console.log('Push notifications toggled:', isOn);
+                }}
+              />
+            }
+          />
+          <SettingsRow icon={CircleHelp} title="Support" />
 
-          <View className="flex flex-row justify-between">
-            <View className="flex flex-row gap-2">
-              <Bell />
-              <H1>Push notifications</H1>
-            </View>
-
-            <ToggleSwitch
-              isOn={false}
-              onColor="green"
-              offColor="#F2F4F7"
-              size="small"
-              onToggle={isOn => console.log('changed to : ', isOn)}
-            />
-          </View>
-
-          <View className="flex flex-row gap-2">
-            <CircleHelp />
-            <H1>Support</H1>
-          </View>
-
-          <View className="flex flex-row gap-2">
-            <LogOut />
-            <H1>Logout</H1>
-          </View>
+          <Pressable className="flex items-center flex-row gap-2">
+            <LogOut size={18} color={'#D92D20'} />
+            <H3 className="text-red-500">Logout</H3>
+          </Pressable>
         </View>
       </View>
     </BaseLayout>
@@ -60,6 +56,25 @@ const ProfileScreen = () => {
 };
 
 export default ProfileScreen;
+
+// Settings Row Component
+const SettingsRow = ({
+  icon: Icon,
+  title,
+  rightComponent = null,
+}: {
+  icon: any;
+  title: string;
+  rightComponent?: any;
+}) => (
+  <View className="flex flex-row items-center justify-between">
+    <View className="flex flex-row items-center gap-2">
+      <Icon size={18} />
+      <H3>{title}</H3>
+    </View>
+    {rightComponent}
+  </View>
+);
 
 const styles = StyleSheet.create({
   userIcon: {

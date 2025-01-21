@@ -1,19 +1,28 @@
 import React, {useState} from 'react';
 import {View, Image, StyleSheet} from 'react-native';
-import {AuthLayout} from '../../constants/layouts';
-import {P} from '../../constants/text';
+import CheckBox from '@react-native-community/checkbox';
 import {Lock, Mail} from 'lucide-react-native';
-import {LabelInputField} from './../../components/labelInputField';
-import {PrimaryButton} from '../../components/button';
 import AuthHeader from './authHeader';
 import {useNavigation} from '@react-navigation/native';
-import CheckBox from '@react-native-community/checkbox';
+import {LabelInputField} from '@src/presentation/components/labelInputField';
+import {PrimaryButton} from '@src/presentation/components/button';
+import {P} from '@src/presentation/constants/text';
+import {AuthLayout} from '@src/presentation/constants/layouts';
 
-const LoginScreen = () => {
+const LoginScreen = ({onLoginSuccess}: {onLoginSuccess: () => void}) => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
+
+  const handleLogin = () => {
+    // make API call here
+    const loginSuccessful = true;
+
+    if (loginSuccessful) {
+      onLoginSuccess();
+    }
+  };
 
   const socialIcons = [
     {source: require('../../../assets/images/auth/apple.png'), type: 'apple'},
@@ -98,11 +107,7 @@ const LoginScreen = () => {
           </View>
         </View>
 
-        <PrimaryButton
-          // the Login button isn't working because we're conditionally rendering the RootStack
-          onPress={() => navigation.navigate('Dashboard' as never)}>
-          Login
-        </PrimaryButton>
+        <PrimaryButton onPress={handleLogin}>Login</PrimaryButton>
 
         <PrimaryButton
           onPress={() => navigation.navigate('Register' as never)}

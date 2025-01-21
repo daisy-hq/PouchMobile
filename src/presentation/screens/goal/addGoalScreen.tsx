@@ -16,26 +16,28 @@ const AddGoalScreen = () => {
   return (
     <BaseLayout>
       <View>
-        <LabelInputField
-          label="Goal name"
-          placeholder="sadique"
-          value={name}
-          onChangeText={setName}
-        />
-        <LabelInputField
-          label="Target amount"
-          placeholder="50"
-          value={amount}
-          type="numeric"
-          onChangeText={setAmount}
-        />
-        <LabelDatePicker />
-        <LabelTextArea
-          label="Note"
-          placeholder="description"
-          value={note}
-          onChangeText={setNote}
-        />
+        <View className="rounded-2xl p-4 bg-white border border-gray-200 flex gap-2">
+          <LabelInputField
+            label="Goal name"
+            placeholder="sadique"
+            value={name}
+            onChangeText={setName}
+          />
+          <LabelInputField
+            label="Target amount"
+            placeholder="50"
+            value={amount}
+            type="numeric"
+            onChangeText={setAmount}
+          />
+          <LabelDatePicker />
+          <LabelTextArea
+            label="Note"
+            placeholder="description"
+            value={note}
+            onChangeText={setNote}
+          />
+        </View>
         <PrimaryButton className="mt-5" onPress={() => null}>
           Save
         </PrimaryButton>
