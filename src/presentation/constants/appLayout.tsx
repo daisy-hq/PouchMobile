@@ -3,7 +3,7 @@ import AuthStackNavigation from './navigation/authStackNavigation';
 import RootTabNavigation from './navigation/rootTabNavigation';
 
 const AppLayout = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   // Function to handle login success
   const handleLoginSuccess = () => {

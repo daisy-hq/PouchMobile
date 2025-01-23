@@ -1,5 +1,5 @@
 import React from 'react';
-import {Bell, ChevronLeft, EllipsisVertical, Plus} from 'lucide-react-native';
+import {Bell, ChevronLeft, Plus} from 'lucide-react-native';
 import {
   Pressable,
   SafeAreaView,
@@ -7,10 +7,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
 import {useNavigation} from '@react-navigation/native';
 import {Image} from 'react-native';
 import {CustomText, H1, H3, P} from '../constants/text';
+import DropdownMenu from './dropdownMenu';
 
 const HeaderItems = {
   dashboard: {
@@ -93,9 +93,18 @@ const ScreenHeader = ({
                 {title ? title : HeaderItems.default.name}
               </H1>
             </View>
-            <View>
+            {/* <View>
               <EllipsisVertical size={20} />
-            </View>
+            </View> */}
+            <DropdownMenu
+              content={
+                <View>
+                  <Pressable>
+                    <P>Edit</P>
+                  </Pressable>
+                </View>
+              }
+            />
           </View>
         )}
       </SafeAreaView>

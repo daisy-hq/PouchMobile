@@ -11,11 +11,6 @@ const AuthStackNavigation = ({
   onLoginSuccess: () => void;
 }) => (
   <Stack.Navigator>
-    {/* <Stack.Screen
-      name="Login"
-      component={LoginScreen}
-      options={{headerShown: false}}
-    /> */}
     <Stack.Screen name="Login" options={{headerShown: false}}>
       {props => <LoginScreen {...props} onLoginSuccess={onLoginSuccess} />}
     </Stack.Screen>
