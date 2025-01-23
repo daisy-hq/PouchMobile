@@ -68,7 +68,7 @@ export const GoalDetailCard = () => {
   const progress = 40;
   const progressDegree = (progress / 100) * 360;
   return (
-    <Pressable className="bg-white p-5 rounded-lg flex-column justify-center items-center">
+    <Pressable className="bg-white z-0 p-5 rounded-lg flex-column justify-center items-center">
       <View className="flex-row w-max  items-center justify-center p-3 border border-slate-200 rounded-md">
         <View className="relative w-14 h-14 me-2 rounded-full bg-white border border-4 border-gray-300 justify-center items-center">
           <View

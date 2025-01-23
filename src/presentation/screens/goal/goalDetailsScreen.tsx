@@ -1,21 +1,14 @@
 import {View, ScrollView} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import {BaseLayout} from '../../constants/layouts';
 import {ActivityCard, GoalDetailCard} from '../../components/cards';
 import {P} from '../../constants/text';
-import {UpdateActionSheet} from '../actionSheets';
-import ScreenHeader from '@src/presentation/components/screenHeader';
 
 const GoalDetailsScreen = () => {
-  const [open, setOpen] = useState(false);
-
-  const handleToggleOverlay = () => {
-    setOpen(!open);
-  };
   return (
     <>
       <BaseLayout>
-        <View>
+        <View className="z-0">
           <View>
             <GoalDetailCard />
             <View className="mt-6 pt-3">
@@ -30,11 +23,6 @@ const GoalDetailsScreen = () => {
             </View>
           </View>
         </View>
-        <UpdateActionSheet
-          open={open}
-          toggleOverlay={handleToggleOverlay}
-          setOpen={setOpen}
-        />
       </BaseLayout>
     </>
   );

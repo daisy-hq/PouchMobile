@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Image} from 'react-native';
-import {CustomText, H1, H3, P} from '../constants/text';
+import {CustomText, H1, H2, H3, P} from '../constants/text';
 import DropdownMenu from './dropdownMenu';
 
 const HeaderItems = {
@@ -22,14 +22,15 @@ const HeaderItems = {
   default: {name: 'Default', icon: <Plus />},
 };
 
-const ScreenHeader = ({
-  type,
-  title,
-}: {
-  type?: 'Dashboard' | 'Goaltracker' | 'AddScreen' | string | null; // remove string type
+interface ScreenHeaderProps {
+  type?: 'Dashboard' | 'Goaltracker' | 'AddScreen' | string | null; // TODO: remove string type
   title?: string | null;
-}) => {
+  onEditPress?: () => void;
+}
+
+const ScreenHeader = ({type, title, onEditPress}: ScreenHeaderProps) => {
   const navigation = useNavigation();
+
   return (
     <View className="p-4">
       <SafeAreaView>
@@ -84,7 +85,7 @@ const ScreenHeader = ({
         ) : type === 'none' ? (
           <></>
         ) : (
-          <View className="w-full h-12  flex  flex-row items-center justify-between">
+          <View className="w-full h-12 z-50 flex flex-row items-center justify-between">
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <ChevronLeft />
             </TouchableOpacity>
@@ -93,17 +94,12 @@ const ScreenHeader = ({
                 {title ? title : HeaderItems.default.name}
               </H1>
             </View>
-            {/* <View>
-              <EllipsisVertical size={20} />
-            </View> */}
             <DropdownMenu
-              content={
-                <View>
-                  <Pressable>
-                    <P>Edit</P>
-                  </Pressable>
-                </View>
-              }
+              content={[
+                <Pressable onPress={onEditPress}>
+                  <H2>Edit</H2>
+                </Pressable>,
+              ]}
             />
           </View>
         )}
