@@ -19,6 +19,7 @@ import Notifications from '@src/presentation/screens/notifications';
 import HomeScreen from '@src/presentation/screens/homeScreen';
 import GoalsTrackerScreen from '@src/presentation/screens/goal/goalsTrackerScreen';
 import IncomeDetailsScreen from '@src/presentation/screens/income/incomeDetails';
+import BudgetDetailsScreen from '@src/presentation/screens/budget/budgetDetails';
 
 const Tab = createBottomTabNavigator();
 
@@ -59,6 +60,12 @@ const goalTrackerNavigation = [
     page: AddBudgetScreen,
     title: 'Add New Plan',
     type: 'addScreen',
+  },
+  {
+    name: 'BudgetDetails',
+    page: BudgetDetailsScreen,
+    title: 'Budget Details',
+    type: 'DetailsScreen',
   },
   {
     name: 'Profile',

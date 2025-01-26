@@ -137,12 +137,14 @@ export const Hint = ({
   children: any;
   icon?: React.ReactNode;
   width: any;
-  color: 'red' | 'yellow' | 'green';
+  color: 'red' | 'yellow' | 'green' | 'blue' | 'violet';
 }) => {
   const colorVariants = {
     red: 'bg-red-50 border-red-500 text-red-800',
     yellow: 'bg-yellow-50 border-yellow-500 text-yellow-800',
     green: 'bg-green-50 border-green-500 text-green-800',
+    blue: 'bg-blue-50 border-blue-500 text-blue-800',
+    violet: 'bg-violet-50 border-violet-500 text-violet-800',
   };
 
   return (

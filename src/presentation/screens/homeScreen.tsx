@@ -5,6 +5,7 @@ import {useNavigation} from '@react-navigation/native';
 import {ExpenseCategoryOverview, OverviewCards} from '../components/cards';
 import {FlatList, Pressable, View} from 'react-native';
 import {useSharedValue} from 'react-native-reanimated';
+import {PrimaryButton} from '../components/button';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -20,10 +21,10 @@ const HomeScreen = () => {
     'bg-red-600',
   ];
   const overviewColors = [
-    ['#101828','#475467'],
+    ['#101828', '#475467'],
     ['#42307D', '#7F56D9'],
     ['#42307D', '#7F56D9'],
-    ['#42307D', '#7F56D9']
+    ['#42307D', '#7F56D9'],
   ];
   const pieChartData = [{value: 50}, {value: 80}, {value: 90}, {value: 70}];
 
@@ -72,6 +73,12 @@ const HomeScreen = () => {
             )}
           />
         <Pressable className='bg-rose-500 p-2 rounded-lg my-2' onPress={()=>navigation.navigate("ViewIncome" as never)}><P className="text-white">Go to income screen</P></Pressable>
+        </View>
+        <View>
+          <PrimaryButton
+            onPress={() => navigation.navigate('BudgetDetails' as never)}>
+            Budget details screen
+          </PrimaryButton>
         </View>
       </View>
     </BaseLayout>
