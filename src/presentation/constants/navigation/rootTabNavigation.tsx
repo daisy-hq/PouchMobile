@@ -169,11 +169,6 @@ const RootTabNavigation = () => {
               title: '',
               tabBarItemStyle: {display: 'none'},
               tabBarShowLabel: false,
-              // headerStyle: {
-              //   backgroundColor: 'red',
-              //   borderColor: 'green',
-              //   display: 'none',
-              // },
               header: () => (
                 <ScreenHeader
                   type={item.type}

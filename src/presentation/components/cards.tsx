@@ -28,23 +28,36 @@ export const GoalCard = () => {
     <Pressable
       className="bg-white p-5 rounded-lg"
       onPress={() => navigation.navigate('Goal Detail' as never)}>
-      <View className="flex-row  items-center ">
-        <View className="w-14 h-14 p-2 rounded-full bg-blue-200 me-2 justify-center items-center border border-8 border-blue-100 ">
-          <CarFront color={'#1570EF'} />
+      <View className="flex-row ">
+        <View className="w-10 h-10 p-1 rounded-full bg-blue-200 me-2 justify-center items-center border border-4 border-blue-100 ">
+          <CarFront color={'#1570EF'} size={18} />
         </View>
-        <H2>Travel & Lifestyle</H2>
-      </View>
-      <View className="mt-2">
-        <CustomText className="text-3xl font-semibold">
-          GHS 1000 / GHS 3000
-        </CustomText>
+        <View className="">
+          <H2>Travel & Lifestyle</H2>
+          <H2>
+            GHS 125 <H2 className="text-gray-600">(GHS 3000)</H2>
+          </H2>
+        </View>
       </View>
     </Pressable>
   );
 };
-export const ExpenseCard = () => {
+export const ExpenseCard = ({type}: {type?: 'tracker' | 'none'}) => {
   return (
-    <Pressable className="bg-white p-4 rounded-lg w-full" onPress={() => null}>
+    <View className="bg-white p-4 rounded-lg w-full mb-3" >
+      <View className="items-center">
+        {type === 'tracker' && (
+          <>
+            <CustomText className="text-xs text-gray-600">
+              You’re 60% away from exceeding your budget.
+            </CustomText>
+            <View className="h-2 bg-gray-200 w-full rounded my-3 relative">
+              <View className='absolute w-1/2 left-0 bg-blue-600 h-full rounded '></View>
+
+            </View>
+          </>
+        )}
+      </View>
       <View className="flex flex-row justify-between p-4 gap-4">
         <View className="items-center grow">
           <CustomText className="text-sm mb-2 text-gray-500">Amount</CustomText>
@@ -60,19 +73,20 @@ export const ExpenseCard = () => {
           </CustomText>
         </View>
       </View>
-    </Pressable>
+    </View>
   );
 };
 
 export const GoalDetailCard = () => {
-  const progress = 40;
-  const progressDegree = (progress / 100) * 360;
+  const progress = 70;
+  // const progressDegree = (progress / 100) * 360;
+  const progressDegree = 267;
   return (
     <Pressable className="bg-white z-0 p-5 rounded-lg flex-column justify-center items-center">
-      <View className="flex-row w-max  items-center justify-center p-3 border border-slate-200 rounded-md">
-        <View className="relative w-14 h-14 me-2 rounded-full bg-white border border-4 border-gray-300 justify-center items-center">
+      <View className="flex-row w-full  items-center justify-center p-3 border-b border-slate-200 rounded-md">
+        <View className="relative w-14 h-14 me-2 rounded-full bg-white border-4 border-gray-300 justify-center items-center">
           <View
-            className="absolute w-14 h-14 rounded-full border-4 justify-center items-center"
+            className="absolute w-14 h-14 rounded-full  border-4 justify-center items-center "
             style={{
               borderColor: 'transparent',
               borderTopColor: '#f43f5e',
@@ -84,21 +98,17 @@ export const GoalDetailCard = () => {
           <CustomText className="text-xs">40%</CustomText>
         </View>
 
-        <View>
-          <CustomText className="text-xs">
+        <View className="flex items-start ">
+          <CustomText className="text-xs mb-1">
             40% done. You’re almost there!
           </CustomText>
-          <Hint
-            color="yellow"
-            width={20}
-            // className="text-xs p-1 mt-2 w-20 border rounded-full bg-yellow-50 text-orange-800 border-yellow-500"
-          >
+          <Hint color="yellow" width={'fit'}>
             In Progress
           </Hint>
         </View>
       </View>
       <View className="mt-3 py-2">
-        <CustomText className="text-3xl font-semibold">
+        <CustomText className="text-2xl font-semibold">
           GHS 1000 / GHS 3000
         </CustomText>
       </View>

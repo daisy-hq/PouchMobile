@@ -23,7 +23,7 @@ const TabViewOptions = ({renderScene, routes}: TabViewOptionsProps) => {
           style={styles.tabHeader}
           indicatorStyle={styles.indicator}
           tabStyle={styles.tab}
-          activeColor="#007AFF"
+          activeColor="white"
           inactiveColor="#000"
         />
       )}
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     borderCurve: 'circular',
   },
   indicator: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#007AFF',
     height: '100%',
     width: 180,
     borderRadius: 25,

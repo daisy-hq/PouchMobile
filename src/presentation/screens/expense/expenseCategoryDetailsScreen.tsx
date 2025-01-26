@@ -14,11 +14,11 @@ const ExpenseCategoryDetailsScreen = () => {
         <Calendar size={18} />
         <P className="">This month</P>
       </View>
-      <ExpenseCard />
+      <ExpenseCard type='tracker'/>
       <Hint
         color="yellow"
         width="full"
-        icon={<Lightbulb size={16} color="#DC6803" />}>
+        icon={<Lightbulb size={16} color="#DC6803" />} >
         You have exceeded your budget on payments this month
       </Hint>
       <View className="mt-5">

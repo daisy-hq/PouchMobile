@@ -34,7 +34,7 @@ const ScreenHeader = ({type, title, onEditPress}: ScreenHeaderProps) => {
   return (
     <View
       className={`p-4 ${
-        type === 'DetailsScreen' ? 'bg-[#2C7571]' : 'bg-white'
+        type === 'DetailsScreen' ? 'bg-[#2C7571]' : ''
       }`}>
       <SafeAreaView>
         {type === 'Dashboard' ? (
