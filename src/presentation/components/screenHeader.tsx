@@ -1,5 +1,5 @@
 import React from 'react';
-import {Bell, ChevronLeft, EllipsisVertical, Plus} from 'lucide-react-native';
+import {Bell, ChevronLeft, Plus} from 'lucide-react-native';
 import {
   Pressable,
   SafeAreaView,
@@ -7,10 +7,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
 import {useNavigation} from '@react-navigation/native';
 import {Image} from 'react-native';
-import {CustomText, H1, H3, P} from '../constants/text';
+import {CustomText, H1, H2, H3, P} from '../constants/text';
+import DropdownMenu from './dropdownMenu';
 
 const HeaderItems = {
   dashboard: {
@@ -22,16 +22,20 @@ const HeaderItems = {
   default: {name: 'Default', icon: <Plus />},
 };
 
-const ScreenHeader = ({
-  type,
-  title,
-}: {
-  type?: 'Dashboard' | 'Goaltracker' | 'AddScreen' | string | null; // remove string type
+interface ScreenHeaderProps {
+  type?: 'Dashboard' | 'Goaltracker' | 'AddScreen' | string | null; // TODO: remove string type
   title?: string | null;
-}) => {
+  onEditPress?: () => void;
+}
+
+const ScreenHeader = ({type, title, onEditPress}: ScreenHeaderProps) => {
   const navigation = useNavigation();
+
   return (
-    <View className="p-4">
+    <View
+      className={`p-4 ${
+        type === 'DetailsScreen' ? 'bg-[#2C7571]' : 'bg-white'
+      }`}>
       <SafeAreaView>
         {type === 'Dashboard' ? (
           <View className="w-full h-12 flex flex-row items-center justify-between">
@@ -81,10 +85,30 @@ const ScreenHeader = ({
               </H1>
             </View>
           </View>
+        ) : type === 'DetailsScreen' ? (
+          <View className="w-full h-12 z-50 flex flex-row items-center justify-between">
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              className="p-2 border border-white rounded-xl">
+              <ChevronLeft color={'white'} />
+            </TouchableOpacity>
+            <View>
+              <H1 className="text-xl text-white">
+                {title ? title : HeaderItems.default.name}
+              </H1>
+            </View>
+            <DropdownMenu
+              content={[
+                <Pressable onPress={onEditPress}>
+                  <H2>Edit</H2>
+                </Pressable>,
+              ]}
+            />
+          </View>
         ) : type === 'none' ? (
           <></>
         ) : (
-          <View className="w-full h-12  flex  flex-row items-center justify-between">
+          <View className="w-full h-12 z-50 flex flex-row items-center justify-between">
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <ChevronLeft />
             </TouchableOpacity>
@@ -93,9 +117,13 @@ const ScreenHeader = ({
                 {title ? title : HeaderItems.default.name}
               </H1>
             </View>
-            <View>
-              <EllipsisVertical size={20} />
-            </View>
+            <DropdownMenu
+              content={[
+                <Pressable onPress={onEditPress}>
+                  <H2>Edit</H2>
+                </Pressable>,
+              ]}
+            />
           </View>
         )}
       </SafeAreaView>

@@ -8,6 +8,33 @@ import {H3, P} from '@src/presentation/constants/text';
 const ProfileScreen = () => {
   const [isPushNotificationsOn, setIsPushNotificationsOn] = useState(false);
 
+  const settings = [
+    {
+      icon: DollarSign,
+      title: 'Currency settings',
+    },
+    {
+      icon: Bell,
+      title: 'Push notifications',
+      rightComponent: (
+        <ToggleSwitch
+          isOn={isPushNotificationsOn}
+          onColor="blue"
+          offColor="#F2F4F7"
+          size="small"
+          onToggle={isOn => {
+            setIsPushNotificationsOn(isOn);
+            console.log('Push notifications toggled:', isOn);
+          }}
+        />
+      ),
+    },
+    {
+      icon: CircleHelp,
+      title: 'Support',
+    },
+  ];
+
   return (
     <BaseLayout>
       <View className="">
@@ -26,24 +53,14 @@ const ProfileScreen = () => {
         </View>
 
         <View className="mt-8 flex gap-6">
-          <SettingsRow icon={DollarSign} title="Current settings" />
-          <SettingsRow
-            icon={Bell}
-            title="Push notifications"
-            rightComponent={
-              <ToggleSwitch
-                isOn={isPushNotificationsOn}
-                onColor="blue"
-                offColor="#F2F4F7"
-                size="small"
-                onToggle={isOn => {
-                  setIsPushNotificationsOn(isOn);
-                  console.log('Push notifications toggled:', isOn);
-                }}
-              />
-            }
-          />
-          <SettingsRow icon={CircleHelp} title="Support" />
+          {settings.map((item, index) => (
+            <SettingsRow
+              key={index}
+              icon={item.icon}
+              title={item.title}
+              rightComponent={item.rightComponent}
+            />
+          ))}
 
           <Pressable className="flex items-center flex-row gap-2">
             <LogOut size={18} color={'#D92D20'} />

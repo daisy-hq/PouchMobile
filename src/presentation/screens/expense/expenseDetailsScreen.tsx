@@ -1,19 +1,29 @@
 import {View} from 'react-native';
 import React from 'react';
-import {BaseLayout} from '@src/presentation/constants/layouts';
+import {DetailsLayout} from '@src/presentation/constants/layouts';
 import {ExpenseCard, Hint, Notes} from '@src/presentation/components/cards';
-import {H3} from '@src/presentation/constants/text';
+import {H2, H3, P} from '@src/presentation/constants/text';
 
 const ExpenseDetailsScreen = () => {
   return (
-    <BaseLayout>
-      <View className="flex items-center">
-        <Hint width="20">High</Hint>
-        <H3 className="mb-3">Category: Food</H3>
+    <DetailsLayout
+      detailsTitle={'Every expense, categorized for better financial insights.'}
+      detailsOverviewCard={
+        <View className="flex flex-row justify-between items-center">
+          <H3 className="">Category: Food</H3>
+          <Hint width="20" color={'red'}>
+            High
+          </Hint>
+        </View>
+      }>
+      <View>
         <ExpenseCard />
-        <Notes title="Notes">Bought eggs</Notes>
+        <Notes title="Notes">
+          Bought fruits and vegetables for the whole month which i know that I
+          will not use them but rather be ordering food from outside.
+        </Notes>
       </View>
-    </BaseLayout>
+    </DetailsLayout>
   );
 };
 

@@ -2,7 +2,10 @@
 import React, {useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ScreenHeader from '@src/presentation/components/screenHeader';
-import {AddActionSheet} from '@src/presentation/screens/actionSheets';
+import {
+  AddActionSheet,
+  UpdateActionSheet,
+} from '@src/presentation/screens/actionSheets';
 import {Goal, House, Plus} from 'lucide-react-native';
 import GoalDetailsScreen from '@src/presentation/screens/goal/goalDetailsScreen';
 import AddGoalScreen from '@src/presentation/screens/goal/addGoalScreen';
@@ -66,7 +69,7 @@ const goalTrackerNavigation = [
     name: 'ViewExpense',
     page: ExpenseDetailsScreen,
     title: 'Transportation',
-    type: '',
+    type: 'DetailsScreen',
   },
   {
     name: 'ViewNotifications',
@@ -105,9 +108,13 @@ const TabItems = [
 
 const RootTabNavigation = () => {
   const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
 
   const handleToggleOverlay = () => {
     setOpen(prev => !prev);
+  };
+  const handleToggleEditOverlay = () => {
+    setOpenEdit(prev => !prev);
   };
 
   return (
@@ -148,10 +155,16 @@ const RootTabNavigation = () => {
               title: '',
               tabBarItemStyle: {display: 'none'},
               tabBarShowLabel: false,
+              // headerStyle: {
+              //   backgroundColor: 'red',
+              //   borderColor: 'green',
+              //   display: 'none',
+              // },
               header: () => (
                 <ScreenHeader
                   type={item.type}
                   title={item.title !== '' ? item.title : null}
+                  onEditPress={() => handleToggleEditOverlay()}
                 />
               ),
             }}
@@ -162,6 +175,11 @@ const RootTabNavigation = () => {
         open={open}
         toggleOverlay={handleToggleOverlay}
         setOpen={setOpen}
+      />
+      <UpdateActionSheet
+        open={openEdit}
+        toggleOverlay={handleToggleEditOverlay}
+        setOpen={setOpenEdit}
       />
     </>
   );

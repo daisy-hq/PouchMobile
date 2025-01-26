@@ -1,4 +1,4 @@
-import {View, Pressable, StyleSheet} from 'react-native';
+import {View, Pressable} from 'react-native';
 import React from 'react';
 import {CustomText, H1, H2, H3, P} from '../constants/text';
 import {useNavigation} from '@react-navigation/native';
@@ -44,19 +44,19 @@ export const GoalCard = () => {
 };
 export const ExpenseCard = () => {
   return (
-    <Pressable className="bg-white p-5 rounded-lg w-full" onPress={() => null}>
-      <View className="flex flex-row justify-between p-4">
-        <View className=" items-center ">
-          <CustomText className="text-sm mb-2 text-gray-500">Spent</CustomText>
+    <Pressable className="bg-white p-4 rounded-lg w-full" onPress={() => null}>
+      <View className="flex flex-row justify-between p-4 gap-4">
+        <View className="items-center grow">
+          <CustomText className="text-sm mb-2 text-gray-500">Amount</CustomText>
           <CustomText className="text-3xl font-semibold">GHS 1000</CustomText>
         </View>
-        <View className="border border-gray-400"></View>
-        <View className=" items-center ">
+        <View className="border border-gray-400" />
+        <View className="items-center grow">
           <CustomText className="text-sm mb-2 text-gray-500">
-            Remaining
+            Date added
           </CustomText>
-          <CustomText className="text-3xl font-semibold text-red-500">
-            GHS -1000
+          <CustomText className="text-3xl font-semibold">
+            Jan 15, 2025
           </CustomText>
         </View>
       </View>
@@ -68,7 +68,7 @@ export const GoalDetailCard = () => {
   const progress = 40;
   const progressDegree = (progress / 100) * 360;
   return (
-    <Pressable className="bg-white p-5 rounded-lg flex-column justify-center items-center">
+    <Pressable className="bg-white z-0 p-5 rounded-lg flex-column justify-center items-center">
       <View className="flex-row w-max  items-center justify-center p-3 border border-slate-200 rounded-md">
         <View className="relative w-14 h-14 me-2 rounded-full bg-white border border-4 border-gray-300 justify-center items-center">
           <View
@@ -88,9 +88,13 @@ export const GoalDetailCard = () => {
           <CustomText className="text-xs">
             40% done. You’re almost there!
           </CustomText>
-          <CustomText className="text-xs p-1 mt-2 w-20 border rounded-full bg-yellow-50 text-orange-800 border-yellow-500 ">
+          <Hint
+            color="yellow"
+            width={20}
+            // className="text-xs p-1 mt-2 w-20 border rounded-full bg-yellow-50 text-orange-800 border-yellow-500"
+          >
             In Progress
-          </CustomText>
+          </Hint>
         </View>
       </View>
       <View className="mt-3 py-2">
@@ -128,16 +132,26 @@ export const Hint = ({
   children,
   icon,
   width,
+  color,
 }: {
   children: any;
   icon?: React.ReactNode;
   width: any;
+  color: 'red' | 'yellow' | 'green';
 }) => {
+  const colorVariants = {
+    red: 'bg-red-50 border-red-500 text-red-800',
+    yellow: 'bg-yellow-50 border-yellow-500 text-yellow-800',
+    green: 'bg-green-50 border-green-500 text-green-800',
+  };
+
   return (
     <View
-      className={`flex flex-row items-center justify-center gap-1 p-2 my-3 w-${width} border rounded-full bg-yellow-50 border-yellow-500`}>
+      className={`flex flex-row items-center justify-center gap-1 p-2 w-${width} border rounded-full ${colorVariants[color]} `}>
       {icon && icon}
-      <CustomText className="text-xs text-orange-800">{children}</CustomText>
+      <CustomText className={`text-xs ${colorVariants[color]} `}>
+        {children}
+      </CustomText>
     </View>
   );
 };
@@ -151,8 +165,8 @@ export const Notes = ({
   return (
     <View className="mt-3 w-full">
       <P className="mb-2">{title && title}</P>
-      <View className="h-32 w-full p-3 border rounded-lg border-gray-300">
-        <P>{children}</P>
+      <View className="h-32 w-full p-3 rounded-lg border border-gray-200 bg-gray-200">
+        <P className="text-gray-600">{children}</P>
       </View>
     </View>
   );
