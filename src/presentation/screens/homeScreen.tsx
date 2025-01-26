@@ -3,7 +3,7 @@ import {BaseLayout} from '../constants/layouts';
 import {H3, P} from '../constants/text';
 import {useNavigation} from '@react-navigation/native';
 import {ExpenseCategoryOverview, OverviewCards} from '../components/cards';
-import {FlatList, View} from 'react-native';
+import {FlatList, Pressable, View} from 'react-native';
 import {useSharedValue} from 'react-native-reanimated';
 
 const HomeScreen = () => {
@@ -71,6 +71,7 @@ const HomeScreen = () => {
               />
             )}
           />
+        <Pressable className='bg-rose-500 p-2 rounded-lg my-2' onPress={()=>navigation.navigate("ViewIncome" as never)}><P className="text-white">Go to income screen</P></Pressable>
         </View>
       </View>
     </BaseLayout>
