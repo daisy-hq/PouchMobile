@@ -29,7 +29,7 @@ export const GoalCard = () => {
       className="bg-white p-5 rounded-lg"
       onPress={() => navigation.navigate('Goal Detail' as never)}>
       <View className="flex-row ">
-        <View className="w-10 h-10 p-1 rounded-full bg-blue-200 me-2 justify-center items-center border border-4 border-blue-100 ">
+        <View className="w-10 h-10 p-1 rounded-full bg-blue-200 me-2 justify-center items-center border-4 border-blue-100 ">
           <CarFront color={'#1570EF'} size={18} />
         </View>
         <View className="">
