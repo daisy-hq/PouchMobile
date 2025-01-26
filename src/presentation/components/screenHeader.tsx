@@ -32,7 +32,10 @@ const ScreenHeader = ({type, title, onEditPress}: ScreenHeaderProps) => {
   const navigation = useNavigation();
 
   return (
-    <View className="p-4">
+    <View
+      className={`p-4 ${
+        type === 'DetailsScreen' ? 'bg-[#2C7571]' : 'bg-white'
+      }`}>
       <SafeAreaView>
         {type === 'Dashboard' ? (
           <View className="w-full h-12 flex flex-row items-center justify-between">
@@ -81,6 +84,26 @@ const ScreenHeader = ({type, title, onEditPress}: ScreenHeaderProps) => {
                 {title ? title : HeaderItems.addScreen.name}
               </H1>
             </View>
+          </View>
+        ) : type === 'DetailsScreen' ? (
+          <View className="w-full h-12 z-50 flex flex-row items-center justify-between">
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              className="p-2 border border-white rounded-xl">
+              <ChevronLeft color={'white'} />
+            </TouchableOpacity>
+            <View>
+              <H1 className="text-xl text-white">
+                {title ? title : HeaderItems.default.name}
+              </H1>
+            </View>
+            <DropdownMenu
+              content={[
+                <Pressable onPress={onEditPress}>
+                  <H2>Edit</H2>
+                </Pressable>,
+              ]}
+            />
           </View>
         ) : type === 'none' ? (
           <></>

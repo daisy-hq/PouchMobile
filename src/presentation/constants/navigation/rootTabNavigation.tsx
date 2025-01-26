@@ -69,7 +69,7 @@ const goalTrackerNavigation = [
     name: 'ViewExpense',
     page: ExpenseDetailsScreen,
     title: 'Transportation',
-    type: '',
+    type: 'DetailsScreen',
   },
   {
     name: 'ViewNotifications',
@@ -155,6 +155,11 @@ const RootTabNavigation = () => {
               title: '',
               tabBarItemStyle: {display: 'none'},
               tabBarShowLabel: false,
+              // headerStyle: {
+              //   backgroundColor: 'red',
+              //   borderColor: 'green',
+              //   display: 'none',
+              // },
               header: () => (
                 <ScreenHeader
                   type={item.type}
