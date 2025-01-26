@@ -25,7 +25,7 @@ export const DetailsLayout = ({
   detailsOverviewCard: any;
 }) => {
   return (
-    <View className="flex-1">
+    <View className="flex-1 bg-white">
       <View className="bg-[#2C7571] h-1/3 flex items-center">
         <H1 className="text-white text-wrap w-[70%] absolute top-16 text-center">
           {detailsTitle}
