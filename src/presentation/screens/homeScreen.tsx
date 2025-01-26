@@ -72,6 +72,7 @@ const HomeScreen = () => {
               />
             )}
           />
+        <Pressable className='bg-rose-500 p-2 rounded-lg my-2' onPress={()=>navigation.navigate("ViewIncome" as never)}><P className="text-white">Go to income screen</P></Pressable>
         </View>
         <View>
           <PrimaryButton

@@ -18,6 +18,7 @@ import ExpenseDetailsScreen from '@src/presentation/screens/expense/expenseDetai
 import Notifications from '@src/presentation/screens/notifications';
 import HomeScreen from '@src/presentation/screens/homeScreen';
 import GoalsTrackerScreen from '@src/presentation/screens/goal/goalsTrackerScreen';
+import IncomeDetailsScreen from '@src/presentation/screens/income/incomeDetails';
 import BudgetDetailsScreen from '@src/presentation/screens/budget/budgetDetails';
 
 const Tab = createBottomTabNavigator();
@@ -76,6 +77,12 @@ const goalTrackerNavigation = [
     name: 'ViewExpense',
     page: ExpenseDetailsScreen,
     title: 'Transportation',
+    type: 'DetailsScreen',
+  },
+  {
+    name: 'ViewIncome',
+    page: IncomeDetailsScreen,
+    title: 'Salary',
     type: 'DetailsScreen',
   },
   {
