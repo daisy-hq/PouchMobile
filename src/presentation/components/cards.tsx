@@ -7,6 +7,7 @@ import {
   CarFront,
   CircleArrowLeft,
   CircleArrowRight,
+  Goal,
   ShoppingBag,
 } from 'lucide-react-native';
 import Animated, {
@@ -44,7 +45,7 @@ export const GoalCard = () => {
 };
 export const ExpenseCard = ({type}: {type?: 'tracker' | 'none'}) => {
   return (
-    <View className="bg-white p-4 rounded-lg w-full mb-3" >
+    <View className="bg-white p-4 rounded-lg w-full mb-3">
       <View className="items-center">
         {type === 'tracker' && (
           <>
@@ -52,8 +53,7 @@ export const ExpenseCard = ({type}: {type?: 'tracker' | 'none'}) => {
               You’re 60% away from exceeding your budget.
             </CustomText>
             <View className="h-2 bg-gray-200 w-full rounded my-3 relative">
-              <View className='absolute w-1/2 left-0 bg-blue-600 h-full rounded '></View>
-
+              <View className="absolute w-1/2 left-0 bg-blue-600 h-full rounded "></View>
             </View>
           </>
         )}
@@ -366,3 +366,82 @@ export const NotificationsCard = ({markedAsRead}: {markedAsRead: boolean}) => {
     </View>
   );
 };
+
+export function IncomeCards({
+  onPress,
+  bgColor,
+  textColor,
+}: {
+  onPress: () => void;
+  bgColor?: String;
+  textColor?: String;
+}) {
+  return (
+    <Pressable
+      className={`justify-center px-3 ${
+        bgColor || 'bg-rose-50'
+      } rounded-md w-52 h-16 me-2`}
+      onPress={onPress}>
+      <View className="flex-row justify-between items-center">
+        <CustomText className={`${textColor || 'text-rose-600 '} text-xs`}>
+          BitAfrika
+        </CustomText>
+        <CustomText className="text-[8px]">Jan 5,2025</CustomText>
+      </View>
+      <View className="flex-row justify-between items-center">
+        <P className="text-gray-500">Salary</P>
+        <P>
+          GHS 10,000<CustomText className="text-[8px]">/wk</CustomText>
+        </P>
+      </View>
+    </Pressable>
+  );
+}
+export function BudgetCards({
+  onPress,
+  data,
+}: {
+  onPress: () => void;
+  data?: any;
+}) {
+  return (
+    <Pressable
+      className={` p-3 bg-blue-50 rounded-md w-52 h-56 me-2 `}
+      onPress={onPress}>
+      <View className="flex-row justify-between items-center">
+        <P>General Expense</P>
+        <Goal size={16} />
+      </View>
+      <View className="my-2">
+        <View className="h-6 gap-1">
+          {data.map((i: any, index: any) => {
+            const total = data.reduce(
+              (accumulator: any, item: any) => accumulator + item.value,
+              0,
+            );
+            const valuePercent = (i.value / total) * 100;
+            return (
+              <View key={index} className="flex-row items-center gap-1">
+                <View
+                  className={`h-full w-1 rounded`}
+                  style={{backgroundColor: i.color}}
+                />
+                <View>
+                  <CustomText className="text-xs">
+                    {Math.ceil(valuePercent)}%
+                  </CustomText>
+                  <CustomText className="text-[8px] text-gray-400">
+                    {i.label}
+                  </CustomText>
+                </View>
+              </View>
+            );
+          })}
+        </View>
+        <View className=" h-full flex-row  justify-end items-baseline">
+          <PieChart data={data} radius={50} />
+        </View>
+      </View>
+    </Pressable>
+  );
+}

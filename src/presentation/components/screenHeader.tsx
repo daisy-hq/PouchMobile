@@ -1,5 +1,5 @@
 import React from 'react';
-import {Bell, ChevronLeft, Plus} from 'lucide-react-native';
+import {Bell, ChevronLeft, Gift, Plus} from 'lucide-react-native';
 import {
   Pressable,
   SafeAreaView,
@@ -32,10 +32,7 @@ const ScreenHeader = ({type, title, onEditPress}: ScreenHeaderProps) => {
   const navigation = useNavigation();
 
   return (
-    <View
-      className={`p-4 ${
-        type === 'DetailsScreen' ? 'bg-[#2C7571]' : ''
-      }`}>
+    <View className={`p-4 ${type === 'DetailsScreen' ? 'bg-[#2C7571]' : ''}`}>
       <SafeAreaView>
         {type === 'Dashboard' ? (
           <View className="w-full h-12 flex flex-row items-center justify-between">
@@ -54,16 +51,30 @@ const ScreenHeader = ({type, title, onEditPress}: ScreenHeaderProps) => {
               </View>
             </View>
 
-            <Pressable
-              onPress={() => navigation.navigate('ViewNotifications' as never)}
-              className="relative ">
-              <View className="bg-white p-3 rounded-lg ">
-                {HeaderItems.dashboard.icon}
-              </View>
-              <View className="w-4 h-4 rounded-md bg-red-500 items-center justify-center absolute top-1 right-2">
-                <CustomText className="text-xs text-white ">2</CustomText>
-              </View>
-            </Pressable>
+            <View className="flex-row gap-2">
+              <Pressable
+                onPress={() =>
+                  navigation.navigate('ViewNotifications' as never)
+                }
+                className="relative ">
+                <View className="bg-white p-3 rounded-lg ">
+                  <Gift size={20} />
+                </View>
+                <View className="w-2 h-2 rounded-full bg-red-500 items-center justify-center absolute top-2 right-3" />
+              </Pressable>
+              <Pressable
+                onPress={() =>
+                  navigation.navigate('ViewNotifications' as never)
+                }
+                className="relative ">
+                <View className="bg-white p-3 rounded-lg ">
+                  {HeaderItems.dashboard.icon}
+                </View>
+                <View className="w-4 h-4 rounded-md bg-red-500 items-center justify-center absolute top-1 right-2">
+                  <CustomText className="text-xs text-white ">2</CustomText>
+                </View>
+              </Pressable>
+            </View>
           </View>
         ) : type === 'Goaltracker' ? (
           <View className="w-full h-12  flex  flex-row items-center justify-between">
