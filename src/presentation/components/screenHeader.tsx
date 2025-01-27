@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Bell, ChevronLeft, Gift, Plus} from 'lucide-react-native';
 import {
+  Animated,
   Pressable,
   SafeAreaView,
   StyleSheet,
@@ -30,6 +31,51 @@ interface ScreenHeaderProps {
 
 const ScreenHeader = ({type, title, onEditPress}: ScreenHeaderProps) => {
   const navigation = useNavigation();
+  const newHintAnimation = useRef(new Animated.Value(0)).current;
+
+  const [isPressed, setIsPressed] = useState(false);
+  const [showHint, setShowHint] = useState(false);
+
+  const hintPrompt = () => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(newHintAnimation, {
+          toValue: -10,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(newHintAnimation, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+      ]),
+    ).start();
+  };
+  useEffect(() => {
+    if (!isPressed) {
+      hintPrompt();
+    }
+  }, [isPressed]);
+
+  const handlePress = () => {
+    setIsPressed(true);
+    newHintAnimation.stopAnimation(() => {
+      newHintAnimation.setValue(0);
+    });
+    setShowHint(!showHint);
+  };
+
+  const showNewHint = () => {
+    if (showHint) {
+      return (
+        <View className="p-4 bg-rose-100 rounded-lg absolute top-10 right-14">
+          <P className="text-rose-600">Here is all the gist you need!</P>
+        </View>
+      );
+    }
+    return null;
+  };
 
   return (
     <View className={`p-4 ${type === 'DetailsScreen' ? 'bg-[#2C7571]' : ''}`}>
@@ -52,16 +98,15 @@ const ScreenHeader = ({type, title, onEditPress}: ScreenHeaderProps) => {
             </View>
 
             <View className="flex-row gap-2">
-              <Pressable
-                onPress={() =>
-                  navigation.navigate('ViewNotifications' as never)
-                }
-                className="relative ">
-                <View className="bg-white p-3 rounded-lg ">
+              <Pressable onPress={handlePress} className="relative ">
+                <Animated.View
+                  className="bg-white p-3 rounded-lg "
+                  style={{transform: [{translateY: newHintAnimation}]}}>
                   <Gift size={20} />
-                </View>
-                <View className="w-2 h-2 rounded-full bg-red-500 items-center justify-center absolute top-2 right-3" />
+                  <View className="w-2 h-2 rounded-full bg-red-500 items-center justify-center absolute top-2 right-3" />
+                </Animated.View>
               </Pressable>
+              {showNewHint()}
               <Pressable
                 onPress={() =>
                   navigation.navigate('ViewNotifications' as never)

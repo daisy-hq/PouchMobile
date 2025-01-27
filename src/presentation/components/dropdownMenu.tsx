@@ -32,7 +32,6 @@ const DropdownMenu: FC<Props> = ({content}) => {
                   setVisible(false);
                 }
               }}
-              // underlayColor="#e0e0e0"
             >
               {item}
             </TouchableHighlight>

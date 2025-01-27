@@ -406,7 +406,7 @@ export function BudgetCards({
 }) {
   return (
     <Pressable
-      className={` p-3 bg-blue-50 rounded-md w-52 h-56 me-2 `}
+      className={` p-3 bg-gray-200 rounded-md w-52 h-56 me-2 `}
       onPress={onPress}>
       <View className="flex-row justify-between items-center">
         <P>General Expense</P>

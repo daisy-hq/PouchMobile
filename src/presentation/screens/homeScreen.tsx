@@ -10,7 +10,6 @@ import {
 } from '../components/cards';
 import {FlatList, ScrollView, View, Animated} from 'react-native';
 import {useSharedValue} from 'react-native-reanimated';
-import {PrimaryButton} from '../components/button';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -57,6 +56,7 @@ const HomeScreen = () => {
     <BaseLayout>
       <ScrollView
         className="h-full relative flex w-full"
+        nestedScrollEnabled
         showsVerticalScrollIndicator={false}>
         <View className="relative h-72">
           {renderOverviewCards.map((item, i) => (
@@ -75,28 +75,27 @@ const HomeScreen = () => {
           ))}
         </View>
         <View>
-          <ScrollView
+          <FlatList
             horizontal
-            className="mt-2"
+            data={[1, 2, 3, 7, 8, 9, 4, 5]}
             onScroll={Animated.event(
               [{nativeEvent: {contentOffset: {x: scrollX}}}],
               {useNativeDriver: false},
             )}
-            scrollEventThrottle={16}
-            showsHorizontalScrollIndicator={false}>
-            {[1, 2, 3, 7, 8, 9, 4, 5].map((item, index) => {
-              const colorIndex = index % incomeColorVariants.length;
+            renderItem={item => {
+              const colorIndex = item.index % incomeColorVariants.length;
               const {background, textColor} = incomeColorVariants[colorIndex];
               return (
                 <IncomeCards
-                  key={index}
+                  key={item.index}
                   onPress={() => navigation.navigate('ViewIncome' as never)}
                   textColor={textColor}
                   bgColor={background}
                 />
               );
-            })}
-          </ScrollView>
+            }}
+            showsHorizontalScrollIndicator={false}
+          />
           <View className="items-center mt-3">
             <View className="px-5 py-2 bg-gray-300 rounded-full flex-row items-center justify-center gap-2">
               <Animated.View
@@ -144,9 +143,20 @@ const HomeScreen = () => {
         </View>
         <View className="mt-2">
           <H3 className="my-2">Budget Plans</H3>
-          <BudgetCards
-            onPress={() => navigation.navigate('BudgetDetails' as never)}
-            data={pieChartData}
+          <FlatList
+            data={[1, 2]}
+            numColumns={2}
+            columnWrapperStyle={{
+              justifyContent: 'space-between',
+              marginBottom: 2,
+            }}
+            renderItem={item => (
+              <BudgetCards
+                key={item.index}
+                onPress={() => navigation.navigate('BudgetDetails' as never)}
+                data={pieChartData}
+              />
+            )}
           />
         </View>
       </ScrollView>
