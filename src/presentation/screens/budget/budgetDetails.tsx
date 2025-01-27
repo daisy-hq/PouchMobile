@@ -44,7 +44,7 @@ const BudgetDetailsScreen = () => {
       detailsOverviewCard={
         <View className="flex flex-row gap-2">
           {/* <P>O</P> */}
-          <View className="w-14 h-14 p-2 rounded-full bg-blue-200 me-2 justify-center items-center border border-8 border-blue-100 ">
+          <View className="w-14 h-14 p-2 rounded-full bg-blue-200 me-2 justify-center items-center  border-8 border-blue-100 ">
             <Percent color={'#1570EF'} />
           </View>
           <View className="">
