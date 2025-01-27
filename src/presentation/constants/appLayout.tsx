@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import AuthStackNavigation from './navigation/authStackNavigation';
 import RootTabNavigation from './navigation/rootTabNavigation';
-import OnboardStackNavigation from './navigation/onboardStackNavigation';
+import Onboarding from '../screens/onboarding/onboarding';
 
 const AppLayout = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   // Function to handle login success
   const handleLoginSuccess = () => {
@@ -14,7 +14,7 @@ const AppLayout = () => {
   return isAuthenticated ? (
     <RootTabNavigation />
   ) : (
-    <OnboardStackNavigation />
+    <Onboarding />
     // <AuthStackNavigation onLoginSuccess={handleLoginSuccess} />
   );
 };
