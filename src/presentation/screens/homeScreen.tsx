@@ -52,12 +52,11 @@ const HomeScreen = () => {
     {background: 'bg-violet-100', textColor: 'text-violet-600'},
     {background: 'bg-green-100', textColor: 'text-green-600'},
   ];
+
   return (
     <BaseLayout>
-      <ScrollView
-        className="h-full relative flex w-full"
-        nestedScrollEnabled
-        showsVerticalScrollIndicator={false}>
+      <View className="h-full relative flex w-full">
+        {/* overview cards */}
         <View className="relative h-72">
           {renderOverviewCards.map((item, i) => (
             <OverviewCards
@@ -74,92 +73,100 @@ const HomeScreen = () => {
             />
           ))}
         </View>
-        <View>
-          <FlatList
-            horizontal
-            data={[1, 2, 3, 7, 8, 9, 4, 5]}
-            onScroll={Animated.event(
-              [{nativeEvent: {contentOffset: {x: scrollX}}}],
-              {useNativeDriver: false},
-            )}
-            renderItem={item => {
-              const colorIndex = item.index % incomeColorVariants.length;
-              const {background, textColor} = incomeColorVariants[colorIndex];
-              return (
-                <IncomeCards
-                  key={item.index}
-                  onPress={() => navigation.navigate('ViewIncome' as never)}
-                  textColor={textColor}
-                  bgColor={background}
+        <ScrollView
+          nestedScrollEnabled
+          showsVerticalScrollIndicator={false}
+          className="mt-4">
+          {/* Income cards */}
+          <View>
+            <FlatList
+              horizontal
+              data={[1, 2, 3, 7, 8, 9, 4, 5]}
+              onScroll={Animated.event(
+                [{nativeEvent: {contentOffset: {x: scrollX}}}],
+                {useNativeDriver: false},
+              )}
+              renderItem={item => {
+                const colorIndex = item.index % incomeColorVariants.length;
+                const {background, textColor} = incomeColorVariants[colorIndex];
+                return (
+                  <IncomeCards
+                    key={item.index}
+                    onPress={() => navigation.navigate('ViewIncome' as never)}
+                    textColor={textColor}
+                    bgColor={background}
+                  />
+                );
+              }}
+              showsHorizontalScrollIndicator={false}
+            />
+            <View className="items-center mt-3">
+              <View className="px-5 py-2 bg-gray-300 rounded-full flex-row items-center justify-center gap-2">
+                <Animated.View
+                  className="w-2 h-2 rounded-full bg-black"
+                  style={{
+                    backgroundColor: scrollX.interpolate({
+                      inputRange: [0, 16],
+                      outputRange: ['black', 'gray'],
+                      extrapolate: 'clamp',
+                    }),
+                  }}
                 />
-              );
-            }}
-            showsHorizontalScrollIndicator={false}
-          />
-          <View className="items-center mt-3">
-            <View className="px-5 py-2 bg-gray-300 rounded-full flex-row items-center justify-center gap-2">
-              <Animated.View
-                className="w-2 h-2 rounded-full bg-black"
-                style={{
-                  backgroundColor: scrollX.interpolate({
-                    inputRange: [0, 16],
-                    outputRange: ['black', 'gray'],
-                    extrapolate: 'clamp',
-                  }),
-                }}
-              />
-              <Animated.View
-                className="w-2 h-2 rounded-full bg-gray-400"
-                style={{
-                  backgroundColor: scrollX.interpolate({
-                    inputRange: [0, 16],
-                    outputRange: ['gray', 'black'],
-                    extrapolate: 'clamp',
-                  }),
-                }}
-              />
+                <Animated.View
+                  className="w-2 h-2 rounded-full bg-gray-400"
+                  style={{
+                    backgroundColor: scrollX.interpolate({
+                      inputRange: [0, 16],
+                      outputRange: ['gray', 'black'],
+                      extrapolate: 'clamp',
+                    }),
+                  }}
+                />
+              </View>
             </View>
           </View>
-        </View>
-        <View className="mt-2">
-          <H3>Expense categories</H3>
-          <FlatList
-            data={[1, 2, 3, 4]}
-            numColumns={2}
-            columnWrapperStyle={{
-              justifyContent: 'space-between',
-              marginBottom: 2,
-            }}
-            renderItem={item => (
-              <ExpenseCategoryOverview
-                key={item.index}
-                onPress={() =>
-                  navigation.navigate('ViewExpenseCategory' as never)
-                }
-                color={colors[item.index]}
-              />
-            )}
-          />
-        </View>
-        <View className="mt-2">
-          <H3 className="my-2">Budget Plans</H3>
-          <FlatList
-            data={[1, 2]}
-            numColumns={2}
-            columnWrapperStyle={{
-              justifyContent: 'space-between',
-              marginBottom: 2,
-            }}
-            renderItem={item => (
-              <BudgetCards
-                key={item.index}
-                onPress={() => navigation.navigate('BudgetDetails' as never)}
-                data={pieChartData}
-              />
-            )}
-          />
-        </View>
-      </ScrollView>
+          {/* expense cards */}
+          <View className="mt-2">
+            <H3>Expense categories</H3>
+            <FlatList
+              data={[1, 2, 3, 4]}
+              numColumns={2}
+              columnWrapperStyle={{
+                justifyContent: 'space-between',
+                marginBottom: 2,
+              }}
+              renderItem={item => (
+                <ExpenseCategoryOverview
+                  key={item.index}
+                  onPress={() =>
+                    navigation.navigate('ViewExpenseCategory' as never)
+                  }
+                  color={colors[item.index]}
+                />
+              )}
+            />
+          </View>
+          {/* budget cards */}
+          <View className="mt-2">
+            <H3 className="my-2">Budget Plans</H3>
+            <FlatList
+              data={[1, 2]}
+              numColumns={2}
+              columnWrapperStyle={{
+                justifyContent: 'space-between',
+                marginBottom: 2,
+              }}
+              renderItem={item => (
+                <BudgetCards
+                  key={item.index}
+                  onPress={() => navigation.navigate('BudgetDetails' as never)}
+                  data={pieChartData}
+                />
+              )}
+            />
+          </View>
+        </ScrollView>
+      </View>
     </BaseLayout>
   );
 };
