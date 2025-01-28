@@ -18,6 +18,8 @@ import Animated, {
 import {
   Directions,
   FlingGestureHandler,
+  Gesture,
+  GestureDetector,
   State,
 } from 'react-native-gesture-handler';
 import {PieChart} from 'react-native-gifted-charts';
