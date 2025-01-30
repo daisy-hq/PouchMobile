@@ -79,18 +79,20 @@ const SettingsRow = ({
   icon: Icon,
   title,
   rightComponent = null,
+  onPress
 }: {
   icon: any;
   title: string;
   rightComponent?: any;
+  onPress?: any;
 }) => (
-  <View className="flex flex-row items-center justify-between">
+  <Pressable className="flex flex-row items-center justify-between" onPress={onPress}>
     <View className="flex flex-row items-center gap-2">
       <Icon size={18} />
       <H3>{title}</H3>
     </View>
     {rightComponent}
-  </View>
+  </Pressable>
 );
 
 const styles = StyleSheet.create({
