@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ScreenHeader from '@src/presentation/components/screenHeader';
 import {
@@ -20,6 +20,19 @@ import HomeScreen from '@src/presentation/screens/homeScreen';
 import GoalsTrackerScreen from '@src/presentation/screens/goal/goalsTrackerScreen';
 import IncomeDetailsScreen from '@src/presentation/screens/income/incomeDetails';
 import BudgetDetailsScreen from '@src/presentation/screens/budget/budgetDetails';
+import {View} from 'react-native';
+import {
+  Gesture,
+  GestureDetector,
+  HoverEffect,
+} from 'react-native-gesture-handler';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
+import UpdateProfile from '@src/presentation/screens/profile/updateProfile';
 
 const Tab = createBottomTabNavigator();
 
@@ -91,23 +104,37 @@ const goalTrackerNavigation = [
     title: 'Notifications',
     type: 'AddScreen',
   },
+  {
+    name: 'updateProfile',
+    page: UpdateProfile,
+    title: 'Update Profile',
+    type: '',
+    profile: true,
+  },
 ];
 
 const TabItems = [
-  {name: 'Dashboard', page: HomeScreen, icon: <House />, title: 'Dashboard'},
+  {
+    name: 'Dashboard',
+    page: HomeScreen,
+    icon: <House />,
+    title: 'Dashboard',
+  },
   {
     name: 'AddScreen',
     page: () => null,
     icon: (
-      <Plus
-        color={'white'}
-        style={{
-          backgroundColor: '#1570EF',
-          padding: 20,
-          borderRadius: '50%',
-          marginBottom: 24,
-        }}
-      />
+      <View className="p-4 bg-white rounded-full">
+        <Plus
+          color={'white'}
+          style={{
+            backgroundColor: '#1570EF',
+            padding: 20,
+            borderRadius: '50%',
+            marginBottom: 24,
+          }}
+        />
+      </View>
     ),
     title: 'Action',
     actionSheet: true,
@@ -123,6 +150,7 @@ const TabItems = [
 const RootTabNavigation = () => {
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  const viewRef = useRef(null);
 
   const handleToggleOverlay = () => {
     setOpen(prev => !prev);
@@ -130,6 +158,8 @@ const RootTabNavigation = () => {
   const handleToggleEditOverlay = () => {
     setOpenEdit(prev => !prev);
   };
+
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -153,7 +183,9 @@ const RootTabNavigation = () => {
             }
             options={{
               title: item.title,
-              tabBarIcon: () => item.icon,
+              tabBarIcon: ({focused}) => (
+                <BottomTabItem item={item} focused={focused} />
+              ),
               tabBarShowLabel: false,
               header: () => <ScreenHeader type={item.name} />,
             }}
@@ -174,6 +206,8 @@ const RootTabNavigation = () => {
                   type={item.type}
                   title={item.title !== '' ? item.title : null}
                   onEditPress={() => handleToggleEditOverlay()}
+                  updateProfile={item.profile}
+                  isChanging={true}
                 />
               ),
             }}
@@ -195,3 +229,28 @@ const RootTabNavigation = () => {
 };
 
 export default RootTabNavigation;
+
+const BottomTabItem = ({item, focused}: any) => {
+  const scale = useSharedValue(1);
+
+  useEffect(() => {
+    scale.value = withSpring(focused ? 1.2 : 1, {
+      damping: 10, 
+      stiffness: 20, 
+    });
+  }, [focused]);
+
+  const animatedIconStyle = useAnimatedStyle(() => ({
+    transform: [{scale: scale.value}],
+  }));
+
+  return (
+    <View className="items-center mt-2">
+      <Animated.View style={animatedIconStyle} className="mt-2">
+        {React.cloneElement(item.icon, {
+          color: focused ? '#7F56D9' : 'gray',
+        })}
+      </Animated.View>
+    </View>
+  );
+};

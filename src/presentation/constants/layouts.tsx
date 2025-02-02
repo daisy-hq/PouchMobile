@@ -48,8 +48,8 @@ interface OnboardingLayoutProps {
   title: string;
   illustration: any;
   description: string;
-  totalSteps: number;
-  currentStep: number;
+  totalSteps?: number;
+  currentStep?: number;
   onNext: () => void;
   onSkip: () => void;
 }
@@ -58,7 +58,7 @@ export const OnboardingLayout = ({
   title,
   illustration,
   description,
-  totalSteps,
+  totalSteps = 4,
   currentStep,
   onNext,
   onSkip,
