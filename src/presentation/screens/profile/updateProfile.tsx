@@ -1,8 +1,23 @@
-import {View, Image} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {View, Image, TouchableHighlight, Pressable} from 'react-native';
+import React, {useState} from 'react';
 import {BaseLayout} from '@src/presentation/constants/layouts';
 import {P} from '@src/presentation/constants/text';
 import {LabelInputField} from '@src/presentation/components/labelInputField';
+import {
+  ImageLibraryOptions,
+  launchImageLibrary,
+} from 'react-native-image-picker';
+
+const openGallery = () => {
+  const options: ImageLibraryOptions = {
+    mediaType: 'photo',
+    quality: 1,
+  };
+
+  launchImageLibrary(options, response => {
+    console.log(response);
+  });
+};
 
 const UpdateProfile = () => {
   const [name, setName] = useState('Sandara Boateng');
@@ -19,7 +34,9 @@ const UpdateProfile = () => {
               source={require('../../../assets/images/avatar.png')}
             />
           </View>
-          <P className="text-blue-800 mt-1">Upload Photo</P>
+          <Pressable onPress={openGallery}>
+            <P className="text-blue-800 mt-1">Upload Photo</P>
+          </Pressable>
         </View>
         <View className="mt-3">
           <LabelInputField
