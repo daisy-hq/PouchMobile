@@ -46,7 +46,7 @@ const Notifications = () => {
         <SafeAreaView className="flex-1 justify-center items-center ">
           <Image
             className=""
-            source={require('../../assets/images/ghost-img.png')}
+            source={require('../../assets/images/commons/ghost-img.png')}
           />
           <P className="text-gray-600">No notifications yet!</P>
           <P className="text-gray-600">Check back later for updates</P>

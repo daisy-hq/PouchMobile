@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
   FlatList,
   Image,
@@ -191,7 +190,7 @@ const SplashScreen = () => {
             opacity: opacityAnim,
           },
         ]}
-        source={require('../../../assets/images/pouch-logo.png')}
+        source={require('../../../assets/images/commons/pouch-logo.png')}
       />
       <Image
         style={styles.pattern}

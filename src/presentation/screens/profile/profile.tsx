@@ -4,9 +4,17 @@ import {Bell, CircleHelp, DollarSign, Edit, LogOut} from 'lucide-react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import {BaseLayout} from '@src/presentation/constants/layouts';
 import {H3, P} from '@src/presentation/constants/text';
+import {useNavigation} from '@react-navigation/native';
+import {CurrencyActionSheet} from '../actionSheets';
 
 const ProfileScreen = () => {
   const [isPushNotificationsOn, setIsPushNotificationsOn] = useState(false);
+  const navigation = useNavigation();
+  const [open, setOpen] = useState(false);
+
+  const handleToggleOverlay = () => {
+    setOpen(prev => !prev);
+  };
 
   const openWhatsApp = () => {
     const phoneNumber = '+1234567890';
@@ -20,6 +28,7 @@ const ProfileScreen = () => {
     {
       icon: DollarSign,
       title: 'Currency settings',
+      onPress: () => setOpen(true),
     },
     {
       icon: Bell,
@@ -50,12 +59,14 @@ const ProfileScreen = () => {
         <View className="flex items-center justify-center">
           <View className="h-[80px] w-[80px] rounded-full bg-blue-200 relative mx-auto flex items-center justify-center">
             <Image
-              source={require('../../../assets/images/avatar.png')}
+              source={require('../../../assets/images/commons/avatar.png')}
               style={styles.userIcon}
             />
-            <View className="absolute bg-white bottom-0 right-0 p-1 rounded">
+            <Pressable
+              className="absolute bg-white bottom-0 right-0 rounded-lg p-2"
+              onPress={() => navigation.navigate('updateProfile' as never)}>
               <Edit size={16} />
-            </View>
+            </Pressable>
           </View>
           <H3>Sandra</H3>
           <P className="text-gray-400">sandra@gmail.com</P>
@@ -78,6 +89,11 @@ const ProfileScreen = () => {
           </Pressable>
         </View>
       </View>
+      <CurrencyActionSheet
+        open={open}
+        toggleOverlay={handleToggleOverlay}
+        setOpen={setOpen}
+      />
     </BaseLayout>
   );
 };

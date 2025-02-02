@@ -132,7 +132,6 @@ export const UpdateActionSheet = ({open, toggleOverlay, setOpen}: Props) => {
   ) : null;
 };
 export const CurrencyActionSheet = ({open, toggleOverlay, setOpen}: Props) => {
-  const [cuurncy, setCurrency] = useState('');
   const handleUpdate = () => {
     setOpen(false);
     return;

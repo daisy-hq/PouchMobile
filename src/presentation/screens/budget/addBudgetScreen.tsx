@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
 import {BaseLayout} from '../../constants/layouts';
-import {StyleSheet, Text, View} from 'react-native';
-import {LabelInputField} from '../../components/labelInputField';
+import {View} from 'react-native';
+import {
+  DropDownOptions,
+  LabelInputField,
+} from '../../components/labelInputField';
 import {PrimaryButton} from '../../components/button';
 import {P} from '../../constants/text';
-import SelectDropdown from 'react-native-select-dropdown';
-import {ChevronDown, ChevronUp} from 'lucide-react-native';
 
 const AddBudgetScreen = () => {
   const [name, setName] = useState('');
-  const [amount, setAmount] = useState('');
-
   const selectFields = [
     {
       value: 'Catetory One',
@@ -33,113 +32,17 @@ const AddBudgetScreen = () => {
           <P className="text-gray-600 mb-2">Primary Details</P>
           <View className="rounded-2xl p-4 bg-white border border-gray-200 flex gap-2">
             <P>Format</P>
-            <SelectDropdown
-              data={selectFields}
-              onSelect={(selectedItem, index) => {
-                console.log(selectedItem, index);
-              }}
-              renderButton={(selectedItem, isOpened) => {
-                return (
-                  <View className="w-full text-sm p-2 border border-gray-200 flex flex-row justify-center items-center rounded-lg">
-                    <Text className="flex-1 text-gray-400 font-lexend flex items-center justify-center">
-                      {(selectedItem && selectedItem.title) || 'Amount'}
-                    </Text>
-                    {isOpened ? (
-                      <ChevronUp className="text-gray-400" />
-                    ) : (
-                      <ChevronDown className="text-gray-400" />
-                    )}
-                  </View>
-                );
-              }}
-              renderItem={(item, index, isSelected) => {
-                return (
-                  <View
-                    className={`w-full flex flex-row px-4 justify-center items-center py-2 ${
-                      isSelected && 'bg-gray-300'
-                    }`}>
-                    <P className="flex-1 text-gray-700">{item.label}</P>
-                  </View>
-                );
-              }}
-              showsVerticalScrollIndicator={false}
-              dropdownStyle={styles.dropdownMenuStyle}
-            />
-
+            <DropDownOptions data={selectFields} sectionTitle="Amount" />
             <LabelInputField
               label="Name"
               placeholder=""
               value={name}
               onChangeText={setName}
             />
-
             <P>Income Source</P>
-            <SelectDropdown
-              data={selectFields}
-              onSelect={(selectedItem, index) => {
-                console.log(selectedItem, index);
-              }}
-              renderButton={(selectedItem, isOpened) => {
-                return (
-                  <View className="w-full text-sm p-2 border border-gray-200 flex flex-row justify-center items-center rounded-lg">
-                    <Text className="flex-1 text-gray-400 font-lexend flex items-center justify-center">
-                      {(selectedItem && selectedItem.title) || 'Select income'}
-                    </Text>
-                    {isOpened ? (
-                      <ChevronUp className="text-gray-400" />
-                    ) : (
-                      <ChevronDown className="text-gray-400" />
-                    )}
-                  </View>
-                );
-              }}
-              renderItem={(item, index, isSelected) => {
-                return (
-                  <View
-                    className={`w-full flex flex-row px-4 justify-center items-center py-2 ${
-                      isSelected && 'bg-gray-300'
-                    }`}>
-                    <P className="flex-1 text-gray-700">{item.label}</P>
-                  </View>
-                );
-              }}
-              showsVerticalScrollIndicator={false}
-              dropdownStyle={styles.dropdownMenuStyle}
-            />
-
+            <DropDownOptions data={selectFields} sectionTitle="Select income" />
             <P>Frequency</P>
-            <SelectDropdown
-              data={selectFields}
-              onSelect={(selectedItem, index) => {
-                console.log(selectedItem, index);
-              }}
-              renderButton={(selectedItem, isOpened) => {
-                return (
-                  <View className="w-full text-sm p-2 border border-gray-200 flex flex-row justify-center items-center rounded-lg">
-                    <Text className="flex-1 text-gray-400 font-lexend flex items-center justify-center">
-                      {(selectedItem && selectedItem.title) || 'Frequency'}
-                    </Text>
-                    {isOpened ? (
-                      <ChevronUp className="text-gray-400" />
-                    ) : (
-                      <ChevronDown className="text-gray-400" />
-                    )}
-                  </View>
-                );
-              }}
-              renderItem={(item, index, isSelected) => {
-                return (
-                  <View
-                    className={`w-full flex flex-row px-4 justify-center items-center py-2 ${
-                      isSelected && 'bg-gray-300'
-                    }`}>
-                    <P className="flex-1 text-gray-700">{item.label}</P>
-                  </View>
-                );
-              }}
-              showsVerticalScrollIndicator={false}
-              dropdownStyle={styles.dropdownMenuStyle}
-            />
+            <DropDownOptions data={selectFields} sectionTitle="Frequency" />
           </View>
         </View>
 
@@ -163,7 +66,6 @@ const AddBudgetScreen = () => {
             </View>
           </View>
         </View>
-
         <PrimaryButton onPress={() => null}>Save plan</PrimaryButton>
       </View>
     </BaseLayout>
@@ -171,25 +73,3 @@ const AddBudgetScreen = () => {
 };
 
 export default AddBudgetScreen;
-
-const styles = StyleSheet.create({
-  dropdownButtonArrowStyle: {
-    fontSize: 28,
-  },
-  dropdownMenuStyle: {
-    backgroundColor: '#E9ECEF',
-    borderRadius: 8,
-  },
-  dropdownItemStyle: {
-    width: '100%',
-    flexDirection: 'row',
-    paddingHorizontal: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 8,
-  },
-  dropdownItemIconStyle: {
-    fontSize: 28,
-    marginRight: 8,
-  },
-});

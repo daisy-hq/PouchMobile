@@ -1,5 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ScreenHeader from '@src/presentation/components/screenHeader';
 import {
@@ -21,16 +20,10 @@ import GoalsTrackerScreen from '@src/presentation/screens/goal/goalsTrackerScree
 import IncomeDetailsScreen from '@src/presentation/screens/income/incomeDetails';
 import BudgetDetailsScreen from '@src/presentation/screens/budget/budgetDetails';
 import {View} from 'react-native';
-import {
-  Gesture,
-  GestureDetector,
-  HoverEffect,
-} from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-  withTiming,
 } from 'react-native-reanimated';
 import UpdateProfile from '@src/presentation/screens/profile/updateProfile';
 
@@ -150,7 +143,6 @@ const TabItems = [
 const RootTabNavigation = () => {
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
-  const viewRef = useRef(null);
 
   const handleToggleOverlay = () => {
     setOpen(prev => !prev);
@@ -235,8 +227,8 @@ const BottomTabItem = ({item, focused}: any) => {
 
   useEffect(() => {
     scale.value = withSpring(focused ? 1.2 : 1, {
-      damping: 10, 
-      stiffness: 20, 
+      damping: 10,
+      stiffness: 20,
     });
   }, [focused]);
 

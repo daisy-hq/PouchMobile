@@ -95,7 +95,7 @@ const ScreenHeader = ({
               <Pressable
                 onPress={() => navigation.navigate('Profile' as never)}>
                 <Image
-                  source={require('../../assets/images/avatar.png')}
+                  source={require('../../assets/images/commons/avatar.png')}
                   style={styles.userIcon}
                 />
               </Pressable>

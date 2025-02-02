@@ -2,7 +2,7 @@ import {View} from 'react-native';
 import React from 'react';
 import {DetailsLayout} from '@src/presentation/constants/layouts';
 import {ExpenseCard, Hint, Notes} from '@src/presentation/components/cards';
-import {H2, H3, P} from '@src/presentation/constants/text';
+import {H3} from '@src/presentation/constants/text';
 
 const ExpenseDetailsScreen = () => {
   return (

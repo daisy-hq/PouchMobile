@@ -48,7 +48,6 @@ export const LabelInputField = ({
   value,
   type = 'default',
   onChangeText,
-  trailingIcon,
   isPasswordField = false,
   className,
 }: LabelInputFieldProps) => {
@@ -77,7 +76,6 @@ export const LabelInputField = ({
           value={value}
           onChangeText={onChangeText}
         />
-        {/*{trailingIcon && trailingIcon} */}
         {isPasswordField && (
           <Pressable onPress={togglePasswordVisible}>
             {passwordVisible ? (
@@ -167,6 +165,7 @@ export const DropDownOptions = ({data, sectionTitle}: any) => {
       renderItem={(item, index, isSelected) => {
         return (
           <View
+            key={index}
             className={`w-full flex flex-row px-4 justify-center items-center py-2 ${
               isSelected && 'bg-gray-300'
             }`}>

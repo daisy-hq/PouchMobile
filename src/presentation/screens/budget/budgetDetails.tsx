@@ -43,7 +43,6 @@ const BudgetDetailsScreen = () => {
       detailsTitle={'A detailed view of your budget plan at a glance.'}
       detailsOverviewCard={
         <View className="flex flex-row gap-2">
-          {/* <P>O</P> */}
           <View className="w-14 h-14 p-2 rounded-full bg-blue-200 me-2 justify-center items-center  border-8 border-blue-100 ">
             <Percent color={'#1570EF'} />
           </View>
@@ -64,7 +63,6 @@ const BudgetDetailsScreen = () => {
           columnWrapperStyle={{
             width: '100%',
             justifyContent: 'space-between',
-            // marginBottom: 2,
             margin: 4,
           }}
           renderItem={item => (

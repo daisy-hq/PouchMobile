@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
 import {Calendar, Lightbulb} from 'lucide-react-native';
 import {P} from '../../constants/text';
@@ -14,11 +14,11 @@ const ExpenseCategoryDetailsScreen = () => {
         <Calendar size={18} />
         <P className="">This month</P>
       </View>
-      <ExpenseCard type='tracker'/>
+      <ExpenseCard type="tracker" />
       <Hint
         color="yellow"
         width="full"
-        icon={<Lightbulb size={16} color="#DC6803" />} >
+        icon={<Lightbulb size={16} color="#DC6803" />}>
         You have exceeded your budget on payments this month
       </Hint>
       <View className="mt-5">
@@ -35,5 +35,3 @@ const ExpenseCategoryDetailsScreen = () => {
 };
 
 export default ExpenseCategoryDetailsScreen;
-
-const styles = StyleSheet.create({});

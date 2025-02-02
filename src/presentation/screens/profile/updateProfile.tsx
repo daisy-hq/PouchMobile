@@ -1,4 +1,4 @@
-import {View, Image, TouchableHighlight, Pressable} from 'react-native';
+import {View, Image, Pressable} from 'react-native';
 import React, {useState} from 'react';
 import {BaseLayout} from '@src/presentation/constants/layouts';
 import {P} from '@src/presentation/constants/text';
@@ -31,7 +31,7 @@ const UpdateProfile = () => {
           <View className="w-32 h-32 ">
             <Image
               className="w-full h-full object-cover rounded-full"
-              source={require('../../../assets/images/avatar.png')}
+              source={require('../../../assets/images/commons/avatar.png')}
             />
           </View>
           <Pressable onPress={openGallery}>

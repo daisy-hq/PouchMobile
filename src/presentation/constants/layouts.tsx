@@ -2,7 +2,6 @@ import React from 'react';
 import {Image, Pressable, StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {H1, H2, P} from './text';
-import {PrimaryButton} from '../components/button';
 import {useNavigation} from '@react-navigation/native';
 
 export const BaseLayout = ({children}: any) => {
@@ -23,7 +22,7 @@ export const DetailsLayout = ({
   detailsOverviewCard,
 }: {
   children: any;
-  detailsTitle: any;
+  detailsTitle: string;
   detailsOverviewCard: any;
 }) => {
   return (
@@ -61,7 +60,6 @@ export const OnboardingLayout = ({
   totalSteps = 4,
   currentStep,
   onNext,
-  onSkip,
 }: OnboardingLayoutProps) => {
   const navigation = useNavigation();
 

@@ -11,12 +11,10 @@ import {useNavigation} from '@react-navigation/native';
 const RegisterScreen = () => {
   const navigation = useNavigation();
 
-  const [checked, setChecked] = useState(true);
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
-  const toggleCheckbox = () => setChecked(!checked);
 
   return (
     <AuthLayout>

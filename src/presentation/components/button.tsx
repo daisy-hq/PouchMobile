@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, TouchableOpacity} from 'react-native';
+import {Pressable} from 'react-native';
 import {H3} from '../constants/text';
 
 export const PrimaryButton = ({

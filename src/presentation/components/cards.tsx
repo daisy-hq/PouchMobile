@@ -12,17 +12,16 @@ import {
 } from 'lucide-react-native';
 import Animated, {
   interpolate,
+  SharedValue,
   useAnimatedStyle,
   withTiming,
 } from 'react-native-reanimated';
 import {
   Directions,
   FlingGestureHandler,
-  Gesture,
-  GestureDetector,
   State,
 } from 'react-native-gesture-handler';
-import {PieChart} from 'react-native-gifted-charts';
+import {PieChart, pieDataItem} from 'react-native-gifted-charts';
 import {LinearGradient} from 'react-native-linear-gradient';
 
 export const GoalCard = () => {
@@ -81,8 +80,7 @@ export const ExpenseCard = ({type}: {type?: 'tracker' | 'none'}) => {
 
 export const GoalDetailCard = () => {
   const progress = 70;
-  // const progressDegree = (progress / 100) * 360;
-  const progressDegree = 267;
+  const progressDegree = (progress / 100) * 360;
   return (
     <Pressable className="bg-white z-0 p-5 rounded-lg flex-column justify-center items-center">
       <View className="flex-row w-full  items-center justify-center p-3 border-b border-slate-200 rounded-md">
@@ -140,6 +138,7 @@ export const ActivityCard = ({onPress}: {onPress: () => void}) => {
     </Pressable>
   );
 };
+
 export const Hint = ({
   children,
   icon,
@@ -169,6 +168,7 @@ export const Hint = ({
     </View>
   );
 };
+
 export const Notes = ({
   children,
   title,
@@ -198,13 +198,13 @@ export const OverviewCards = ({
 }: {
   dataLength: number;
   i: number;
-  prevIndex: any;
-  currentIndex: any;
-  animatedValue: any;
-  maxVisibleItems: any;
-  color: any;
-  data?: any;
-  type?: any;
+  prevIndex: SharedValue<number>;
+  currentIndex: SharedValue<number>;
+  animatedValue: SharedValue<number>;
+  maxVisibleItems: number;
+  color: string[];
+  data: pieDataItem[];
+  type?: string;
 }) => {
   const animatedStyle = useAnimatedStyle(() => {
     const translateY = interpolate(
@@ -321,7 +321,7 @@ export const ExpenseCategoryOverview = ({
   color,
 }: {
   onPress: () => void;
-  color: any;
+  color: string;
 }) => {
   return (
     <Pressable
@@ -404,7 +404,7 @@ export function BudgetCards({
   data,
 }: {
   onPress: () => void;
-  data?: any;
+  data: pieDataItem[];
 }) {
   return (
     <Pressable
