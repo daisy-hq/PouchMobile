@@ -8,7 +8,7 @@ import {
   NotebookText,
   ReceiptText,
 } from 'lucide-react-native';
-import {LabelInputField} from '../components/labelInputField';
+import {DropDownOptions, LabelInputField} from '../components/labelInputField';
 import {PrimaryButton} from '../components/button';
 
 type Props = {
@@ -123,6 +123,44 @@ export const UpdateActionSheet = ({open, toggleOverlay, setOpen}: Props) => {
           type="numeric"
           value={increment}
           onChangeText={setIncrement}
+        />
+        <PrimaryButton className="mt-5" onPress={handleUpdate}>
+          Save
+        </PrimaryButton>
+      </View>
+    </Overlay>
+  ) : null;
+};
+export const CurrencyActionSheet = ({open, toggleOverlay, setOpen}: Props) => {
+  const [cuurncy, setCurrency] = useState('');
+  const handleUpdate = () => {
+    setOpen(false);
+    return;
+  };
+  const currencyOptions = [
+    {
+      value: 'Currency One',
+      label: 'Currency One',
+    },
+    {
+      value: 'Currency Two',
+      label: 'Currency Two',
+    },
+    {
+      value: 'Currency Three',
+      label: 'Currency Three',
+    },
+  ];
+
+  return open ? (
+    <Overlay
+      isVisible={open}
+      onBackdropPress={toggleOverlay}
+      backdropStyle={{backgroundColor: 'black', opacity: 0.7}}>
+      <View className="p-5 rounded-lg flex justify-center items-center">
+        <DropDownOptions
+          data={currencyOptions}
+          sectionTitle="Select currency"
         />
         <PrimaryButton className="mt-5" onPress={handleUpdate}>
           Save

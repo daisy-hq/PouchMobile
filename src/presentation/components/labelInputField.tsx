@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import {P} from '../constants/text';
 import DateTimePicker from 'react-native-ui-datepicker';
-import {Eye, EyeOff} from 'lucide-react-native';
+import {ChevronDown, ChevronUp, Eye, EyeOff} from 'lucide-react-native';
+import SelectDropdown from 'react-native-select-dropdown';
 
 type LabelInputFieldProps = {
   label: string;
@@ -28,7 +29,7 @@ type LabelInputFieldProps = {
   onChangeText: (text: string) => void;
   trailingIcon?: React.ReactNode;
   isPasswordField?: boolean;
-  className?: string
+  className?: string;
 };
 
 type LabelTextAreaProps = {
@@ -48,8 +49,8 @@ export const LabelInputField = ({
   type = 'default',
   onChangeText,
   trailingIcon,
-  isPasswordField=false,
-  className
+  isPasswordField = false,
+  className,
 }: LabelInputFieldProps) => {
   const [passwordVisible, setPasswordVisible] = useState(secureTextEntry);
 
@@ -62,14 +63,17 @@ export const LabelInputField = ({
       <P className="mb-2">
         {label} {required && <P className="text-blue-600">*</P>}
       </P>
-      <View className={`${className || "border border-gray-300 rounded-xl p-2 bg-white"} flex flex-row items-center  gap-2 w-full `}>
+      <View
+        className={`${
+          className || 'border border-gray-300 rounded-xl p-2 bg-white'
+        } flex flex-row items-center  gap-2 w-full `}>
         {icon && icon}
         <TextInput
           className="flex-1 text-gray-700"
           placeholder={placeholder}
           placeholderTextColor={'#9CA3AF'}
           keyboardType={type}
-          secureTextEntry={isPasswordField?!passwordVisible:false}
+          secureTextEntry={isPasswordField ? !passwordVisible : false}
           value={value}
           onChangeText={onChangeText}
         />
@@ -139,6 +143,47 @@ export const LabelDatePicker = () => {
   );
 };
 
+export const DropDownOptions = ({data, sectionTitle}: any) => {
+  return (
+    <SelectDropdown
+      data={data}
+      onSelect={(selectedItem, index) => {
+        console.log(selectedItem, index);
+      }}
+      renderButton={(selectedItem, isOpened) => {
+        return (
+          <View className="w-full text-sm p-2 border border-gray-200 flex flex-row justify-center items-center rounded-lg">
+            <P className="flex-1 text-gray-400 font-lexend flex items-center justify-center">
+              {(selectedItem && selectedItem.title) || sectionTitle}
+            </P>
+            {isOpened ? (
+              <ChevronUp className="text-gray-400" />
+            ) : (
+              <ChevronDown className="text-gray-400" />
+            )}
+          </View>
+        );
+      }}
+      renderItem={(item, index, isSelected) => {
+        return (
+          <View
+            className={`w-full flex flex-row px-4 justify-center items-center py-2 ${
+              isSelected && 'bg-gray-300'
+            }`}>
+            <P className="flex-1 text-gray-700">{item.label}</P>
+          </View>
+        );
+      }}
+      showsVerticalScrollIndicator={false}
+      dropdownStyle={styles.dropdownMenuStyle}
+    />
+  );
+};
+
 const styles = StyleSheet.create({
   datePickerTextStyle: {fontSize: 12, fontFamily: 'Lexend'},
+  dropdownMenuStyle: {
+    backgroundColor: '#E9ECEF',
+    borderRadius: 8,
+  },
 });
