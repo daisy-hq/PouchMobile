@@ -1,22 +1,31 @@
 import React, {useState} from 'react';
 import AuthStackNavigation from './navigation/authStackNavigation';
 import RootTabNavigation from './navigation/rootTabNavigation';
-import OnboardStackNavigation from './navigation/onboardStackNavigation';
+import Onboarding from '../screens/onboarding/onboarding';
 
 const AppLayout = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isOnboardingComplete, setIsOnboardingComplete] = useState(false);
 
-  // Function to handle login success
+  // func to navigate to auth screens after onboarding
+  const handleOnboardingComplete = () => {
+    setIsOnboardingComplete(true);
+  };
+
+  // func to help route to dashboard
   const handleLoginSuccess = () => {
     setIsAuthenticated(true);
   };
 
-  return isAuthenticated ? (
-    <RootTabNavigation />
-  ) : (
-    <OnboardStackNavigation />
-    // <AuthStackNavigation onLoginSuccess={handleLoginSuccess} />
-  );
+  if (!isOnboardingComplete) {
+    return <Onboarding onOnboardingComplete={handleOnboardingComplete} />;
+  }
+
+  if (!isAuthenticated) {
+    return <AuthStackNavigation onLoginSuccess={handleLoginSuccess} />;
+  }
+
+  return <RootTabNavigation />;
 };
 
 export default AppLayout;

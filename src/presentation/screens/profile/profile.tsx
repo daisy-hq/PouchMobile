@@ -4,14 +4,23 @@ import {Bell, CircleHelp, DollarSign, Edit, LogOut} from 'lucide-react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import {BaseLayout} from '@src/presentation/constants/layouts';
 import {H3, P} from '@src/presentation/constants/text';
+import {useNavigation} from '@react-navigation/native';
+import {CurrencyActionSheet} from '../actionSheets';
 
 const ProfileScreen = () => {
   const [isPushNotificationsOn, setIsPushNotificationsOn] = useState(false);
+  const navigation = useNavigation();
+  const [open, setOpen] = useState(false);
+
+  const handleToggleOverlay = () => {
+    setOpen(prev => !prev);
+  };
 
   const settings = [
     {
       icon: DollarSign,
       title: 'Currency settings',
+      onPress: () => setOpen(true),
     },
     {
       icon: Bell,
@@ -44,9 +53,11 @@ const ProfileScreen = () => {
               source={require('../../../assets/images/avatar.png')}
               style={styles.userIcon}
             />
-            <View className="absolute bg-white bottom-0 right-0 p-1 rounded">
+            <Pressable
+              className="absolute bg-white bottom-0 right-0 rounded-lg p-2"
+              onPress={() => navigation.navigate('updateProfile' as never)}>
               <Edit size={16} />
-            </View>
+            </Pressable>
           </View>
           <H3>Sandra</H3>
           <P className="text-gray-400">sandra@gmail.com</P>
@@ -59,6 +70,7 @@ const ProfileScreen = () => {
               icon={item.icon}
               title={item.title}
               rightComponent={item.rightComponent}
+              onPress={item.onPress}
             />
           ))}
 
@@ -67,6 +79,11 @@ const ProfileScreen = () => {
             <H3 className="text-red-500">Logout</H3>
           </Pressable>
         </View>
+        <CurrencyActionSheet
+          open={open}
+          toggleOverlay={handleToggleOverlay}
+          setOpen={setOpen}
+        />
       </View>
     </BaseLayout>
   );
@@ -79,18 +96,22 @@ const SettingsRow = ({
   icon: Icon,
   title,
   rightComponent = null,
+  onPress,
 }: {
   icon: any;
   title: string;
   rightComponent?: any;
+  onPress?: any;
 }) => (
-  <View className="flex flex-row items-center justify-between">
+  <Pressable
+    className="flex flex-row items-center justify-between"
+    onPress={onPress}>
     <View className="flex flex-row items-center gap-2">
       <Icon size={18} />
       <H3>{title}</H3>
     </View>
     {rightComponent}
-  </View>
+  </Pressable>
 );
 
 const styles = StyleSheet.create({
