@@ -1,26 +1,25 @@
 import React, {useState} from 'react';
-import {View, Image, StyleSheet, Pressable} from 'react-native';
+import {View, Image, StyleSheet, Pressable, Linking} from 'react-native';
 import {Bell, CircleHelp, DollarSign, Edit, LogOut} from 'lucide-react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import {BaseLayout} from '@src/presentation/constants/layouts';
 import {H3, P} from '@src/presentation/constants/text';
-import {useNavigation} from '@react-navigation/native';
-import {CurrencyActionSheet} from '../actionSheets';
 
 const ProfileScreen = () => {
   const [isPushNotificationsOn, setIsPushNotificationsOn] = useState(false);
-  const navigation = useNavigation();
-  const [open, setOpen] = useState(false);
 
-  const handleToggleOverlay = () => {
-    setOpen(prev => !prev);
+  const openWhatsApp = () => {
+    const phoneNumber = '+1234567890';
+    const url = `https://wa.me/${phoneNumber}`;
+    Linking.openURL(url).catch(() => {
+      console.log('Could not open WhatsApp');
+    });
   };
 
   const settings = [
     {
       icon: DollarSign,
       title: 'Currency settings',
-      onPress: () => setOpen(true),
     },
     {
       icon: Bell,
@@ -41,6 +40,7 @@ const ProfileScreen = () => {
     {
       icon: CircleHelp,
       title: 'Support',
+      onPress: openWhatsApp,
     },
   ];
 
@@ -53,11 +53,9 @@ const ProfileScreen = () => {
               source={require('../../../assets/images/avatar.png')}
               style={styles.userIcon}
             />
-            <Pressable
-              className="absolute bg-white bottom-0 right-0 rounded-lg p-2"
-              onPress={() => navigation.navigate('updateProfile' as never)}>
+            <View className="absolute bg-white bottom-0 right-0 p-1 rounded">
               <Edit size={16} />
-            </Pressable>
+            </View>
           </View>
           <H3>Sandra</H3>
           <P className="text-gray-400">sandra@gmail.com</P>
@@ -79,11 +77,6 @@ const ProfileScreen = () => {
             <H3 className="text-red-500">Logout</H3>
           </Pressable>
         </View>
-        <CurrencyActionSheet
-          open={open}
-          toggleOverlay={handleToggleOverlay}
-          setOpen={setOpen}
-        />
       </View>
     </BaseLayout>
   );
@@ -101,11 +94,11 @@ const SettingsRow = ({
   icon: any;
   title: string;
   rightComponent?: any;
-  onPress?: any;
+  onPress?: () => void;
 }) => (
   <Pressable
-    className="flex flex-row items-center justify-between"
-    onPress={onPress}>
+    onPress={onPress}
+    className="flex flex-row items-center justify-between">
     <View className="flex flex-row items-center gap-2">
       <Icon size={18} />
       <H3>{title}</H3>
