@@ -4,9 +4,11 @@ import {Bell, CircleHelp, DollarSign, Edit, LogOut} from 'lucide-react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import {BaseLayout} from '@src/presentation/constants/layouts';
 import {H3, P} from '@src/presentation/constants/text';
+import { useNavigation } from '@react-navigation/native';
 
 const ProfileScreen = () => {
   const [isPushNotificationsOn, setIsPushNotificationsOn] = useState(false);
+  const navigation = useNavigation()
 
   const settings = [
     {
@@ -44,9 +46,9 @@ const ProfileScreen = () => {
               source={require('../../../assets/images/avatar.png')}
               style={styles.userIcon}
             />
-            <View className="absolute bg-white bottom-0 right-0 p-1 rounded">
+            <Pressable className="absolute bg-white bottom-0 right-0 rounded-lg p-2" onPress={()=> navigation.navigate("updateProfile" as never)}>
               <Edit size={16} />
-            </View>
+            </Pressable>
           </View>
           <H3>Sandra</H3>
           <P className="text-gray-400">sandra@gmail.com</P>

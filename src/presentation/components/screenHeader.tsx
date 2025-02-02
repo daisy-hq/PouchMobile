@@ -27,9 +27,17 @@ interface ScreenHeaderProps {
   type?: 'Dashboard' | 'Goaltracker' | 'AddScreen' | string | null; // TODO: remove string type
   title?: string | null;
   onEditPress?: () => void;
+  updateProfile?: boolean;
+  isChanging?: boolean;
 }
 
-const ScreenHeader = ({type, title, onEditPress}: ScreenHeaderProps) => {
+const ScreenHeader = ({
+  type,
+  title,
+  onEditPress,
+  updateProfile = false,
+  isChanging = false,
+}: ScreenHeaderProps) => {
   const navigation = useNavigation();
   const newHintAnimation = useRef(new Animated.Value(0)).current;
 
@@ -173,13 +181,17 @@ const ScreenHeader = ({type, title, onEditPress}: ScreenHeaderProps) => {
                 {title ? title : HeaderItems.default.name}
               </H1>
             </View>
-            <DropdownMenu
-              content={[
-                <Pressable onPress={onEditPress}>
-                  <H2>Edit</H2>
-                </Pressable>,
-              ]}
-            />
+            {updateProfile ? (
+              isChanging && <H3 className="text-blue-700">Save </H3>
+            ) : (
+              <DropdownMenu
+                content={[
+                  <Pressable onPress={onEditPress}>
+                    <H2>Edit</H2>
+                  </Pressable>,
+                ]}
+              />
+            )}
           </View>
         )}
       </SafeAreaView>

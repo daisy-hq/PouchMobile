@@ -28,6 +28,7 @@ type LabelInputFieldProps = {
   onChangeText: (text: string) => void;
   trailingIcon?: React.ReactNode;
   isPasswordField?: boolean;
+  className?: string
 };
 
 type LabelTextAreaProps = {
@@ -48,6 +49,7 @@ export const LabelInputField = ({
   onChangeText,
   trailingIcon,
   isPasswordField=false,
+  className
 }: LabelInputFieldProps) => {
   const [passwordVisible, setPasswordVisible] = useState(secureTextEntry);
 
@@ -60,7 +62,7 @@ export const LabelInputField = ({
       <P className="mb-2">
         {label} {required && <P className="text-blue-600">*</P>}
       </P>
-      <View className="flex flex-row items-center  gap-2 w-full border border-gray-300 rounded-xl p-2 bg-white">
+      <View className={`${className || "border border-gray-300 rounded-xl p-2 bg-white"} flex flex-row items-center  gap-2 w-full `}>
         {icon && icon}
         <TextInput
           className="flex-1 text-gray-700"

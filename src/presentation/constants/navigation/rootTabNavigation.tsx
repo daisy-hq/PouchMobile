@@ -31,8 +31,10 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
+import UpdateProfile from '@src/presentation/screens/profile/updateProfile';
 
 const Tab = createBottomTabNavigator();
+
 
 // TODO: export this to a separate module
 const goalTrackerNavigation = [
@@ -102,6 +104,13 @@ const goalTrackerNavigation = [
     title: 'Notifications',
     type: 'AddScreen',
   },
+  {
+    name: 'updateProfile',
+    page: UpdateProfile ,
+    title: 'Update Profile',
+    type: '',
+    profile: true,
+  },
 ];
 
 const TabItems = [
@@ -142,7 +151,6 @@ const RootTabNavigation = () => {
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const viewRef = useRef(null);
-  // const focused = acces
 
   const handleToggleOverlay = () => {
     setOpen(prev => !prev);
@@ -211,6 +219,8 @@ const RootTabNavigation = () => {
                   type={item.type}
                   title={item.title !== '' ? item.title : null}
                   onEditPress={() => handleToggleEditOverlay()}
+                  updateProfile={item.profile}
+                  isChanging={true}
                 />
               ),
             }}
