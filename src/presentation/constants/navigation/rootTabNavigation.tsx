@@ -30,11 +30,11 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
+  withTiming,
 } from 'react-native-reanimated';
 import UpdateProfile from '@src/presentation/screens/profile/updateProfile';
 
 const Tab = createBottomTabNavigator();
-
 
 // TODO: export this to a separate module
 const goalTrackerNavigation = [
@@ -106,7 +106,7 @@ const goalTrackerNavigation = [
   },
   {
     name: 'updateProfile',
-    page: UpdateProfile ,
+    page: UpdateProfile,
     title: 'Update Profile',
     type: '',
     profile: true,
@@ -184,20 +184,7 @@ const RootTabNavigation = () => {
             options={{
               title: item.title,
               tabBarIcon: ({focused}) => (
-                <View className="items-center">
-                  <Animated.View
-                    ref={viewRef}
-                    className={`${focused ? '' : ''} 
-                     
-                    `}>
-                    {React.cloneElement(item.icon, {
-                      color: focused ? '#7F56D9' : 'gray',
-                    })}
-                  </Animated.View>
-                  {focused && (
-                    <View className="w-2 h-2 bg-[#7F56D9] rounded-full -1"></View>
-                  )}
-                </View>
+                <BottomTabItem item={item} focused={focused} />
               ),
               tabBarShowLabel: false,
               header: () => <ScreenHeader type={item.name} />,
@@ -242,3 +229,28 @@ const RootTabNavigation = () => {
 };
 
 export default RootTabNavigation;
+
+const BottomTabItem = ({item, focused}: any) => {
+  const scale = useSharedValue(1);
+
+  useEffect(() => {
+    scale.value = withSpring(focused ? 1.2 : 1, {
+      damping: 10, 
+      stiffness: 20, 
+    });
+  }, [focused]);
+
+  const animatedIconStyle = useAnimatedStyle(() => ({
+    transform: [{scale: scale.value}],
+  }));
+
+  return (
+    <View className="items-center mt-2">
+      <Animated.View style={animatedIconStyle} className="mt-2">
+        {React.cloneElement(item.icon, {
+          color: focused ? '#7F56D9' : 'gray',
+        })}
+      </Animated.View>
+    </View>
+  );
+};
