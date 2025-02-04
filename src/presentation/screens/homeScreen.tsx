@@ -57,7 +57,7 @@ const HomeScreen = () => {
     <BaseLayout>
       <View className="h-full relative flex w-full">
         {/* overview cards */}
-        <View className="relative h-72">
+        <View className="relative h-72 z-0">
           {renderOverviewCards.map((item, i) => (
             <OverviewCards
               dataLength={renderOverviewCards.length}
@@ -74,7 +74,7 @@ const HomeScreen = () => {
           ))}
         </View>
         <ScrollView
-          nestedScrollEnabled
+          nestedScrollEnabled={true}
           showsVerticalScrollIndicator={false}
           className="mt-4">
           {/* Income cards */}

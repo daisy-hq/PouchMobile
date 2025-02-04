@@ -77,7 +77,7 @@ const ScreenHeader = ({
   const showNewHint = () => {
     if (showHint) {
       return (
-        <View className="p-4 bg-rose-100 rounded-lg absolute top-10 right-14">
+        <View className="p-4 bg-rose-100 rounded-lg absolute top-10 right-14 z-50">
           <P className="text-rose-600">Here is all the gist you need!</P>
         </View>
       );
