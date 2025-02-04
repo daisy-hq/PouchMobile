@@ -3,6 +3,9 @@ import {Image, Pressable, StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {H1, H2, P} from './text';
 import {useNavigation} from '@react-navigation/native';
+import {LogBox} from 'react-native';
+
+LogBox.ignoreAllLogs(true);
 
 export const BaseLayout = ({children}: any) => {
   return <View className="flex-1 px-4">{children}</View>;
