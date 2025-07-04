@@ -27,10 +27,23 @@ import Animated, {
 } from 'react-native-reanimated';
 import UpdateProfile from '@src/presentation/screens/profile/updateProfile';
 
+interface NavigationItem {
+  name: string;
+  page: React.ComponentType<any>;
+  title: string;
+  type?: string;
+  profile?: boolean;
+}
+
+interface TabItem extends NavigationItem {
+  icon: React.ReactElement;
+  actionSheet?: boolean;
+}
+
 const Tab = createBottomTabNavigator();
 
 // TODO: export this to a separate module
-const goalTrackerNavigation = [
+const goalTrackerNavigation: NavigationItem[] = [
   {
     name: 'Goal Detail',
     page: GoalDetailsScreen,
@@ -106,7 +119,7 @@ const goalTrackerNavigation = [
   },
 ];
 
-const TabItems = [
+const TabItems: TabItem[] = [
   {
     name: 'Dashboard',
     page: HomeScreen,
@@ -151,7 +164,12 @@ const RootTabNavigation = () => {
     setOpenEdit(prev => !prev);
   };
 
-  useEffect(() => {}, []);
+  const handleTabPress = (item: TabItem) => (e: any) => {
+    if (item.actionSheet) {
+      e.preventDefault();
+      handleToggleOverlay();
+    }
+  };
 
   return (
     <>
@@ -161,18 +179,9 @@ const RootTabNavigation = () => {
             key={index}
             name={item.name}
             component={item.page}
-            listeners={
-              item.actionSheet
-                ? {
-                    tabPress: e => {
-                      e.preventDefault();
-                      handleToggleOverlay();
-                    },
-                  }
-                : {
-                    tabPress: () => {},
-                  }
-            }
+            listeners={{
+              tabPress: handleTabPress(item),
+            }}
             options={{
               title: item.title,
               tabBarIcon: ({focused}) => (
@@ -183,7 +192,6 @@ const RootTabNavigation = () => {
             }}
           />
         ))}
-        {/* TODO: look into the React Navigation library in-depth */}
         {goalTrackerNavigation.map((item, index) => (
           <Tab.Screen
             key={index}
@@ -197,7 +205,7 @@ const RootTabNavigation = () => {
                 <ScreenHeader
                   type={item.type}
                   title={item.title !== '' ? item.title : null}
-                  onEditPress={() => handleToggleEditOverlay()}
+                  onEditPress={handleToggleEditOverlay}
                   updateProfile={item.profile}
                   isChanging={true}
                 />
@@ -222,7 +230,12 @@ const RootTabNavigation = () => {
 
 export default RootTabNavigation;
 
-const BottomTabItem = ({item, focused}: any) => {
+interface BottomTabItemProps {
+  item: TabItem;
+  focused: boolean;
+}
+
+const BottomTabItem = ({item, focused}: BottomTabItemProps) => {
   const scale = useSharedValue(1);
 
   useEffect(() => {
@@ -230,7 +243,7 @@ const BottomTabItem = ({item, focused}: any) => {
       damping: 10,
       stiffness: 20,
     });
-  }, [focused]);
+  }, [focused, scale]);
 
   const animatedIconStyle = useAnimatedStyle(() => ({
     transform: [{scale: scale.value}],
